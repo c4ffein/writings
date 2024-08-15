@@ -34,7 +34,7 @@ I may or may not have been talking about:
   - Maybe you just don't have to ship an 8MB bundle when you know what you are doing.
 - Redis, Mongo, Celery... Instead of a relational database with a well thought data model.
   - Some people had to diverge from the established relational database principles for good reasons.
-  - Many people think they can't do with just a Postgres database. [Most of them actually could.](https://www.amazingcto.com/postgres-for-everything/).
+  - Many people think they can't do with just a Postgres database. [Most of them actually could](https://www.amazingcto.com/postgres-for-everything/).
     - Not that you should. That was the only link I provided, because it's an interesting take, it might get traction.
     - I don't want to be guilty of my own accusations, so while I'd recommend you to experiment with those,
       I have to say that submiting to the zeitgeist of your current environment might be the smartest choice.
