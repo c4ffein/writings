@@ -1,6 +1,4 @@
 # writings
-imagine what socrates would have done if he had access to git and markdown
-
 
 I wanted to write for many years, but creating my own blog wasn't my top priority,
 as I knew I would spend so many hours on it, already having so many ideas on how to design it.
