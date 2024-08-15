@@ -5,7 +5,7 @@ People that created it and people that specifically need it are quite close actu
 Maybe at the same org, or at least part of the same ecosystem.  
 That new tech comes from bright minds, it's shiny, it's trending.  
 Highly motivated people that follow those latest trends pick it up and do something with it.  
-Using it is becomes a marker of skill.  
+Using it becomes a marker of skill.  
 Maybe people actually don't need it to solve their problems.  
 But they use it anyway, since they learned how to.  
 And less and less motivated people end up joining that trend.  
