@@ -10,3 +10,5 @@ I came to the conclusion that GitHub might just be the perfect platform. I shoul
 So, I'll see how this repo ends-up in the long term, but I'll just start with this: [Competency Cycle](s/competency_cycle/competency_cycle.md)
 
 Feel free to drop an issue if you want to start a discussion.
+
+And you can also check [the last stuff I enjoyed reading](what-i-enjoyed-reading.md).
