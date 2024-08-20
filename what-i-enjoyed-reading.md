@@ -11,3 +11,6 @@ Three of my favorites articles:
 - [Futurist prediction methods and accuracy](danluu.com/futurist-predictions/) - The title says it all, I'll add this one is really complete.
 - [Misidentifying talent](danluu.com/talent/) - About bias in skill assessment.
 - [Willingness to look stupid](https://danluu.com/look-stupid/) - `Although there are some downsides to people thinking that I'm stupid, e.g., failing interviews where the interviewer very clearly thought I was stupid, I think that, overall, the upsides of being willing to look stupid have greatly outweighed the downsides.`
+
+## [Phrack](http://www.phrack.org/)
+It's back. [And the last article is so based.](http://www.phrack.org/issues/71/17.html#article)
