@@ -13,6 +13,6 @@ Actually, the more I think about it, the more I consider the history provided by
 Feel free to drop an issue if you want to start a discussion (even just to correct my english, I'm a non-native speaker, and even that would be appreciated).
 
 ## Index
-- [The last stuff I enjoyed reading](what-i-enjoyed-reading.md)
+- [The last stuff I enjoyed reading](s/what-i-enjoyed-reading/what-i-enjoyed-reading.md)
 - [How to start contributing to Open Source](s/contributing-to-open-source/contributing-to-open-source.md)
 - [Competency Cycle](s/competency-cycle/competency-cycle.md)
