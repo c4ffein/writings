@@ -14,5 +14,6 @@ Feel free to drop an issue if you want to start a discussion (even just to corre
 
 ## Index
 - [The last stuff I enjoyed reading](s/what-i-enjoyed-reading/what-i-enjoyed-reading.md)
+- [Some puzzles](s/puzzles/puzzles.md)
 - [How to start contributing to Open Source](s/contributing-to-open-source/contributing-to-open-source.md)
 - [Competency Cycle](s/competency-cycle/competency-cycle.md)
