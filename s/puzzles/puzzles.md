@@ -1,5 +1,5 @@
 # Puzzles
-Just some puzzles I enjoyed, you may also check [my coding puzzles solutions](https://github.com/c4ffein/puzzles).
+Just some puzzles I enjoyed, you may also check [my coding puzzles recommendations and solutions](https://github.com/c4ffein/puzzles).
 
 ## Books
 ### [How Would You Move Mount Fuji?](https://www.amazon.fr/How-Would-Move-Mount-Fuji/dp/0316778494)
