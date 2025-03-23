@@ -162,7 +162,7 @@ Similar to HashMap: here are the different complexities:
 What that means is that we don't really have to think about performance when using those.
 For exemple, it is possible to deal with huge dictionnaries to implement local memory caching without a noticeable performance impact. It is also possible to store values of any type (not that you should).
 
-```
+```python
 AGE = "age"
 user = {
     "name": "Alice",
@@ -172,15 +172,21 @@ user = {
 print(user["name"])  # prints: Alice
 ```
 
-# Sets
+#### Sets
+Implements a hash table like a dictionnary, but without associated values to the keys
+```python
 unique_numbers = {1, 2, 3, 3, 4}  # Will contain 1, 2, 3, 4
+print(1 in unique_numbers)  # True in nearly constant time
 ```
+
+#### Additional collections
+[The Python documentation about collections](https://docs.python.org/3/library/collections.html) includes many more powerful tools.
 
 ## Control Flow
 TODO keys/values/items
 TODO ternary
+### If statements
 ```python
-# If statements
 x = 10
 if x > 5:
     print("x is greater than 5")
@@ -189,24 +195,30 @@ elif x == 5:
 else:
     print("x is less than 5")
 ```
+### Same result with a ternary expression
 ```python
-# Same result with a ternary expression
 x = 10
 print("x", "is greater than" if x > 5 else "equals" if x == 5 else "is less than", "5")
 ```
+### For loops
 ```python
-# For loops
 for language in languages:
     print(language)
 ```
-TODO MORE RANGES
+The for loop in python can take any [iterable](#iterable) (more on that later).
+#### Range-based loops
 ```python
-# Range-based loops
-for i in range(5):  # 0 to 4
+for i in range(5):  # 0 to 4, but range allow many more options, check the documentation
     print(i)
 ```
+#### Inline for
+- **List comprehension**: `[x for x in range(10)]` creates a list
+- **Dictionary comprehension**: `{k: v for k, v in pairs}` creates a dictionary
+- **Set comprehension**: `{x for x in items}` creates a set
+- **Generator expression**: `(x for x in range(10))` creates a generator
+
+### While loops
 ```python
-# While loops
 count = 0
 while count < 5:
     print(count)
@@ -366,54 +378,33 @@ TODO PEP8 / Pythonic (explain good with AI) / duck typing
 
 ## Using AI PREF TODO CLAUDE
 Those are very good exemples of the quality of answers that Claude provides. This is far better than what the current enshittified web would give to you.
-### What is the difference between a Python generator and iterator?"
-#### Python Generator vs Iterator
+### What is the difference between a Python iterator, iterable, and generator?
+#### Python Iterators, Iterables, and Generators
 
-Both generators and iterators in Python allow you to iterate through collections of data, but they have key differences:
+These three concepts are closely related but serve different roles in Python:
+
+##### Iterable
+- An object that can be "iterated over" - meaning you can go through its elements one by one
+- Implements the `__iter__()` method that returns an iterator
+- Examples: lists, tuples, dictionaries, sets, strings
+- Usage: `for item in iterable:`
 
 ##### Iterator
-- An iterator is an object that implements the iterator protocol, requiring `__iter__()` and `__next__()` methods
-- It's typically created for a collection (like a list) by calling `iter()` on it
-- Once created, you retrieve values by calling `next()` until it raises `StopIteration`
-- Iterators maintain their own internal state to track their position in the sequence
+- An object that keeps track of state during iteration
+- Implements both `__iter__()` (returns itself) and `__next__()` (returns the next value or raises StopIteration)
+- Stateful - remembers where it is during iteration
+- Created by calling `iter()` on an iterable
+- Usage: `next(iterator)` to get values one at a time
 
 ##### Generator
-- A generator is a special type of iterator created with a function containing the `yield` keyword
-- Generator functions automatically implement the iterator protocol
-- They generate values on-the-fly rather than storing the entire sequence in memory
-- They pause execution and maintain state between calls
-- They're particularly useful for working with large data sets or infinite sequences
+- A special type of iterator created using a function with `yield` statements
+- Generated values are computed on-demand (lazy evaluation)
+- Maintains state automatically between yields
+- Memory efficient - only holds one value in memory at a time
+- Can be created via generator functions or generator expressions
+- Usage: either as a function with `yield` or with syntax like `(x for x in range(10))`
 
-##### Key Differences
-1. **Creation**: Iterators are created from existing collections; generators are created with functions using `yield`
-2. **Memory usage**: Generators calculate values on demand, making them more memory-efficient
-3. **Complexity**: Writing a generator is simpler than implementing a custom iterator class
-4. **Reusability**: Generators are exhausted after one use, while iterator classes can be designed for reuse
-
-##### Example
-```python
-# Iterator example
-class CountUpTo:
-    def __init__(self, max):
-        self.max = max
-        self.n = 0
-    
-    def __iter__(self):
-        return self
-    
-    def __next__(self):
-        if self.n > self.max:
-            raise StopIteration
-        self.n += 1
-        return self.n - 1
-
-# Generator example
-def count_up_to(max):
-    n = 0
-    while n <= max:
-        yield n
-        n += 1
-```
+The key relationship: All generators are iterators, and all iterators are iterables, but not vice versa.
 
 ### "What is a Python metaclass?"
 #### Python Metaclasses
@@ -454,12 +445,79 @@ print(MyClass.added_by_metaclass)  # True
 Metaclasses are considered advanced Python functionality and aren't needed for most programming tasks, but they're powerful for framework developers and certain design patterns.
 
 
+### Tell me about an advanced Python concept I may not know.
+#### Python's Context Managers Beyond "with open()"
+
+While many Python developers are familiar with using context managers through the `with` statement for file handling, the concept goes much deeper and offers powerful patterns for resource management.
+
+##### Contextlib.suppress
+
+Instead of writing try/except blocks that simply pass on specific exceptions, you can use:
+
+```python
+from contextlib import suppress
+
+# Instead of:
+# try:
+#     os.remove('file.txt')
+# except FileNotFoundError:
+#     pass
+
+with suppress(FileNotFoundError):
+    os.remove('file.txt')
+```
+
+##### ExitStack for Dynamic Context Management
+
+The `ExitStack` class lets you dynamically build up and tear down multiple context managers:
+
+```python
+from contextlib import ExitStack
+
+def process_files(filenames):
+    with ExitStack() as stack:
+        files = [stack.enter_context(open(fname)) for fname in filenames]
+        # All files will be properly closed when the with block exits
+        for line in zip(*files):
+            process_line(line)
+```
+
+##### Creating Your Own Context Managers
+
+Beyond the decorator approach with `@contextmanager`, you can implement the context management protocol directly:
+
+```python
+class Timer:
+    def __enter__(self):
+        self.start = time.time()
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.end = time.time()
+        self.elapsed = self.end - self.start
+        print(f"Execution took {self.elapsed:.2f} seconds")
+
+# Usage
+with Timer():
+    do_expensive_operation()
+```
+
+This pattern is particularly useful for resource acquisition/release, transaction management, temporary state changes, and measuring performance.
+
+
 ## Resources for Further Learning
 
 - [Official Python Documentation](https://docs.python.org/3/)
+- [Automate The Boring Stuff with Python](https://inventwithpython.com/automate)
+  - everything from [inventwithpython.com](inventwithpython.com) may help you
 - [Effective Python by Brett Slatkin](https://effectivepython.com/)
 - [Python Crash Course by Eric Matthes](https://nostarch.com/pythoncrashcourse2e)
 - [Python for Java Developers (Real Python)](https://realpython.com/java-vs-python/)
 
 TODO Exercism / Codesignal / Hackerrank explain why
 TODO Link personal notes
+TODO Books from Discord still not added
+TODO learn python the hard way
+TODO Automate The Boring Stuff with Python, free to read under a CC license.
+everything from inventwithpython.com is cool
+https://inventwithpython.com/automate => the book link, nice rec after
