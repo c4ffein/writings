@@ -206,8 +206,8 @@ for i in range(5):  # 0 to 4, but range allow many more options, check the docum
 Protip: you can use `keys`/`values`/`items` of `dict` to iterate on specific parts
 ```python
 the_dict = {"a": 3, "b": 4}
-print([k * 2 for k in the_dict.keys()])  # [6, 8]
-print([v * 2 for v in the_dict.values()])  # {'a': 3, 'b': 4}
+print([k * 2 for k in the_dict.keys()])  # ["aa", "bb"]
+print([v * 2 for v in the_dict.values()])  # [6, 8]
 print({k * 2: v * 2 for k, v in the_dict.items()})  # {'aa': 6, 'bb': 8}
 ```
 
