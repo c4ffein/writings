@@ -118,7 +118,7 @@ Type ".help" for more information.
 
 
 ### Collections
-TODO explain what are collections
+Collections are container data types in Python that allow you to store multiple items together. Python offers several built-in collection types, each with different characteristics and use cases. These include lists, tuples, dictionaries, and sets, which provide various ways to organize and manipulate data.
 
 #### Lists
 Called lists but unrelated to linked lists, those are actual mutable arrays.
@@ -279,11 +279,79 @@ print(Person.get_species_info_from_class())
 ```
 
 ### Abstract classes
-TODO Make an explanation about abstract classes in Python
+Abstract classes in Python are implemented using the `abc` module (Abstract Base Classes). Unlike some languages with explicit `abstract` keywords, Python uses a more flexible approach:
+
+```python
+from abc import ABC, abstractmethod
+
+class Animal(ABC):
+    @abstractmethod  # This is not a keyword but a decorator
+    def make_sound(self):  # With it, we ensure you can't instanciate classes that don't redefine it
+        """This method must be implemented by subclasses"""
+        pass
+
+    def eat(self):
+        print("Eating...")
+
+class Dog(Animal):
+    def make_sound(self):
+        return "Woof!"
+
+# This would raise TypeError: Can't instantiate abstract class Animal with abstract method make_sound
+# animal = Animal()
+
+# This works
+dog = Dog()
+print(dog.make_sound())  # Woof!
+
+# This works until
+class Duck(Animal):
+  pass
+
+# This would raise TypeError: Can't instantiate abstract class Duck with abstract method make_sound
+# animal = Duck()
+```
+
+Abstract classes cannot be instantiated directly and require subclasses to implement all abstract methods.
+
+TODO Move next in conventions, link, here only explain _value for private as better alternative
 ### Generally, everything is a convention
-TODO Explain what is the difference between `_value`, `__value__`, `__value`, `value_`
+In Python, naming conventions carry significant meaning:
+
+- `value`: Regular public attribute or method
+- `_value`: Single underscore indicates "private by convention" - not enforced by the interpreter but signals "for internal use"
+- `__value`: Double underscore triggers name mangling (becomes `_ClassName__value`) to avoid naming conflicts in inheritance
+- `__value__`: Double underscore prefix and suffix indicates special methods controlled by Python (magic/dunder methods)
+  - TODO example with __str__
+- `value_`: Trailing underscore is often used to avoid conflicts with Python keywords (e.g., `class_`)
+
 ### Inheritance
-TODO Show a vey short inheritance exemple, tell that multiple inheritance is is possible but not recommended (don't write too much about that)
+```python
+class Animal:
+    def __init__(self, name):
+        self.name = name
+
+    def speak(self):
+        return "Some sound"
+
+class Dog(Animal):
+    def speak(self):
+        return "Woof!"
+
+# Create an instance of the subclass
+dog = Dog("Rex")
+print(dog.name)    # Inherits attribute from parent
+print(dog.speak()) # Overrides method from parent
+
+# Multiple inheritance is possible but should be used with care
+class Swimmer:
+    def swim(self):
+        return "Swimming"
+
+class Duck(Animal, Swimmer):
+    def speak(self):
+        return "Quack!"
+```
 
 ## Lambda Functions (Anonymous Functions)
 
@@ -327,7 +395,26 @@ finally:
     print("This always executes")
 ```
 ### Inheritance of exceptions
-TODO Explain how inheritance of exceptions works and help you catch as wide as possible at last
+Python's exception handling leverages class inheritance, allowing you to catch specific or broad categories of exceptions:
+
+```python
+try:
+    # Code that might raise an exception
+    result = int("not a number")
+except ValueError:
+    # Catches specifically ValueError
+    print("Not a valid number")
+except (TypeError, KeyError):
+    # Can catch multiple specific types
+    print("Type or key error occurred")
+except Exception as e:
+    # Catches any exception that inherits from Exception
+    # Put this last to catch any exceptions not caught above
+    print(f"Unexpected error: {e}")
+```
+
+Best practice is to catch the most specific exceptions first, then progressively wider exception classes, with the broadest (`Exception`) last.
+
 
 ## Modules and Imports
 
@@ -355,17 +442,46 @@ with open("example.txt", "w") as file:
 ```
 
 ## Python downsides
-TODO write a short subsection about why tail call optimizations aren't implemented
-TODO write a short subsection about why performance is low, but it doesn't matter as:
-- most of your performance bottlenecks will probaby IO based and should be solved with tools like asyncio
-- when you want to improve CPU performance you just write binded code in a lower level language
-TODO write a short subsection about mixed tabs and spaces, and what PEP encourages
+### No tail call optimization
+Python deliberately doesn't implement tail call optimization (TCO), which allows recursive functions to avoid stack overflow by converting tail recursion into iteration. Guido van Rossum (Python's creator) argued that TCO would hide the call stack information, making debugging more difficult. This means recursive functions in Python have a limited depth and must often be rewritten iteratively for deep recursion.
+
+### Performance considerations
+Python's performance is relatively slow compared to compiled languages like C++ or Java because:
+- It's an interpreted language with runtime type checking
+- It uses a Global Interpreter Lock (GIL) that limits true multithreading
+- It has high-level abstractions that prioritize developer productivity over raw speed
+
+However, this rarely matters because:
+- Most applications are IO-bound rather than CPU-bound, so you can use asyncio for performance gains
+- Performance-critical code can be written in C/C++/Rust and called from Python (NumPy, TensorFlow, etc.)
+- Python's ecosystem includes optimized libraries and JIT compilers (like PyPy) for specific use cases
+
+### Tabs vs. spaces
+Python's syntax depends on consistent indentation, and mixing tabs and spaces can lead to subtle errors. PEP 8 (Python's style guide) strongly recommends using 4 spaces for indentation rather than tabs. Modern Python (3.x) will reject code with inconsistent indentation, but the historical possibility of mixing tabs and spaces has caused many headaches. Always configure your editor to use consistent indentation.
+
 
 ## Python Ecosystem
 ### Tooling
-TODO make a short explanation about PIP and venv, but how they are actually best replaced by the astral.sh tools
+#### Package Management
+Python's native package management tools are:
+- **pip**: The Python Package Installer, used to install packages from PyPI
+- **venv**: Built-in module for creating virtual environments that isolate dependencies
 
-### General conventions
+However, many developers now prefer more modern solutions from [astral.sh](https://astral.sh):
+- **ruff**: Ultra-fast Python linter and formatter
+- **uv**: Extremely fast pip replacement with rust-based dependency resolution
+- **hatch**: Modern project, package, and virtual environment manager
+
+These newer tools significantly improve performance, dependency management, and developer experience while maintaining compatibility with the Python ecosystem.
+
+## General conventions
+Python emphasizes readability and consistency through conventions:
+
+- **PEP 8**: The official style guide for Python code that covers naming, indentation, whitespace, etc. Most teams follow PEP 8 or a slightly modified version.
+
+- **Pythonic Code**: Code that follows Python's idiomatic patterns and leverages the language's unique features. Examples include list comprehensions instead of loops, context managers for resource handling, and preferring built-in functions over reinventing the wheel.
+
+- **Duck Typing**: "If it walks like a duck and quacks like a duck, it's a duck." Python doesn't require explicit interface declarations—objects are defined by behavior rather than type. This encourages focusing on what an object can do rather than what it is, leading to more flexible designs.
 TODO Explain convention PEP8 / Pythonic (explain good with AI) / duck typing
 
 ## Using AI is now one of the best ways to learn Python
@@ -506,5 +622,7 @@ This pattern is particularly useful for resource acquisition/release, transactio
 - [Effective Python by Brett Slatkin](https://effectivepython.com/)
 - [Python Crash Course by Eric Matthes](https://nostarch.com/pythoncrashcourse2e)
 - [Python for Java Developers (Real Python)](https://realpython.com/java-vs-python/)
-TODO list Exercism / Codesignal / Hackerrank
-TODO link: learn python the hard way
+- [Exercism](https://exercism.org/tracks/python): Mentored coding challenges with real human feedback
+- [CodeSignal](https://codesignal.com/): Coding challenges and assessments with Python support
+- [HackerRank](https://www.hackerrank.com/domains/python): Python practice problems ranging from basic to advanced
+- [Learn Python the Hard Way](https://learnpythonthehardway.org/): A rigorous introduction to Python programming
