@@ -4,14 +4,14 @@
 ### Why this guide
 This is a summary of some of the notes I've taken as a software engineer mainly working with Python (although I also code with JavaScript and C, and worked with Java back at the university).
 Why care about the languages I worked with? Because this guide is mainly intended for developers with experience in languages similar to Java and C#, and while I don't have extensive professional experience with those, I'll try to give you the advices I would like to receive if I wasn't a Python developer already.
-I'll also try to be a little less straightforward than most guides would be, but rather help you see the bigger picture (while keeping it short), so that you can understand why most of the things I describe are the way they are, and I think those informations are actually worth to know in the long-term if you want to progress with the language.
+I'll also try to be a little less straightforward than most guides would be, but rather help you see the bigger picture (while keeping it short), so that you can understand why most of the things I describe are the way they are, and I think those are actually worth to know in the long-term if you want to progress with the language.
 
 This is the March 2025 version of this guide, I'll see if I keep this updated.
 
 ### What IS Python?
 Python is a high-level, interpreted programming language known for its readability and simplicity. Created by Guido van Rossum and first released in 1991, it is now one of the most used programming language.
 
-Its ease of learning made it the de-facto standard for most scientific fields, including AI, where the high-level Python usually controls performant lower-level code code running on GPU and machine learning hardware accelerators.
+Its ease of learning made it the de-facto standard for most scientific fields, including AI, where the high-level Python usually controls performant lower-level code running on GPU and machine learning hardware accelerators.
 
 It is also well-suited for short scripts, and one of its strength is to let you incrementally convert a small quick-and-dirty solution to a complete project following the best software-engineering practices.
 
@@ -180,6 +180,7 @@ print("x", "is greater than" if x > 5 else "equals" if x == 5 else "is less than
 ```
 ### For loops
 ```python
+languages = ["french", "english", "italian"]
 for language in languages:
     print(language)
 ```
@@ -298,7 +299,7 @@ from abc import ABC, abstractmethod
 
 class Animal(ABC):
     @abstractmethod  # This is not a keyword but a decorator
-    def make_sound(self):  # With it, we ensure you can't instanciate classes that don't redefine it
+    def make_sound(self):  # With it, we ensure you can't instantiate classes that don't redefine it
         """This method must be implemented by subclasses"""
         pass
 
@@ -316,9 +317,9 @@ class Dog(Animal):
 dog = Dog()
 print(dog.make_sound())  # Woof!
 
-# This works until
+# This doesn't raise an exception
 class Duck(Animal):
-  pass
+    pass
 
 # This would raise TypeError: Can't instantiate abstract class Duck with abstract method make_sound
 # animal = Duck()
@@ -329,7 +330,6 @@ Abstract classes cannot be instantiated directly and require subclasses to imple
 ## Lambda Functions (Anonymous Functions)
 
 ```python
-# Java: (a, b) -> a + b
 add = lambda a, b: a + b
 print(add(5, 3))  # 8
 
@@ -443,7 +443,7 @@ Python's native package management tools are:
 - **pip**: The Python Package Installer, used to install packages from PyPI, the more common Python packages repository.
 - **venv**: Built-in module for creating virtual environments that isolate dependencies : it is a good practice to maintain a virtual environment per project, to always have the correct version of your dependencies running with them.
 
-However, many developers now prefer the more modern solutions from [astral.sh](https://astral.sh), **uv**, that is both an extremely fast pip replacement with rust-based dependency resolution, and a virtual environment manager.
+However, many developers now prefer the more modern solutions from [astral.sh](https://astral.sh), **uv**, which is both an extremely fast pip replacement with rust-based dependency resolution, and a virtual environment manager.
 
 These newer tools significantly improve performance, dependency management, and developer experience while maintaining compatibility with the Python ecosystem.
 
@@ -451,8 +451,8 @@ These newer tools significantly improve performance, dependency management, and 
 `ruff`, also from [astral.sh](https://astral.sh), is the `ultra-fast Python linter and formatter`, and replaces nearly every existing tools all-at-once.
 
 #### Typing
-Enforcing type hints is the only thing that `ruff` won't do. You can use another tool like `mypy` for that, with the advantage of being able to gradually type your codebase, you don't have to type everything all at once.
-(The [astral.sh](https://astral.sh) team is currently working on a replacement for it, but we're far from the official release.)
+Enforcing type hints is the only thing that `ruff` won't do. You can use another tool like `mypy` for that, with the advantage of being able to gradually type your codebase; you don't have to type everything all at once.
+The [astral.sh](https://astral.sh) team is currently working on a replacement for it, but we're far from the official release.
 
 ## General conventions
 Python emphasizes readability and consistency through conventions:
@@ -461,7 +461,7 @@ Python emphasizes readability and consistency through conventions:
 The official style guide for Python code that covers naming, indentation, whitespace, etc. Most teams follow PEP 8 or a slightly modified version.
 
 ### Pythonic Code
-How code that follows Python's idiomatic patterns and leverages the language's unique features is called. Examples include list comprehensions instead of loops, context managers for resource handling, and preferring built-in functions over reinventing the wheel. [It is now possible to use AI to refactor your code to make it more pythonic.](is-there-a-more-pythonic-way-to-write-this)
+This is how code that follows Python's idiomatic patterns and leverages the language's unique features is called. Examples include list comprehensions instead of loops, context managers for resource handling, and preferring built-in functions over reinventing the wheel. [It is now possible to use AI to refactor your code to make it more pythonic.](is-there-a-more-pythonic-way-to-write-this)
 
 ### Duck Typing
 "If it walks like a duck and quacks like a duck, it's a duck." Python doesn't require explicit interface declarations—objects are defined by behavior rather than type. This encourages focusing on what an object can do rather than what it is, leading to more flexible designs.
@@ -645,7 +645,7 @@ Both approaches are idiomatic Python, with list comprehensions generally being p
 
 - [Official Python Documentation](https://docs.python.org/3/)
 - [Automate The Boring Stuff with Python](https://inventwithpython.com/automate) as a base
-  - everything from [inventwithpython.com](inventwithpython.com) may help you
+  - everything from [inventwithpython.com](https://inventwithpython.com) may help you
 - [Effective Python by Brett Slatkin](https://effectivepython.com/)
 - [Python Crash Course by Eric Matthes](https://nostarch.com/pythoncrashcourse2e)
 - [Python for Java Developers (Real Python)](https://realpython.com/java-vs-python/)
