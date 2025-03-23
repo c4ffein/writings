@@ -306,6 +306,10 @@ class Duck(Animal, Swimmer):
         return "Quack!"
 ```
 
+#### Private methods and attributes
+Python does not provide "private" methods and attributes like Java does. See [this part of the documentation](#underscore-conventions) for the alternative.
+
+
 ### Abstract classes
 Abstract classes in Python are implemented using the `abc` module (Abstract Base Classes). Unlike some languages with explicit `abstract` keywords, Python uses a more flexible approach:
 
@@ -341,18 +345,6 @@ class Duck(Animal):
 ```
 
 Abstract classes cannot be instantiated directly and require subclasses to implement all abstract methods.
-
-TODO Move next in conventions, link, here only explain _value for private as better alternative
-### Generally, everything is a convention
-In Python, naming conventions carry significant meaning:
-
-- `value`: Regular public attribute or method
-- `_value`: Single underscore indicates "private by convention" - not enforced by the interpreter but signals "for internal use"
-- `__value`: Double underscore triggers name mangling (becomes `_ClassName__value`) to avoid naming conflicts in inheritance
-- `__value__`: Double underscore prefix and suffix indicates special methods controlled by Python (magic/dunder methods)
-  - TODO example with __str__
-- `value_`: Trailing underscore is often used to avoid conflicts with Python keywords (e.g., `class_`)
-
 
 ## Lambda Functions (Anonymous Functions)
 
@@ -478,12 +470,25 @@ These newer tools significantly improve performance, dependency management, and 
 ## General conventions
 Python emphasizes readability and consistency through conventions:
 
-- **PEP 8**: The official style guide for Python code that covers naming, indentation, whitespace, etc. Most teams follow PEP 8 or a slightly modified version.
+### PEP 8
+The official style guide for Python code that covers naming, indentation, whitespace, etc. Most teams follow PEP 8 or a slightly modified version.
 
-- **Pythonic Code**: How code that follows Python's idiomatic patterns and leverages the language's unique features is called. Examples include list comprehensions instead of loops, context managers for resource handling, and preferring built-in functions over reinventing the wheel. [It is now possible to use AI to refactor your code to make it more pythonic.](is-there-a-more-pythonic-way-to-write-this)
+### Pythonic Code
+How code that follows Python's idiomatic patterns and leverages the language's unique features is called. Examples include list comprehensions instead of loops, context managers for resource handling, and preferring built-in functions over reinventing the wheel. [It is now possible to use AI to refactor your code to make it more pythonic.](is-there-a-more-pythonic-way-to-write-this)
 
-- **Duck Typing**: "If it walks like a duck and quacks like a duck, it's a duck." Python doesn't require explicit interface declarations—objects are defined by behavior rather than type. This encourages focusing on what an object can do rather than what it is, leading to more flexible designs.
-TODO Explain convention PEP8 / Pythonic (explain good with AI) / duck typing
+### Duck Typing
+"If it walks like a duck and quacks like a duck, it's a duck." Python doesn't require explicit interface declarations—objects are defined by behavior rather than type. This encourages focusing on what an object can do rather than what it is, leading to more flexible designs.
+
+### Underscore conventions
+In Python, naming conventions carry significant meaning:
+
+- `value`: Regular public attribute or method
+- `_value`: Single underscore indicates "private by convention" - not enforced by the interpreter but signals "for internal use"
+- `__value`: Double underscore triggers name mangling (becomes `_ClassName__value`) to avoid naming conflicts in inheritance
+- `__value__`: Double underscore prefix and suffix indicates special methods controlled by Python (magic/dunder methods)
+  - for exemple, the `__str__` method will control how the object will be casted to a str
+- `value_`: Trailing underscore is often used to avoid conflicts with Python keywords (e.g., `class_`)
+
 
 ## Using AI is now one of the best ways to learn Python
 Claude by Anthropic is currently the best model to learn Python (you may use another model if the guidelines of your company requires it).
