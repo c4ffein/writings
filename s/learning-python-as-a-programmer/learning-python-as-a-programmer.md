@@ -3,7 +3,7 @@
 ## Introduction
 ### Why this guide
 This is a summary of some of the notes I've taken as a software engineer mainly working with Python (although I also codes with JavaScript and C, and worked with Java back at the university).
-Why care about the languages I worked with? Because this guide is mainly intended for developers with experience in languages similar to Java and C#, and why I don't have extensive professional experience with those, I'll try to give you the advices I would like to receive if I wasn't a Python developer already.
+Why care about the languages I worked with? Because this guide is mainly intended for developers with experience in languages similar to Java and C#, and while I don't have extensive professional experience with those, I'll try to give you the advices I would like to receive if I wasn't a Python developer already.
 I'll also try to be a little less straightforward than most guides would be, but rather help you see the bigger picture (while keeping it short), so that you can understand why most of the things I describe are the way they are, and I think those informations are actually worth to know in the long-term if you want to progress with the language.
 
 This is the March 2025 version of this guide, I'll see if I keep this updated.
