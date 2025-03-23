@@ -1,4 +1,4 @@
-# Python for Java Programmers
+# Python for Programmers
 
 ## Introduction
 ### Why this guide
@@ -76,9 +76,6 @@ class Program
 print("Hello, World!")
 ```
 
-### Strong, dynamic typing
-TODO VS CSharp VS JS
-
 ### Basic Data Types
 
 ```python
@@ -90,29 +87,90 @@ is_available = True  # bool (note the capitalization)
 
 # Type checking
 print(type(name))  # <class 'str'>
+print(isinstance(name, str))  # True => Safer as this also returns True for inherited classes
 ```
 
-TODO isinstance
+
+### Strong, dynamic typing
+Python is dynamically typed but strongly typed. Unlike with TypeScript/Java/C# etc, it is common to rely on type inference when defining variables. But unlike with JavaScript, a lot of operations that would just implicitly cast would raise exceptions in Python, like it is expected in other strongly typed languages.
+
+For example
+```python
+>>> a = 42
+>>> b = "answer"
+>>> a + b
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: unsupported operand type(s) for +: 'int' and 'str'
+```
+
+Unlike with JavaScript
+```javascript
+Welcome to Node.js v23.9.0.
+Type ".help" for more information.
+> a = 42
+42
+> b = 'answer'
+'answer'
+> a + b
+'42answer'
+```
+
 
 ### Collections
 TODO EXPLAIN
 
+#### Lists
+Called lists but unrelated to linked lists, those are actual mutable arrays.
 ```python
-# Lists (similar to ArrayList)
-languages = ["Python", "Java", "JavaScript"]
-languages.append("Go")
-first_language = languages[0]  # Zero-indexed like Java
+>>> l = ["a", "b", "c"]
+>>> l.append("d")  # Add one element
+>>> l.extend(["e", "f"])  # Add multiple elements
+>>> l
+['a', 'b', 'c', 'd', 'e', 'f']
+>>> l[0]
+'a'
+>>> l[1:3]  # Range indexing
+['b', 'c']
+>>> l[-1]  # Negative indexing
+'f'
+```
 
-# Tuples (immutable)
-coordinates = (10.5, 20.3)  # Can't be modified after creation
+#### Tuples
+Like lists but are actually immutable.
+```python
+>>> t = (1, 2, 3)  # Defines a 3 elements tuple
+>>> t
+(1, 2, 3)
+>>> t = (1,)  # Defines a 1 element tuple
+>>> t
+(1,)
+>>> t = 1, 2, 3  # Defines the same 3 elements tuple, unneeded parentheses in that case
+>>> t
+(1, 2, 3)
+>>> t = 1,  # WARNING This means this is a valid 1 element tuple, that nearly all linters will accept
+>>> t
+(1,)
+```
 
-# Dictionaries (similar to HashMap)
+#### Dictionaries
+Similar to HashMap: here are the different complexities:
+- Read: O(1) on average, O(n) worst case if there are many collisions
+- Add: O(1) on average, O(n) worst case if the dictionary needs to be resized
+- Modify: O(1) on average, O(n) worst case if there are many collisions
+
+What that means is that we don't really have to think about performance when using those.
+For exemple, it is possible to deal with huge dictionnaries to implement local memory caching without a noticeable performance impact. It is also possible to store values of any type (not that you should).
+
+```
+AGE = "age"
 user = {
     "name": "Alice",
-    "age": 30,
-    "languages": ["Python", "Java"]
+    AGE: 30,  # You can set a key/value pair with a variable as a name instead
+    "languages": ["Python", "Java"],
 }
-print(user["name"])  # Access by key
+print(user["name"])  # prints: Alice
+```
 
 # Sets
 unique_numbers = {1, 2, 3, 3, 4}  # Will contain 1, 2, 3, 4
@@ -263,8 +321,6 @@ import numpy as np
 arr = np.array([1, 2, 3])
 ```
 
-TODO import vs from, as
-
 ## Python-Specific Gems
 
 ### String Formatting
@@ -296,6 +352,12 @@ def count_up_to(max):
 for number in count_up_to(5):
     print(number)  # 1, 2, 3, 4, 5
 ```
+
+## Python downsides
+TODO TAIL CALL OPTIMIZATION
+TODO LESS PERFORMANT BUT WHO CARES
+TODO DONT MIX TABS AND SPACES => SO THANKS EDITORS
+TODO a = 3,   => IN tuples?
 
 ## Python Ecosystem
 TODO PIP, venv, but actually astral, explain: uv + 
@@ -390,7 +452,6 @@ print(MyClass.added_by_metaclass)  # True
 - Creating domain-specific languages
 
 Metaclasses are considered advanced Python functionality and aren't needed for most programming tasks, but they're powerful for framework developers and certain design patterns.
-```
 
 
 ## Resources for Further Learning
