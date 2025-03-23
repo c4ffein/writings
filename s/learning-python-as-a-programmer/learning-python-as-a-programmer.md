@@ -479,7 +479,7 @@ Python emphasizes readability and consistency through conventions:
 
 - **PEP 8**: The official style guide for Python code that covers naming, indentation, whitespace, etc. Most teams follow PEP 8 or a slightly modified version.
 
-- **Pythonic Code**: Code that follows Python's idiomatic patterns and leverages the language's unique features. Examples include list comprehensions instead of loops, context managers for resource handling, and preferring built-in functions over reinventing the wheel.
+- **Pythonic Code**: How code that follows Python's idiomatic patterns and leverages the language's unique features is called. Examples include list comprehensions instead of loops, context managers for resource handling, and preferring built-in functions over reinventing the wheel. [It is now possible to use AI to refactor your code to make it more pythonic.](is-there-a-more-pythonic-way-to-write-this)
 
 - **Duck Typing**: "If it walks like a duck and quacks like a duck, it's a duck." Python doesn't require explicit interface declarations—objects are defined by behavior rather than type. This encourages focusing on what an object can do rather than what it is, leading to more flexible designs.
 TODO Explain convention PEP8 / Pythonic (explain good with AI) / duck typing
@@ -613,6 +613,40 @@ with Timer():
 
 This pattern is particularly useful for resource acquisition/release, transaction management, temporary state changes, and measuring performance.
 
+### `Is there a more pythonic way to write this?`
+```python
+def my_func(x):
+    return x * 2 + 45
+
+my_input = [1, 2, 3, 4]
+my_list = []
+for element in my_input:
+    my_list.append(my_func(element))
+```
+
+Here's a more pythonic way to transform your code:
+
+```python
+def my_func(x):
+    return x * 2 + 45
+
+my_input = [1, 2, 3, 4]
+my_list = [my_func(element) for element in my_input]
+```
+
+This uses a list comprehension, which is considered more pythonic because:
+
+1. It's more concise
+2. It expresses the intention clearly - "create a new list by applying my_func to each element of my_input"
+3. It's typically faster than building a list through repeated append() calls
+
+Alternatively, you could also use the built-in `map()` function:
+
+```python
+my_list = list(map(my_func, my_input))
+```
+
+Both approaches are idiomatic Python, with list comprehensions generally being preferred for their readability.
 
 ## Other resources for Further Learning
 
