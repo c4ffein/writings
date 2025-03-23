@@ -59,19 +59,7 @@ It shows how much the Python contributors actually cared about defining good pra
 You don't necessarily have to follow those, but it helps to understand why most Python codebases are the way they are. Python developers tend to build without too many levels of abstraction (contrary to what seems to be the expected good practice in some other languages), preferring instead to write concise, highly expressive code that takes full advantage of Python's syntax and built-ins.
 
 ### A quick Hello World?
-This might be the most concrete exemple.
-```csharp
-using System;
-
-class Program
-{
-    static void Main()
-    {
-        Console.WriteLine("Hello, World!");
-    }
-}
-```
-
+This might be the most concrete exemple. No boilerplate, always straightforward.
 ```python
 print("Hello, World!")
 ```
