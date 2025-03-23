@@ -278,6 +278,34 @@ print(Person.get_species_info_hardcoded())
 print(Person.get_species_info_from_class())
 ```
 
+### Inheritance
+```python
+class Animal:
+    def __init__(self, name):
+        self.name = name
+
+    def speak(self):
+        return "Some sound"
+
+class Dog(Animal):
+    def speak(self):
+        return "Woof!"
+
+# Create an instance of the subclass
+dog = Dog("Rex")
+print(dog.name)    # Inherits attribute from parent
+print(dog.speak()) # Overrides method from parent
+
+# Multiple inheritance is possible but should be used with care
+class Swimmer:
+    def swim(self):
+        return "Swimming"
+
+class Duck(Animal, Swimmer):
+    def speak(self):
+        return "Quack!"
+```
+
 ### Abstract classes
 Abstract classes in Python are implemented using the `abc` module (Abstract Base Classes). Unlike some languages with explicit `abstract` keywords, Python uses a more flexible approach:
 
@@ -325,33 +353,6 @@ In Python, naming conventions carry significant meaning:
   - TODO example with __str__
 - `value_`: Trailing underscore is often used to avoid conflicts with Python keywords (e.g., `class_`)
 
-### Inheritance
-```python
-class Animal:
-    def __init__(self, name):
-        self.name = name
-
-    def speak(self):
-        return "Some sound"
-
-class Dog(Animal):
-    def speak(self):
-        return "Woof!"
-
-# Create an instance of the subclass
-dog = Dog("Rex")
-print(dog.name)    # Inherits attribute from parent
-print(dog.speak()) # Overrides method from parent
-
-# Multiple inheritance is possible but should be used with care
-class Swimmer:
-    def swim(self):
-        return "Swimming"
-
-class Duck(Animal, Swimmer):
-    def speak(self):
-        return "Quack!"
-```
 
 ## Lambda Functions (Anonymous Functions)
 
