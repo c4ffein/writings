@@ -28,7 +28,7 @@ This guide won't teach you everything but will let you take a sneak peek at some
 
 #### Zen of Python
 You don't have to learn or think to much about this right now, but this is by Tim Peters, one of the main Python contributors, and this is even included in most Python distributions
-```
+```python
 Type "help", "copyright", "credits" or "license" for more information.
 >>> import this
 The Zen of Python, by Tim Peters
@@ -455,14 +455,15 @@ Python's syntax depends on consistent indentation, and mixing tabs and spaces ca
 
 ## Python Ecosystem
 ### Tooling
+#### `pyproject.toml`
+Currently the best way to define all settings for nearly every tool, as more and more will be compatible with this project configuration standard.
+
 #### Package Management
 Python's native package management tools are:
-- **pip**: The Python Package Installer, used to install packages from PyPI
-- **venv**: Built-in module for creating virtual environments that isolate dependencies
+- **pip**: The Python Package Installer, used to install packages from PyPI, the more common python packages repository.
+- **venv**: Built-in module for creating virtual environments that isolate dependencies : it is a good practice to maintain a virtual environment per project, to always have the correct version of your dependencies running with them.
 
-However, many developers now prefer more modern solutions from [astral.sh](https://astral.sh):
-- **uv**: Extremely fast pip replacement with rust-based dependency resolution
-- **hatch**: Modern project, package, and virtual environment manager
+However, many developers now prefer the more modern solutions from [astral.sh](https://astral.sh), **uv**, that is both an extremely fast pip replacement with rust-based dependency resolution, and a virtual environment manager.
 
 These newer tools significantly improve performance, dependency management, and developer experience while maintaining compatibility with the Python ecosystem.
 
@@ -472,7 +473,6 @@ These newer tools significantly improve performance, dependency management, and 
 #### Typing
 Enforcing type hints is the only thing that `ruff` won't do. You can use another tool like `mypy` for that, with the advantage of being able to gradually type your codebase, you don't have to type everything all at once.
 (The [astral.sh](https://astral.sh) team is currently working on a replacement for it, but we're far from the official release.)
-
 
 ## General conventions
 Python emphasizes readability and consistency through conventions:
