@@ -2,7 +2,7 @@
 
 ## Introduction
 ### Why this guide
-This is a summary of some of the notes I've taken as a software engineer mainly working with Python (although I also codes with JavaScript and C, and worked with Java back at the university).
+This is a summary of some of the notes I've taken as a software engineer mainly working with Python (although I also code with JavaScript and C, and worked with Java back at the university).
 Why care about the languages I worked with? Because this guide is mainly intended for developers with experience in languages similar to Java and C#, and while I don't have extensive professional experience with those, I'll try to give you the advices I would like to receive if I wasn't a Python developer already.
 I'll also try to be a little less straightforward than most guides would be, but rather help you see the bigger picture (while keeping it short), so that you can understand why most of the things I describe are the way they are, and I think those informations are actually worth to know in the long-term if you want to progress with the language.
 
@@ -27,7 +27,7 @@ This guide won't teach you everything but will let you take a sneak peek at some
 ### The philosophy of Python
 
 #### Zen of Python
-You don't have to learn or think to much about this right now, but this is by Tim Peters, one of the main Python contributors, and this is even included in most Python distributions
+You don't have to learn or think too much about this right now, but this is by Tim Peters, one of the main Python contributors, and this is even included in most Python distributions
 ```
 Type "help", "copyright", "credits" or "license" for more information.
 >>> import this
@@ -59,7 +59,7 @@ It shows how much the Python contributors actually cared about defining good pra
 You don't necessarily have to follow those, but it helps to understand why most Python codebases are the way they are. Python developers tend to build without too many levels of abstraction (contrary to what seems to be the expected good practice in some other languages), preferring instead to write concise, highly expressive code that takes full advantage of Python's syntax and built-ins.
 
 ### A quick Hello World?
-This might be the most concrete exemple. No boilerplate, always straightforward.
+This might be the most concrete example. No boilerplate, always straightforward.
 ```python
 print("Hello, World!")
 ```
@@ -140,7 +140,7 @@ Similar to HashMap: here are the different complexities:
 - Modify: O(1) on average, O(n) worst case if there are many collisions
 
 What that means is that we don't really have to think about performance when using those.
-For exemple, it is possible to deal with huge dictionnaries to implement local memory caching without a noticeable performance impact. It is also possible to store values of any type (not that you should).
+For example, it is possible to deal with huge dictionaries to implement local memory caching without a noticeable performance impact. It is also possible to store values of any type (not that you should).
 
 ```python
 AGE = "age"
@@ -408,7 +408,7 @@ arr = np.array([1, 2, 3])
 ## Context Managers
 A context manager let you ensure that specific logic is executed before and after your code,
 gracefully handling exceptions.
-Exemple with file handling (automatically closes file):
+Example with file handling (automatically closes file):
 ```python
 with open("example.txt", "w") as file:
     file.write("Hello, Python!")
@@ -440,7 +440,7 @@ Currently the best way to define all settings for nearly every tool, as more and
 
 #### Package Management
 Python's native package management tools are:
-- **pip**: The Python Package Installer, used to install packages from PyPI, the more common python packages repository.
+- **pip**: The Python Package Installer, used to install packages from PyPI, the more common Python packages repository.
 - **venv**: Built-in module for creating virtual environments that isolate dependencies : it is a good practice to maintain a virtual environment per project, to always have the correct version of your dependencies running with them.
 
 However, many developers now prefer the more modern solutions from [astral.sh](https://astral.sh), **uv**, that is both an extremely fast pip replacement with rust-based dependency resolution, and a virtual environment manager.
@@ -473,13 +473,13 @@ In Python, naming conventions carry significant meaning:
 - `_value`: Single underscore indicates "private by convention" - not enforced by the interpreter but signals "for internal use"
 - `__value`: Double underscore triggers name mangling (becomes `_ClassName__value`) to avoid naming conflicts in inheritance
 - `__value__`: Double underscore prefix and suffix indicates special methods controlled by Python (magic/dunder methods)
-  - for exemple, the `__str__` method will control how the object will be casted to a str
+  - for example, the `__str__` method will control how the object will be casted to a str
 - `value_`: Trailing underscore is often used to avoid conflicts with Python keywords (e.g., `class_`)
 
 
 ## Using AI is now one of the best ways to learn Python
 Claude by Anthropic is currently the best model to learn Python (you may use another model if the guidelines of your company requires it).
-These are very good exemples of the quality of answers that Claude provides. This is far better than what the current enshittified web would give to you.
+These are very good examples of the quality of answers that Claude provides. This is far better than what the current enshittified web would give to you.
 ### `What is the difference between a Python iterator, iterable, and generator?`
 #### Python Iterators, Iterables, and Generators
 
