@@ -28,7 +28,7 @@ This guide won't teach you everything but will let you take a sneak peek at some
 
 #### Zen of Python
 You don't have to learn or think to much about this right now, but this is by Tim Peters, one of the main Python contributors, and this is even included in most Python distributions
-```python
+```
 Type "help", "copyright", "credits" or "license" for more information.
 >>> import this
 The Zen of Python, by Tim Peters
