@@ -118,7 +118,7 @@ Type ".help" for more information.
 
 
 ### Collections
-TODO EXPLAIN
+TODO explain what are collections
 
 #### Lists
 Called lists but unrelated to linked lists, those are actual mutable arrays.
@@ -183,8 +183,6 @@ print(1 in unique_numbers)  # True in nearly constant time
 [The Python documentation about collections](https://docs.python.org/3/library/collections.html) includes many more powerful tools.
 
 ## Control Flow
-TODO keys/values/items
-TODO ternary
 ### If statements
 ```python
 x = 10
@@ -214,10 +212,19 @@ for i in range(5):  # 0 to 4, but range allow many more options, check the docum
 #### Inline for
 - **List comprehension**: `[x for x in range(10)]` creates a list
 - **Dictionary comprehension**: `{k: v for k, v in pairs}` creates a dictionary
-- **Set comprehension**: `{x for x in items}` creates a set
-- **Generator expression**: `(x for x in range(10))` creates a generator
+- **Set comprehension**: `{x for x in items}` creates a [set](#sets)
+- **Generator expression**: `(x for x in range(10))` creates a [generator](#generator)
+
+Protip: you can use `keys`/`values`/`items` of `dict` to iterate on specific parts
+```python
+the_dict = {"a": 3, "b": 4}
+print([k * 2 for k in the_dict.keys()])  # [6, 8]
+print([v * 2 for v in the_dict.values()])  # {'a': 3, 'b': 4}
+print({k * 2: v * 2 for k, v in the_dict.items()})  # {'aa': 6, 'bb': 8}
+```
 
 ### While loops
+The regular while loops are still available
 ```python
 count = 0
 while count < 5:
@@ -226,7 +233,6 @@ while count < 5:
 ```
 
 ## Functions
-
 ```python
 # Defining functions
 def greet(name, greeting="Hello"):
@@ -248,31 +254,36 @@ print(sum_all(1, 2, 3, 4))  # 10
 
 ```python
 class Person:
-    # Class variable (shared by all instances)
-    species = "Human"
+    species = "Human" # Class variable (shared by all instances)
     
-    # Constructor
-    def __init__(self, name, age):
-        # Instance variables
+    def __init__(self, name, age):  # Constructor where you usually defines instance variables
         self.name = name
         self.age = age
     
-    # Instance method (note 'self' parameter)
-    def introduce(self):
+    def introduce(self):  # Instance method (note 'self' parameter)
         return f"Hi, I'm {self.name} and I'm {self.age} years old."
     
-    # Static method
     @staticmethod
-    def get_species_info():
+    def get_species_info_hardcoded():
         return "Humans are social beings."
+
+    @classmethod
+    def get_species_info_from_class(cls):
+        return f"{cls.species} are social beings."
 
 # Creating objects
 alice = Person("Alice", 30)
 print(alice.introduce())
-print(Person.get_species_info())
+print(Person.get_species_info_hardcoded())
+print(Person.get_species_info_from_class())
 ```
 
-### TODO _value, __value__, __value, value_
+### Abstract classes
+TODO Make an explanation about abstract classes in Python
+### Generally, everything is a convention
+TODO Explain what is the difference between `_value`, `__value__`, `__value`, `value_`
+### Inheritance
+TODO Show a vey short inheritance exemple, tell that multiple inheritance is is possible but not recommended (don't write too much about that)
 
 ## Lambda Functions (Anonymous Functions)
 
@@ -303,7 +314,6 @@ print(even_squares)  # [0, 4, 16, 36, 64]
 ```
 
 ## Exception Handling
-TODO Explain inheritance
 ```python
 try:
     result = 10 / 0
@@ -316,6 +326,8 @@ else:
 finally:
     print("This always executes")
 ```
+### Inheritance of exceptions
+TODO Explain how inheritance of exceptions works and help you catch as wide as possible at last
 
 ## Modules and Imports
 
@@ -333,52 +345,33 @@ import numpy as np
 arr = np.array([1, 2, 3])
 ```
 
-## Python-Specific Gems
-
-### String Formatting
+## Context Managers
+A context manager let you ensure that specific logic is executed before and after your code,
+gracefully handling exceptions.
+Exemple with file handling (automatically closes file):
 ```python
-name = "Alice"
-age = 30
-# f-strings (Python 3.6+)
-print(f"{name} is {age} years old")
-
-# format() method
-print("{} is {} years old".format(name, age))
-```
-
-### Context Managers
-```python
-# File handling (automatically closes file)
 with open("example.txt", "w") as file:
     file.write("Hello, Python!")
 ```
 
-### Generators
-```python
-def count_up_to(max):
-    count = 1
-    while count <= max:
-        yield count
-        count += 1
-
-for number in count_up_to(5):
-    print(number)  # 1, 2, 3, 4, 5
-```
-
 ## Python downsides
-TODO TAIL CALL OPTIMIZATION
-TODO LESS PERFORMANT BUT WHO CARES
-TODO DONT MIX TABS AND SPACES => SO THANKS EDITORS
-TODO a = 3,   => IN tuples?
+TODO write a short subsection about why tail call optimizations aren't implemented
+TODO write a short subsection about why performance is low, but it doesn't matter as:
+- most of your performance bottlenecks will probaby IO based and should be solved with tools like asyncio
+- when you want to improve CPU performance you just write binded code in a lower level language
+TODO write a short subsection about mixed tabs and spaces, and what PEP encourages
 
 ## Python Ecosystem
-TODO PIP, venv, but actually astral, explain: uv + 
+### Tooling
+TODO make a short explanation about PIP and venv, but how they are actually best replaced by the astral.sh tools
 
-TODO PEP8 / Pythonic (explain good with AI) / duck typing
+### General conventions
+TODO Explain convention PEP8 / Pythonic (explain good with AI) / duck typing
 
-## Using AI PREF TODO CLAUDE
-Those are very good exemples of the quality of answers that Claude provides. This is far better than what the current enshittified web would give to you.
-### What is the difference between a Python iterator, iterable, and generator?
+## Using AI is now one of the best ways to learn Python
+Claude by Anthropic is currently the best model to learn Python (you may use another model if the guidelines of your company requires it).
+These are very good exemples of the quality of answers that Claude provides. This is far better than what the current enshittified web would give to you.
+### `What is the difference between a Python iterator, iterable, and generator?`
 #### Python Iterators, Iterables, and Generators
 
 These three concepts are closely related but serve different roles in Python:
@@ -406,7 +399,7 @@ These three concepts are closely related but serve different roles in Python:
 
 The key relationship: All generators are iterators, and all iterators are iterables, but not vice versa.
 
-### "What is a Python metaclass?"
+### `What is a Python metaclass?`
 #### Python Metaclasses
 
 A metaclass in Python is a class of a class - it defines how a class behaves. While classes define how instances behave, metaclasses define how classes behave.
@@ -445,7 +438,7 @@ print(MyClass.added_by_metaclass)  # True
 Metaclasses are considered advanced Python functionality and aren't needed for most programming tasks, but they're powerful for framework developers and certain design patterns.
 
 
-### Tell me about an advanced Python concept I may not know.
+### `Tell me about an advanced Python concept I may not know.`
 #### Python's Context Managers Beyond "with open()"
 
 While many Python developers are familiar with using context managers through the `with` statement for file handling, the concept goes much deeper and offers powerful patterns for resource management.
@@ -505,19 +498,13 @@ with Timer():
 This pattern is particularly useful for resource acquisition/release, transaction management, temporary state changes, and measuring performance.
 
 
-## Resources for Further Learning
+## Other resources for Further Learning
 
 - [Official Python Documentation](https://docs.python.org/3/)
-- [Automate The Boring Stuff with Python](https://inventwithpython.com/automate)
+- [Automate The Boring Stuff with Python](https://inventwithpython.com/automate) as a base
   - everything from [inventwithpython.com](inventwithpython.com) may help you
 - [Effective Python by Brett Slatkin](https://effectivepython.com/)
 - [Python Crash Course by Eric Matthes](https://nostarch.com/pythoncrashcourse2e)
 - [Python for Java Developers (Real Python)](https://realpython.com/java-vs-python/)
-
-TODO Exercism / Codesignal / Hackerrank explain why
-TODO Link personal notes
-TODO Books from Discord still not added
-TODO learn python the hard way
-TODO Automate The Boring Stuff with Python, free to read under a CC license.
-everything from inventwithpython.com is cool
-https://inventwithpython.com/automate => the book link, nice rec after
+TODO list Exercism / Codesignal / Hackerrank
+TODO link: learn python the hard way
