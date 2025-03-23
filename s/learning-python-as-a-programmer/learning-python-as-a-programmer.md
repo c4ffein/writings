@@ -461,11 +461,18 @@ Python's native package management tools are:
 - **venv**: Built-in module for creating virtual environments that isolate dependencies
 
 However, many developers now prefer more modern solutions from [astral.sh](https://astral.sh):
-- **ruff**: Ultra-fast Python linter and formatter
 - **uv**: Extremely fast pip replacement with rust-based dependency resolution
 - **hatch**: Modern project, package, and virtual environment manager
 
 These newer tools significantly improve performance, dependency management, and developer experience while maintaining compatibility with the Python ecosystem.
+
+#### Linting
+`ruff`, also from [astral.sh](https://astral.sh), is the `ultra-fast Python linter and formatter`, and replaces nearly every existing tools all-at-once.
+
+#### Typing
+Enforcing type hints is the only thing that `ruff` won't do. You can use another tool like `mypy` for that, with the advantage of being able to gradually type your codebase, you don't have to type everything all at once.
+(The [astral.sh](https://astral.sh) team is currently working on a replacement for it, but we're far from the official release.)
+
 
 ## General conventions
 Python emphasizes readability and consistency through conventions:
