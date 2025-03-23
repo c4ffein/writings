@@ -111,34 +111,26 @@ Collections are container data types in Python that allow you to store multiple 
 #### Lists
 Called lists but unrelated to linked lists, those are actual mutable arrays.
 ```python
->>> l = ["a", "b", "c"]
->>> l.append("d")  # Add one element
->>> l.extend(["e", "f"])  # Add multiple elements
->>> l
-['a', 'b', 'c', 'd', 'e', 'f']
->>> l[0]
-'a'
->>> l[1:3]  # Range indexing
-['b', 'c']
->>> l[-1]  # Negative indexing
-'f'
+l = ["a", "b", "c"]
+l.append("d")  # Add one element
+l.extend(["e", "f"])  # Add multiple elements
+print(l)       # ['a', 'b', 'c', 'd', 'e', 'f']
+print(l[0])    # 'a'
+print(l[1:3])  # ['b', 'c'] - Range indexing
+print(l[-1])   # 'f' - Negative indexing
 ```
 
 #### Tuples
 Like lists but are actually immutable.
 ```python
->>> t = (1, 2, 3)  # Defines a 3 elements tuple
->>> t
-(1, 2, 3)
->>> t = (1,)  # Defines a 1 element tuple
->>> t
-(1,)
->>> t = 1, 2, 3  # Defines the same 3 elements tuple, unneeded parentheses in that case
->>> t
-(1, 2, 3)
->>> t = 1,  # WARNING This means this is a valid 1 element tuple, that nearly all linters will accept
->>> t
-(1,)
+t = (1, 2, 3)  # Defines a 3 elements tuple
+print(t)       # (1, 2, 3)
+t = (1,)       # Defines a 1 element tuple
+print(t)       # (1,)
+t = 1, 2, 3    # Defines the same 3 elements tuple, unneeded parentheses in that case
+print(t)       # (1, 2, 3)
+t = 1,         # WARNING This means this is a valid 1 element tuple, that nearly all linters will accept
+print(t)       # (1,)
 ```
 
 #### Dictionaries
