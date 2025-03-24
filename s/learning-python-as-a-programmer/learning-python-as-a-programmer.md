@@ -231,6 +231,59 @@ def sum_all(*numbers):
 print(sum_all(1, 2, 3, 4))  # 10
 ```
 
+## Decorators
+Decorators are a powerful feature in Python that allows you to modify the behavior of functions or classes without changing their source code. They're a form of metaprogramming that uses the `@decorator` syntax.
+
+```python
+# Basic decorator example
+def my_decorator(func):
+    def wrapper(*args, **kwargs):
+        print("Something is happening before the function is called.")
+        result = func(*args, **kwargs)
+        print("Something is happening after the function is called.")
+        return result
+    return wrapper
+
+@my_decorator
+def say_hello(name):
+    return f"Hello, {name}!"
+
+# This is equivalent to:
+# say_hello = my_decorator(say_hello)
+
+print(say_hello("Python Developer"))  # The decorator will run before and after the function
+```
+
+Decorators can also accept arguments:
+
+```python
+def repeat(n=1):
+    def decorator(func):
+        def wrapper(*args, **kwargs):
+            result = None
+            for _ in range(n):
+                result = func(*args, **kwargs)
+            return result
+        return wrapper
+    return decorator
+
+@repeat(3)
+def greet(name):
+    print(f"Hello, {name}!")
+
+greet("World")  # Will print "Hello, World!" three times
+```
+
+You'll commonly see decorators used for:
+- Authentication and authorization
+- Logging and debugging
+- Caching results
+- Measuring execution time
+- Input validation
+- Rate limiting
+
+Some people tend to prefer relying on decorators far more than classes inheritance to limit code duplication.
+
 ## Classes and Objects
 
 ```python
@@ -241,14 +294,14 @@ class Person:
         self.name = name
         self.age = age
     
-    def introduce(self):  # Instance method (note 'self' parameter)
+    def introduce(self):  # Instance method (notice the 'self' parameter)
         return f"Hi, I'm {self.name} and I'm {self.age} years old."
     
-    @staticmethod
+    @staticmethod  # Notice this is not a keyword of the language but a standard decorator
     def get_species_info_hardcoded():
         return "Humans are social beings."
 
-    @classmethod
+    @classmethod  # Once again not a keyword of the language but a standard decorator
     def get_species_info_from_class(cls):
         return f"{cls.species} are social beings."
 
@@ -356,26 +409,21 @@ print(even_squares)  # [0, 4, 16, 36, 64]
 
 ## Exception Handling
 ```python
-try:
-    result = 10 / 0
-except ZeroDivisionError:
-    print("Cannot divide by zero")
-except Exception as e:
-    print(f"Other error: {e}")
-else:
-    print("No exceptions occurred")
-finally:
-    print("This always executes")
-```
-### Inheritance of exceptions
-Python's exception handling leverages class inheritance, allowing you to catch specific or broad categories of exceptions:
+class SpecificKindOfValueError(ValueError):
+    """
+    This defines an Exception inheriting from ValueError
+    We may inherit from the global Exception instead
+    You should always inherit from the most adequate exception
+    """
+    pass
 
-```python
 try:
-    # Code that might raise an exception
-    result = int("not a number")
+    do_something()
+except SpecificKindOfValueError:
+    # Catches a SpecificKindOfValueError
+    print("Here, we should actually handle SpecificKindOfValueError")
 except ValueError:
-    # Catches specifically ValueError
+    # Catches any other ValueError
     print("Not a valid number")
 except (TypeError, KeyError):
     # Can catch multiple specific types
@@ -383,11 +431,13 @@ except (TypeError, KeyError):
 except Exception as e:
     # Catches any exception that inherits from Exception
     # Put this last to catch any exceptions not caught above
-    print(f"Unexpected error: {e}")
+    print(f"Other error: {e}")
+else:
+    print("No exceptions occurred")
+finally:
+    print("This always executes")
 ```
-
-Best practice is to catch the most specific exceptions first, then progressively wider exception classes, with the broadest (`Exception`) last.
-
+As Python's exception handling leverages class inheritance, allowing you to catch specific or broad categories of exceptions, it is recommended to manage a clear hierarchy of exceptions so that you can catch in a general or a fine-grained way depending on where you are in your project.
 
 ## Modules and Imports
 
@@ -414,6 +464,34 @@ with open("example.txt", "w") as file:
     file.write("Hello, Python!")
 ```
 
+## Asynchronicity
+Python's asynchronous programming model uses `async`/`await` syntax to write concurrent code that's more maintainable than traditional callbacks or thread-based approaches. This allows you to handle many operations concurrently without the overhead of locking multiple threads.
+
+Here are some of the concepts python handles through the standard `asyncio` lib (this code doesn't work, just listing concepts):
+```
+result = await some_coroutine()  # Pauses execution until completed
+
+async def my_async_function():  # Defines an asynchronous function (coroutine)
+    pass
+
+asyncio.run(main_coroutine())  # Used to run the coroutine from a non-async context
+
+coro = main_coroutine(a, b)  # If the async function took parameters
+print(coro)  # <coroutine object coro at 0x7f1bcc2fb940>
+asyncio.run(coro)  # Also possible to pass a coroutine between calls
+
+results = await asyncio.gather(coro1(), coro2(), coro3())  # Waits for all of them
+
+task = asyncio.create_task(some_coroutine())  # Allows more advanced features like scheduling and cancellation
+
+async for item in async_iterable:  # Pauses execution waiting for each item
+    process(item)
+```
+
+Contrarily to some other programming languages, most of those operations aren't available by default, as you need to use `asyncio.run` first to enter an async context and then be able to use them.
+
+However, for a far better management of your asynchronous logic, the best solution may be to learn [Trio](https://trio.readthedocs.io/), of which the best advantage is to let you handle the whole arborescence of coroutines with the help of [context managers](#context-managers)
+
 ## Python downsides
 ### No tail call optimization
 Python deliberately doesn't implement tail call optimization (TCO), which allows recursive functions to avoid stack overflow by converting tail recursion into iteration. Guido van Rossum (Python's creator) argued that TCO would hide the call stack information, making debugging more difficult. This means recursive functions in Python have a limited depth and must often be rewritten iteratively for deep recursion.
@@ -425,7 +503,7 @@ Python's performance is relatively slow compared to compiled languages like C++ 
 - It has high-level abstractions that prioritize developer productivity over raw speed
 
 However, this rarely matters because:
-- Most applications are IO-bound rather than CPU-bound, so you can use asyncio for performance gains
+- Most applications are IO-bound rather than CPU-bound, so you can use [asynchronicity](#asynchronicity) for performance gains
 - Performance-critical code can be written in C/C++/Rust and called from Python (NumPy, TensorFlow, etc.)
 - Python's ecosystem includes optimized libraries and JIT compilers (like PyPy) for specific use cases
 
@@ -451,8 +529,27 @@ These newer tools significantly improve performance, dependency management, and 
 `ruff`, also from [astral.sh](https://astral.sh), is the `ultra-fast Python linter and formatter`, and replaces nearly every existing tools all-at-once.
 
 #### Typing
-Enforcing type hints is the only thing that `ruff` won't do. You can use another tool like `mypy` for that, with the advantage of being able to gradually type your codebase; you don't have to type everything all at once.
+Enforcing type hints is the only thing that `ruff` won't do.
+Type hints are annotations that indicate the expected data types of variables, function parameters, and return values.
+
+```python
+def greeting(name: str) -> str:
+    return f"Hello, {name}"
+
+age: int = 30
+```
+They can be used manually from your own code, in a metaprogramming way, but it is not how they will be the most useful to you for now, as they will allow:
+- Better code documentation, readability, maintainability, and easier refactoring
+- Enhanced IDE support (autocomplete, error detection)
+- Static type checking via tools like `mypy`
+
+Whit `mypy`, you will be able to gradually type your codebase; you don't have to type everything all at once.
 The [astral.sh](https://astral.sh) team is currently working on a replacement for it, but we're far from the official release.
+
+```
+a: int = "0"  # Types aren't enforced by the Python interpreter, you HAVE to rely on mypy
+print(type(a))  # <class 'str'>  This didn't raise any exception
+```
 
 ## General conventions
 Python emphasizes readability and consistency through conventions:
