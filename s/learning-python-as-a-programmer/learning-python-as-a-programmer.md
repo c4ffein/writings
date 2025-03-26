@@ -8,7 +8,7 @@ I'll also try to be a little less straightforward than most guides would be, but
 
 This is the March 2025 version of this guide, I'll see if I keep this updated.
 
-In accordance with [this section](using-ai-is-now-one-of-the-best-ways-to-learn-python), don't hesitate to ask [Claude](https://claude.ai) about anything that seems unclear while reading this guide.
+In accordance with [this section](#using-ai-is-now-one-of-the-best-ways-to-learn-python), don't hesitate to ask [Claude](https://claude.ai) about anything that seems unclear while reading this guide.
 
 ### What IS Python?
 Python is a high-level, interpreted programming language known for its readability and simplicity. Created by Guido van Rossum and first released in 1991, it is now one of the most used programming language.
@@ -553,7 +553,7 @@ Python emphasizes readability and consistency through conventions:
 The official style guide for Python code that covers naming, indentation, whitespace, etc. Most teams follow PEP 8 or a slightly modified version.
 
 ### Pythonic Code
-This is how code that follows Python's idiomatic patterns and leverages the language's unique features is called. Examples include list comprehensions instead of loops, context managers for resource handling, and preferring built-in functions over reinventing the wheel. [It is now possible to use AI to refactor your code to make it more pythonic.](is-there-a-more-pythonic-way-to-write-this)
+This is how code that follows Python's idiomatic patterns and leverages the language's unique features is called. Examples include list comprehensions instead of loops, context managers for resource handling, and preferring built-in functions over reinventing the wheel. [It is now possible to use AI to refactor your code to make it more pythonic.](#is-there-a-more-pythonic-way-to-write-this)
 
 ### Duck Typing
 "If it walks like a duck and quacks like a duck, it's a duck." Python doesn't require explicit interface declarations—objects are defined by behavior rather than type. This encourages focusing on what an object can do rather than what it is, leading to more flexible designs.
