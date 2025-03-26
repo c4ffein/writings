@@ -741,6 +741,7 @@ Both approaches are idiomatic Python, with list comprehensions generally being p
 - [Effective Python by Brett Slatkin](https://effectivepython.com/)
 - [Python Crash Course by Eric Matthes](https://nostarch.com/pythoncrashcourse2e)
 - [Python for Java Developers (Real Python)](https://realpython.com/java-vs-python/)
+### Exercises / Coding puzzles
 - [Exercism](https://exercism.org/tracks/python): Mentored coding challenges with real human feedback
 - [CodeSignal](https://codesignal.com/): Coding challenges and assessments with Python support
 - [HackerRank](https://www.hackerrank.com/domains/python): Python practice problems ranging from basic to advanced
