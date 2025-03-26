@@ -8,6 +8,8 @@ I'll also try to be a little less straightforward than most guides would be, but
 
 This is the March 2025 version of this guide, I'll see if I keep this updated.
 
+In accordance with [this section](using-ai-is-now-one-of-the-best-ways-to-learn-python), don't hesitate to ask [Claude](https://claude.ai) about anything that seems unclear while reading this guide.
+
 ### What IS Python?
 Python is a high-level, interpreted programming language known for its readability and simplicity. Created by Guido van Rossum and first released in 1991, it is now one of the most used programming language.
 
