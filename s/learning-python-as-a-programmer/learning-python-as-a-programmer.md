@@ -80,6 +80,7 @@ print(type(name))  # <class 'str'>
 print(isinstance(name, str))  # True => Safer as this also returns True for inherited classes
 ```
 
+In Python, even these basic types are subclasses of the root class `object`.
 
 ### Strong, dynamic typing
 Python is dynamically typed but strongly typed. Unlike with TypeScript/Java/C# etc, it is common to rely on type inference when defining variables. But unlike with JavaScript, a lot of operations that would just implicitly cast would raise exceptions in Python, like it is expected in other strongly typed languages.
@@ -155,7 +156,7 @@ print(user["name"])  # prints: Alice
 ```
 
 #### Sets
-Implements a hash table like a dictionnary, but without associated values to the keys
+Implements a hash table like a dictionary, but without associated values to the keys
 ```python
 unique_numbers = {1, 2, 3, 3, 4}  # Will contain 1, 2, 3, 4
 print(1 in unique_numbers)  # True in nearly constant time
@@ -204,6 +205,13 @@ the_dict = {"a": 3, "b": 4}
 print([k * 2 for k in the_dict.keys()])  # ["aa", "bb"]
 print([v * 2 for v in the_dict.values()])  # [6, 8]
 print({k * 2: v * 2 for k, v in the_dict.items()})  # {'aa': 6, 'bb': 8}
+```
+
+##### With conditional logic
+```python
+squares = [x * x for x in range(10)]
+even_squares = [x * x for x in range(10) if x % 2 == 0]
+print(even_squares)  # [0, 4, 16, 36, 64]
 ```
 
 ### While loops
@@ -343,7 +351,7 @@ class Duck(Animal, Swimmer):
 ```
 
 #### Private methods and attributes
-Python does not provide "private" methods and attributes like Java does. See [this part of the documentation](#underscore-conventions) for the alternative.
+Python does not provide "private" methods and attributes like Java does. See [this part of the documentation](#underscore-conventions) for the `_value` alternative.
 
 
 ### Abstract classes
@@ -392,21 +400,6 @@ print(add(5, 3))  # 8
 numbers = [1, 2, 3, 4, 5]
 squares = list(map(lambda x: x**2, numbers))
 print(squares)  # [1, 4, 9, 16, 25]
-```
-
-## List Comprehensions
-
-```python
-# Creating lists with loop logic
-squares = [x**2 for x in range(10)]
-# Equivalent to:
-# squares = []
-# for x in range(10):
-#     squares.append(x**2)
-
-# With conditions
-even_squares = [x**2 for x in range(10) if x % 2 == 0]
-print(even_squares)  # [0, 4, 16, 36, 64]
 ```
 
 ## Exception Handling
