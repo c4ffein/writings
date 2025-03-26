@@ -73,7 +73,7 @@ print("Hello, World!")
 name = "Python"  # str
 age = 30  # int
 price = 19.99  # float
-is_available = True  # bool (note the capitalization)
+is_available = True  # bool
 
 # Type checking
 print(type(name))  # <class 'str'>
