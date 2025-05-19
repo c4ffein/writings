@@ -542,7 +542,7 @@ Whit `mypy`, you will be able to gradually type your codebase; you don't have to
 The [astral.sh](https://astral.sh) team released a replacement for `mypy`, called [ty](https://github.com/astral-sh/ty). It is extremely fast as it is coded in Rust, but still not ready for production use. It is probably the future of Python type checking though.
 
 ```
-a: int = "0"  # Types aren't enforced by the Python interpreter, you HAVE to rely on mypy
+a: int = "0"  # Types aren't enforced by the Python interpreter, you HAVE to rely on mypy or ty
 print(type(a))  # <class 'str'>  This didn't raise any exception
 ```
 
