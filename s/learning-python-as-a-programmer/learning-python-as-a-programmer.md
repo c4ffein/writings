@@ -536,10 +536,10 @@ age: int = 30
 They can be used manually from your own code, in a metaprogramming way, but it is not how they will be the most useful to you for now, as they will allow:
 - Better code documentation, readability, maintainability, and easier refactoring
 - Enhanced IDE support (autocomplete, error detection)
-- Static type checking via tools like `mypy`
+- Static type checking via tools like `ty` or `mypy`
 
 Whit `mypy`, you will be able to gradually type your codebase; you don't have to type everything all at once.
-The [astral.sh](https://astral.sh) team is currently working on a replacement for it, but we're far from the official release.
+The [astral.sh](https://astral.sh) team released a replacement for `mypy`, called [ty](https://github.com/astral-sh/ty). It is extremely fast as it is coded in Rust, but still not ready for production use. It is probably the future of Python type checking though.
 
 ```
 a: int = "0"  # Types aren't enforced by the Python interpreter, you HAVE to rely on mypy
