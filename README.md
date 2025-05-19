@@ -16,5 +16,7 @@ Feel free to drop an issue if you want to start a discussion (even just to corre
 - [The last stuff I enjoyed reading](s/what-i-enjoyed-reading/what-i-enjoyed-reading.md)
 - [Some puzzles](s/puzzles/puzzles.md)
 - [How to start contributing to Open Source](s/contributing-to-open-source/contributing-to-open-source.md)
+- [Prophecies](s/prophecies/prophecies.md)
 - [Competency Cycle](s/competency-cycle/competency-cycle.md)
 - [Python for Programmers](s/learning-python-as-a-programmer/learning-python-as-a-programmer.md)
+- [My experience with Claude Code - This is quite technical, but you can read my experience with them](/c4ffein/pass)
