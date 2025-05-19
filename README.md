@@ -19,4 +19,4 @@ Feel free to drop an issue if you want to start a discussion (even just to corre
 - [Prophecies](s/prophecies/prophecies.md)
 - [Competency Cycle](s/competency-cycle/competency-cycle.md)
 - [Python for Programmers](s/learning-python-as-a-programmer/learning-python-as-a-programmer.md)
-- [My experience with Claude Code - This is quite technical, but you can read my experience with them](/c4ffein/pass)
+- [My experience with Claude Code - In another repo, this is quite technical, but you can read my experience with them](https://github.com/c4ffein/pass/chat_history/00-INDEX.md)
