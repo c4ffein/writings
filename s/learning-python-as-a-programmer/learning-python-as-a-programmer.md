@@ -538,7 +538,7 @@ They can be used manually from your own code, in a metaprogramming way, but it i
 - Enhanced IDE support (autocomplete, error detection)
 - Static type checking via tools like `ty` or `mypy`
 
-Whit `mypy`, you will be able to gradually type your codebase; you don't have to type everything all at once.
+Whit `mypy`, you will be able to gradually type your codebase; you don't have to type everything all at once.  
 The [astral.sh](https://astral.sh) team released a replacement for `mypy`, called [ty](https://github.com/astral-sh/ty). It is extremely fast as it is coded in Rust, but still not ready for production use. It is probably the future of Python type checking though.
 
 ```
