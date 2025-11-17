@@ -7,7 +7,8 @@ A book about Microsoft's cult of the puzzle, both a good criticism and a good so
 
 ## Accessible from the web
 ### [Sedecordle](https://www.sedecordle.com/)
-There is still a point playing a [Wordle](https://www.nytimes.com/games/wordle/index.html)-like when you're filling 16 words in 21 tries.
+There is still a point playing a [Wordle](https://www.nytimes.com/games/wordle/index.html)-like when you're filling 16 words in 21 tries.  
+[squardle](https://fubargames.se/squardle/) is fun too.
 
 ### [Jane Street Puzzles](https://www.janestreet.com/puzzles/)
 You can go for the [current one](https://www.janestreet.com/puzzles/current-puzzle/) or just browse [the archive](https://www.janestreet.com/puzzles/archive/index.html).
