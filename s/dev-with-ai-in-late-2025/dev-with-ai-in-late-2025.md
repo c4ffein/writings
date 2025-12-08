@@ -32,10 +32,27 @@ But now we must be asking, what separates what the AIs everyone is talking about
 There are 2 concepts that I consider quite important here.
 
 #### Moore's law
-- Moore's law - should have been slowing down, but not that much => remeber this
+
+**Moore's Law** (1965): The observation that the number of transistors on a chip doubles roughly every two years, leading to exponential growth in computing power at similar cost.
+
+It was predicted to hit physical limits (atoms are only so small), but it keeps finding ways to continue through:
+- **3D chip stacking** - building up instead of shrinking down
+- **Chiplets** - multiple smaller chips working together instead of one monolithic die
+- **Specialized accelerators** - GPUs, TPUs, NPUs: purpose-built silicon for specific workloads
+
+TL;DR - no real stop in sight
 
 #### Wirth's law
-- https://en.wikipedia.org/wiki/Wirth%27s_law => also remember this, will be useful later (TODO link to why Anthropic acquired Bun e2e tests)
+
+**Wirth's Law** (1995): "Software is getting slower more rapidly than hardware is getting faster."
+
+Companies are incentivized to develop inefficient software: they want efficient production processes, and are incentivized to maximize short-term feature delivery, even if they are coded in a naive way, and don't require costly developers.
+The only barrier is being **tolerable** according to the average human standard.
+This is why most software seems so slow.
+
+This is not real for AI software - they want maximum performance since there is a run to get the most powerful AI at the lowest cost.
+
+It's just a random fact for now but it will makes sense later.
 
 ### What is a neural network
 
@@ -692,7 +709,24 @@ Showing first examples - TODO
 ## And what is the future now?
 - No stopping in sight
 - Machines are limited by Wirth's law
-- Anthropic aquires Bun - smartest move
+  - in my feedback loop, as a developer, I'm now wasting more time waiting for tests than waiting for the model
+  - Wirth's law explains this: the average tech stack is slow. Most companies don't care. But it makes your tests slow
+- Anthropic acquires Bun - smartest move
+```
+Bun is a JavaScript/TypeScript runtime built from scratch in Zig, designed as a faster alternative to Node.js.
+It's an all-in-one toolkit: runtime, bundler, package manager, and test runner - all optimized for speed.
+Key point for your article: Bun is often 3-10x faster than Node.js for common operations.
+It's a direct counter to Wirth's law - instead of accepting that JS tooling is "just slow",
+they rewrote everything with performance as the priority.
+```
+  - Link - TL;DR powers Claude Code, and is already developed by Claude
+  - Now, companies like Anthropic care about fast runtimes. Raw compute isn't enough if the software stack wastes it.
+  - side effect: the testing feedback loop gets faster
+
+  If your AI agent is bottlenecked by a 30-second test suite that could run in 3
+  seconds, that's wasted compute, wasted user time, and worse results (fewer
+  iterations = less refinement).
+
 
 ### Pricing + Education
 - Only Claude weakness pricing, describe pricing, should do discounts for students
@@ -700,8 +734,8 @@ Showing first examples - TODO
 - TODO place somewhere AoC depressing
 
 ### And the workforce?
-- Dario accurate for the last 5 years - 90% of the code - developpers not dead, stay consistent with his promise actually
-- But in the next 5 years? Can only go better: "developper" is dead, either be
+- Dario accurate for the last 5 years - 90% of the code - developers not dead, stay consistent with his promise actually
+- But in the next 5 years? Can only go better: "developer" is dead, either be
   - an excellent engineer - like, **really**
     - R&D should be somehow safer
   - good with product
