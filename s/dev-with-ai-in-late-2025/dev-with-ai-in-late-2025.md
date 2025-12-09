@@ -483,92 +483,18 @@ With thinking mode enabled
 ### Claude still sometimes make mistakes
 There, I have to show that something actually got removed
 
-```
-> It seems we removed some logic. Can you explain this?
-  [ a git diff ]
-
-● No logic was removed -
-  it was refactored from a nested dict structure to a flat dataclass structure.
-
-  Old structure (nested dict):
-  [ nested dict ]
-
-  New structure (flat dataclass in context.py):
-  @dataclass
-  class TheDataclass:
-      [ dataclass content ]
-
-  The logic is equivalent:
-  | Old                | New                   |
-  |--------------------|-----------------------|
-  | nested[dict][aaa]  | nested.dataclass.aaa  |
-  | nested[dict][bbb]  | nested.dataclass.bbb  |
-  | nested[dict][ccc]  | nested.dataclass.ccc  |
-
-  The substep [ a substep ] logic ( [ another substep ] ) is now in [ a method ] at state.py:97-111.
-```
+claude_can_still_make_mistakes
 
 #### I really had to pinpoint the exact problem
 
-```
-> Ok, what about this especially?
-  [ a subpart of the git diff ]
-
-● Good catch! Two changes:
-
-  1. Error handling changed:
-    - Old: return [ sad path - there is a reason for not using exceptions ]
-    - New: return (silent)
-  2. Return value removed:
-    - Old: return [ call to update the state somehow ]
-    - New: nothing (caller must call [ the helper ] separately)
-
-  The second is intentional - separates mutation from presentation. The callers do:
-  [ something ]
-
-  But the first is a regression - we lost the error message.
-  The callers do validate before calling:
-  [ changes ]
-
-  So it works, but the function itself is now less defensive.
-  Want me to restore the error return for [ sad path ]?
-```
-
-
-
-
+claude_can_still_make_mistakes_i_had_to_really_pinpoint
 
 
 ### Better architecture for my data structures based on SE principles
 
 #### First, what is a tree?
 
-```
-> Can you output the ascii of a tree and nodes?
-
-● root
-          /  \
-         /    \
-        A      B
-       / \      \
-      C   D      E
-     /          / \
-    F          G   H
-
-  Or a more detailed style:
-
-  root
-  ├── A
-  │   ├── C
-  │   │   └── F
-  │   └── D
-  └── B
-      └── E
-          ├── G
-          └── H
-
-  Would you like a different structure or style?
-```
+claude_can_show_ascii_to_explain_datastructures
 
 #### Can they work with my datastructures
 
