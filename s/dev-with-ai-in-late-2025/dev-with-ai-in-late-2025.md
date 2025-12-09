@@ -233,53 +233,12 @@ TODO show still doesn't work with React + Vite, but you can just link the doc
 
 ### Point at the TODO instead of doing yourself
 
-```
-> Can you read path/to/my/file.py - line 111 ?
-
-● Read(path/to/my/file.py)
-  ⎿  Read 20 lines
-
-● Ah, there's a TODO: Use context instead of global state - and [ ... ]
-
-  Let me check if this function is actually used:
-
-● Search(pattern: "_a_method", path: [ path ])
-  ⎿  Found 1 file (ctrl+o to expand)
-
-● Search(pattern: "_a_method|A_CONSTANT, path: "a/subpath",
-        output_mode: "content")
-  ⎿  Found 4 lines (ctrl+o to expand)
-```
+claude_can_take_the_tasks
 
 
 ### Auto runs tests, show me the architecture after I ask for a refactor
-```
-● All 99 tests pass! Here's the summary of this refactor:
 
-Removed hidden global state for safety:
-
-- chatbot.py: Now creates _cli_context = Context() explicitly at the top, uses it directly in do_something()
-- state.py: Reduced to just re-exports for backwards compatibility (83 lines → 23 lines)
-- something/__init__.py: Simplified exports (no more wrapper functions)
-
-Architecture is now explicit:
-CLI (chatbot.py)        Backend ([ commons/file.py ])
-       │                            │
-       ▼                            ▼
-_cli_context = Context()    context from Django
-       │                            │
-       └──────────┬─────────────────┘
-                  ▼
-         context.do_another_thing()
-         context.do_another_thing_again()
-         etc.
-
-Benefit: If someone forgets to set up context properly, they'll get an error instead of silently using wrong/shared state.
-```
-
-
-
-
+claude_auto_runs_tests_and_shows_the_architecture
 
 
 ### I enjoy using acronyms
