@@ -572,64 +572,13 @@ There, I have to show that something actually got removed
 
 #### Can they work with my datastructures
 
-```
-> [ code ]   ============>   Could we stop with the "status": "something" ?
-  If either this is a leaf, and we direcly put the status,
-  or the status of a node is a computed property
+claude_can_work_with_my_datastructures
 
-● Good point! Computed values shouldn't be serialized. Let me fix to_dict()/from_dict():
 
-  - [ other nodes ] → only serialize [ leafs ], status computed on read
-  - [ leafs ]       → directly serialize the status string
+### Can follow my architectures ideas
 
-● Read([ path ])
-  ⎿  Read 60 lines
+claude_can_follow_my_architecture_ideas
 
-● Update([ path ])
-  [ showing me a diff ]
-
-### Can follow my "smart" architectures ideas easily
-
-```
-> I have another idea. Could we not use a function called in each [ item ],
-  but instead, commons/registry.py scans for every dir in [ container ],
-  for a CONFIG in [ subfile in each dir ]
-  WDYT? That way we KNOW if we forgot to define/link this config!
-
-∴ Thinking…
-
-  The user wants to change the approach:
-
-  Instead of:
-  1. Each [ item ] calls [ registration helper ]
-  2. Registry imports and runs the modules
-
-  To:
-  1. Registry scans [ path/*/file.py ]
-  2. Registry imports each module and looks for a CONFIG attribute
-  3. Uses CONFIG.[ named_id ] to register it
-
-  This is cleaner because:
-  - No need for explicit [ registration helper ] call in each [ item ]
-  - If CONFIG is missing, we get a clear error
-  - The convention is: have a CONFIG in [ path/*/file.py ] with a [ named_id ]
-
-  Let me update the registry.py to do this:
-  [ file update ]
-
-  This way:
-  - Convention: each [ iteam ] has [ file.py ] with a CONFIG: [ Configuration ]
-  - Registry scans and imports, looks for CONFIG, uses CONFIG.[ named_id ] to register
-
-  I'll implement robust warning mechanisms to catch configuration issues early.
-  This involves adding informative error messages
-  that help developers quickly identify and resolve problems with configurations.
-  The goal is to provide clear, actionable feedback during the discovery process.
-
-● Yes! That's cleaner - convention over configuration.
-  The registry scans for CONFIG in each [ file.py ] and uses CONFIG.[ named_id ] to register.
-  If CONFIG is missing → clear error.
-```
 
 #### And still improve robustness
 We also added tests to ensure there can't be dirs with missing configurations
@@ -638,75 +587,7 @@ We also added tests to ensure there can't be dirs with missing configurations
 
 ### Can take ops problems into account
 
-
-```
-> We're on a cheap sevalla, I think it's safer to do the ml inference on a dedicated infra.
-  WDYT? Is it super lightweight? I doubt it
-
-∴ Thinking…
-
-  The user is asking about whether [ the model ] is lightweight enough to
-  run on their cheap Sevalla (a hosting provider) infrastructure.
-  They're concerned about resource usage and are suggesting
-  maybe they should use a dedicated ML inference service instead.
-
-  Let me check what [ the model ] requires - it's an [ XM ] parameter model,
-  which is relatively small for a [ specific kind of model ].
-  But even so, on a cheap VPS it might be too heavy.
-
-  Let me look at the dependencies and think about this:
-  - [ the model ] is a relatively small model ([ XM ] parameters)
-  - But it still requires loading the model into memory
-  - Plus [ another model ] for [ another use case Claude knows about ] is much heavier
-
-  The user is right to be concerned. For a production deployment on a cheap server, using a cloud API like:
-  - HuggingFace Inference API
-  - ElevenLabs
-  - Google Cloud TTS
-  - Amazon Polly
-
-  Would be much safer than running inference locally.
-
-  Let me check the pyproject.toml to see the dependencies and give them a realistic assessment.
-
-● Good point. Let me check the model size and dependencies:
-
-● [ analyzing my pyproject.toml ]
-
-∴ Thinking…
-
-  So [ the dependencies ] include:
-  [ dependencies ]
-
-  For a cheap Sevalla VPS, this is definitely risky:
-  [ too much memory usage, too slow ]
-
-  The user is right - for production, using a cloud inference API would be much safer:
-  [ inference providers recommendation ]
-
-  Let me give them a realistic assessment and suggest the HuggingFace Inference API approach.
-
-● You're right to be concerned. Here's the reality:
-
-  Local inference is heavy:
-  [ justifications ]
-
-  On a cheap VPS, this would be slow and could OOM.
-
-  Better options for production:
-
-  1. HuggingFace Inference API (free tier available)
-    [ justifications ]
-  2. Dedicated options:
-    [ justifications ]
-
-  Want me to create a HuggingFace class that uses their Inference API instead of
-  local [ model ]? It would be a simple swap - same speak() interface but calls the API
-  instead of running inference locally.
-
-  The free HF tier has rate limits but should work fine for [ our ] use case.
-```
-
+claude_can_take_ops_problems_into_account
 
 ### Can take security into account, and discuss the tradeoffs
 
