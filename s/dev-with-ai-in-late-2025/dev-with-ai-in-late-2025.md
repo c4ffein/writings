@@ -1,4 +1,6 @@
-# Dev with AI in Late 2025
+# There is no stop sign
+
+TODO move this file
 
 Why this?
 have to give a talk
