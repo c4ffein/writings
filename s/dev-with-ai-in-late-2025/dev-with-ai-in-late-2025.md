@@ -56,23 +56,118 @@ It's just a random fact for now but it will makes sense later.
 
 ### What is a neural network
 
+A neural network is a program structured as layers of connected nodes, loosely inspired by how neurons in the brain connect to each other.
+
+The key difference from traditional programming:
+- **Traditional**: you write explicit rules ("if pixel pattern looks like X, it's a 7")
+- **Neural network**: you show it thousands of examples and it *learns* the patterns
+
+Each connection between nodes has a "weight" - a number that gets adjusted during training. When you feed data through the network, these weights determine what signal passes through. Training is just: show it examples, check if it got the answer right, adjust the weights slightly, repeat millions of times.
+
+That's it. No magic. Just matrix multiplication and gradual weight adjustment.
+
 ### MNIST
+
+MNIST is the "hello world" of machine learning - a dataset of 70,000 handwritten digits (0-9) that became the standard benchmark for testing neural networks.
+
+Why does it matter? In the 1990s, getting a computer to recognize handwritten digits was genuinely hard. You couldn't write rules for it - everyone's handwriting is different. MNIST proved that neural networks could learn to do it with ~99% accuracy.
+
+It sounds trivial now, but this was the proof of concept: neural networks can learn to recognize patterns that humans can't explicitly describe in code.
 
 ### emergent properties
 
+Here's where it gets interesting. When you scale neural networks up - more parameters, more training data, more compute - they start doing things nobody explicitly trained them to do.
+
+MNIST networks recognize digits. But at some point, larger networks started:
+- Reasoning through multi-step problems
+- Writing code
+- Translating between languages they weren't specifically trained on
+- Explaining their reasoning
+
+These are "emergent properties" - capabilities that appear at scale without being directly programmed. Nobody wrote "if user asks for code, generate syntax." The network learned it from patterns in the training data.
+
+This is why scaling matters. You're not just making the same thing faster - you're potentially unlocking entirely new capabilities.
+
 ### the bitter lesson
 
-### What they already killed months ago: templating
+Rich Sutton's "The Bitter Lesson" (2019) is one of the most important essays in AI.
+
+The bitter lesson: **general methods that leverage computation scale better than clever domain-specific engineering.**
+
+Every time AI researchers tried to hand-craft knowledge or build in human expertise, they eventually got beaten by simpler methods that just used more compute and data. Chess engines with elaborate position evaluation? Beaten by tree search + compute. Carefully designed language rules? Beaten by statistical models trained on raw text.
+
+The lesson is "bitter" because it means human cleverness matters less than we'd like. The winning strategy is almost always: simpler architecture + more data + more compute.
+
+This is why we have trillion-parameter models instead of cleverly engineered smaller ones.
+
+### how does a transformer work
+
+TODO can you try this one?
+
+### my "whoa moment" happened before chatgpt, so I'm not surprised anymore, we scalin
+
+TODO
+
+### How we used "AI" before
+
+- google on steroid
+- very good for bootstraping, kinda killed the template industry TODO link numbers
+- autocomplete - a bit painful actually
+
+### How does a human actually code
+
+Think about what you actually do when you code:
+1. Read existing code to understand context
+2. Search for relevant files and patterns
+3. Make a change
+4. Run tests or the app to see if it works
+5. Read error messages
+6. Repeat
+
+It's not "think of perfect code and type it out." It's an iterative loop of reading, searching, trying, failing, adjusting.
+
+### AI has to be agentic
+
+Early AI coding tools were "autocomplete on steroids" - you type, they suggest the next line. Useful, but limited.
+
+The insight: if humans code through an iterative loop (read → search → edit → test → repeat), then AI should too.
+
+An "agentic" AI doesn't just generate text - it takes actions, observes results, and adjusts. It can:
+- Read files to understand your codebase
+- Search for patterns across thousands of files
+- Make edits and run tests
+- See the errors and fix them
+- Repeat until the task is done
+
+This is the paradigm shift. Not "AI writes code" but "AI does the same loop a human developer does."
+
+### Claude Code
+
+TODO - bridge to Claude Code specifically
+- imo so good because they actually built it for themselves, it's not bs
+- "We actually weren't even sure if we wanted to launch Claude Code publicly because we were thinking it could be a competitive advantage for us, like our 'secret sauce': if it gives us an advantage, why launch it?"
+- "I started hacking around using Claude in the terminal. The first version was barebones: it couldn't read files, nor could it use bash, and couldn't do any engineering stuff at all."
+- "I hooked up this prototype to AppleScript: it could tell me what music I was listening to while working. And then it could also change the music playing, based on my input."
+Boris Cherny
+Source: https://newsletter.pragmaticengineer.com/p/how-claude-code-is-built
+
+They then iterated on something that could do more and more
+
+### What is Claude Code?
+- Terminal + VSCode + in the cloud + ...
 
 ### Current state
 - OpenAI stalls (can't be surprised but I'm not really bullish on them)
-- Claude and Gemini lead, for different reasons
-- We gonna focus on Claude Code
-
-## What is Claude Code?
-- Terminal + VSCode + in the cloud + ...
+- Claude and Gemini lead, for different reasons - Claude is bad at vision, bad at math, link article about claudyness
+- Only guy I know that preferred Gemini to Claude Opus 4.5 works on computer vision and physics simulation
+- Other than that I explain the Claude Code underuse because it's behind a paywall
+- We gonna focus on Claude Code cause the best imo, but other alternatives for agentic coding exist
+  - list some?
 
 ## How a beginner would use this
+TODO This part should actually be a demo
+put a slide to be sure to show thinking vs no thinking, and modes
+should do a video instead, because talking while doing is risky
 ### TODO just prompt
 ### TODO try to fix mistakes
 ### TODO good vs bad - asking questions and learning vs stuck
@@ -699,6 +794,8 @@ TODO here is a dashboard
 
 ## Example of me coding with Claude on a not average project
 Writing an alternate wrapper - TODO
+
+
 ### Opus 4.5 now finds bugs?
 Showing first examples - TODO
 
