@@ -1,20 +1,21 @@
 # Dev with AI in Late 2025
 
-## First, what is an AI?
+Why this?
+have to give a talk
+had to clear my head
+hesitated on how to orient my talk
+infodumped everything before cleaning
+nothing new here, not trying to compete with the existant but still can get all the things I think people should know in a single place, and they can form their own opinion
+nothing to learn for an expert, but still think my take could be interesting to the average non-ai engineer once refined
+just the article I'll link when discussing with someone having opposite views to mine, they can form their own opinion but all the "have you taken this into consideration" stuff is there
 
-Honestly, I really think this is the first question we should openly ask ourselves there.
+## Do they know what an AI is
 
-And there is a reason why I think this is worth asking ourselves.
+I am more and more disappointed by people having takes on where this AI thing is going without having any basic understanding of it whatsoever. I won't pretend to be an expert, I consider myself a competent engineer with an interest for AI, and I think basic engineering knowledge and scientific curiosity should still be enough to provide interesting takes - so anyway, hope you have fun reading this!
 
-Defining these concepts will allow us to get a more profounding understanding,
-and to make more accurate predictions about where all of this is going.
+I have my own definition of "intelligence", but it is not something everyone agrees upon. Well, even the researchers at the frontline don't all have the same definition of what AGI will be.
 
-So, what is "AI"?
-
-```
-Artificial intelligence is machines or software that can do tasks which normally require human thinking—like recognizing images, understanding language, making decisions, or solving problems.
-```
-(thanks Claude)
+What we can agree upon is the definition of "artificial", and how that thing, whether we want to call it "intelligent", "thinking", or "just a stochastic parrot", comes from.
 
 ### Well, actually, what is a computer?
 
@@ -25,11 +26,10 @@ So this should be even more important to actually define.
 ```
 A computer is a machine that takes in information, processes it by following instructions, and gives you results.
 ```
-(thanks Claude again)
 
 But now we must be asking, what separates what the AIs everyone is talking about and previous attempt at generalize "problem-solving", since they are based on the same machines that only perform basic computations?
 
-There are 2 concepts that I consider quite important here.
+Before we dive in, there are 2 concepts that I consider quite important here.
 
 #### Moore's law
 
@@ -40,7 +40,7 @@ It was predicted to hit physical limits (atoms are only so small), but it keeps 
 - **Chiplets** - multiple smaller chips working together instead of one monolithic die
 - **Specialized accelerators** - GPUs, TPUs, NPUs: purpose-built silicon for specific workloads
 
-TL;DR - no real stop in sight
+TL;DR - computers can still become more powerful, no real stop in sight
 
 #### Wirth's law
 
@@ -102,11 +102,109 @@ This is why we have trillion-parameter models instead of cleverly engineered sma
 
 ### how does a transformer work
 
-TODO can you try this one?
+The transformer (2017) is the architecture behind modern LLMs. The key innovation: **attention**.
 
-### my "whoa moment" happened before chatgpt, so I'm not surprised anymore, we scalin
+Previous neural networks processed sequences one step at a time (word by word). Transformers can look at the entire input at once and learn which parts are relevant to which other parts.
 
-TODO
+When processing "The cat sat on the mat because **it** was tired", attention lets the model learn that "it" relates to "cat", not "mat" - by learning patterns across millions of examples of how words relate to each other.
+
+The "magic" of modern LLMs:
+1. Stack many transformer layers (GPT-4 has ~120, Claude is similar scale)
+2. Train on massive text datasets
+3. The attention patterns become increasingly sophisticated at each layer
+4. Emergent capabilities appear at scale
+
+That's the architecture. Everything else - the chat interface, the coding ability, the reasoning - emerges from scaling this basic pattern up.
+
+If you want to actually understand this visually, 3Blue1Brown's series is the best resource:
+1. [But what is a Neural Network?](https://www.3blue1brown.com/lessons/neural-networks)
+2. [Gradient descent, how neural networks learn](https://www.3blue1brown.com/lessons/gradient-descent)
+3. [What is backpropagation really doing?](https://www.3blue1brown.com/lessons/backpropagation)
+4. [Backpropagation calculus](https://www.3blue1brown.com/lessons/backpropagation-calculus)
+5. [Transformers, the tech behind LLMs](https://www.3blue1brown.com/lessons/gpt)
+6. [Attention in transformers, step-by-step](https://www.3blue1brown.com/lessons/attention)
+
+Full playlist: [3blue1brown.com/topics/neural-networks](https://www.3blue1brown.com/topics/neural-networks)
+
+### my "whoa moment" happened before ChatGPT
+
+I heard about transformers, GPT-2, and OpenAI's bet on "just scale it up" back when it sounded almost naive. I didn't believe this was the path to general intelligence.
+
+Then I actually tried ChatGPT when it launched, and even with all the criticism that was already there, I saw the potential.
+
+But here's the thing: the ChatGPT moment didn't come from nowhere. It came from GPT-2, which came from GPT, which came from scaling transformers. Each step was "just" more compute, more data, more parameters - and each step unlocked capabilities the previous one didn't have.
+
+So now when people say "but LLMs can't do X" - I'm not surprised when the next version does X. The early criticisms (can't reason, can't code, can't follow instructions) got solved by throwing more compute at the problem. That's the bitter lesson playing out in real time.
+
+There's no reason to believe this stops.
+
+### more parameters introduce nuance
+
+```
+> ai model=opus "Peux tu m'expliquer le sens de cette phrase: Pierre prend la boule et la lance."
+# Explication de la phrase
+
+**« Pierre prend la boule et la lance. »**
+
+Cette phrase décrit **deux actions successives** réalisées par Pierre :
+
+1. **Pierre prend la boule** → il saisit une boule (probablement avec sa main)
+2. **et la lance** → puis il la jette/projette
+
+---
+
+## Point intéressant : une ambiguïté potentielle
+
+À l'écrit, cette phrase peut théoriquement avoir **deux sens** à cause du mot **« lance »** :
+
+| Interprétation | Signification |
+|----------------|---------------|
+| **Verbe « lancer »** ✅ | Pierre jette la boule *(sens le plus naturel)* |
+| **Nom « la lance »** | Pierre prend la boule et prend aussi la lance (l'arme) |
+
+À l'oral, l'intonation lèverait l'ambiguïté. À l'écrit, le **contexte** (jeu de pétanque, bowling...) indique clairement qu'il s'agit du verbe *lancer*.
+
+---
+
+Tu voulais une analyse grammaticale plus détaillée, ou c'était plutôt le sens général qui t'intéressait ?
+```
+
+```
+> ai model=sonnet "Peux tu m'expliquer le sens de cette phrase: Pierre prend la boule et la lance."
+# Explication de la phrase
+
+Cette phrase décrit **deux actions successives** accomplies par Pierre :
+
+## Les actions
+
+1. **"Pierre prend la boule"** = Pierre saisit/attrape une boule avec sa(ses) main(s)
+2. **"et la lance"** = ensuite, il projette cette boule (il la jette)
+
+## Structure grammaticale
+
+- **"la"** (pronom) remplace "la boule" pour éviter la répétition
+- La phrase complète serait : "Pierre prend la boule et **lance la boule**"
+
+## Sens global
+
+Pierre effectue un mouvement complet : il attrape d'abord un objet sphérique (une boule), puis il la projette dans une direction (peut-être vers quelqu'un ou quelque chose, ou simplement en l'air).
+
+## Contextes possibles
+
+Cela pourrait se passer dans différentes situations :
+- Un jeu de pétanque
+- Un jeu de bowling
+- Un jeu de balle entre amis
+- Une activité sportive
+
+La phrase est simple et décrit une **séquence d'actions concrètes et physiques**.
+```
+
+For non-French speakers: the sentence "Pierre prend la boule et la lance" is ambiguous. Does Pierre throw the ball ("lance" as verb), or does he grab the ball and the spear ("lance" as noun)? Opus catches this ambiguity. Sonnet doesn't even consider it.
+
+This isn't about generational improvements - Sonnet 4 vs Opus 4.5 were released months apart. I observed the same pattern with previous gen models: Sonnet never caught this nuance, Opus always did. Parameter size is the determining factor here, not training iterations or release dates.
+
+More parameters → more nuance. Same bitter lesson, same scaling principle.
 
 ### How we used "AI" before
 
