@@ -141,64 +141,16 @@ There's no reason to believe this stops.
 ### more parameters introduce nuance
 
 ```
-> ai model=opus "Peux tu m'expliquer le sens de cette phrase: Pierre prend la boule et la lance."
-# Explication de la phrase
-
-**« Pierre prend la boule et la lance. »**
-
-Cette phrase décrit **deux actions successives** réalisées par Pierre :
-
-1. **Pierre prend la boule** → il saisit une boule (probablement avec sa main)
-2. **et la lance** → puis il la jette/projette
-
----
-
-## Point intéressant : une ambiguïté potentielle
-
-À l'écrit, cette phrase peut théoriquement avoir **deux sens** à cause du mot **« lance »** :
-
-| Interprétation | Signification |
-|----------------|---------------|
-| **Verbe « lancer »** ✅ | Pierre jette la boule *(sens le plus naturel)* |
-| **Nom « la lance »** | Pierre prend la boule et prend aussi la lance (l'arme) |
-
-À l'oral, l'intonation lèverait l'ambiguïté. À l'écrit, le **contexte** (jeu de pétanque, bowling...) indique clairement qu'il s'agit du verbe *lancer*.
-
----
-
-Tu voulais une analyse grammaticale plus détaillée, ou c'était plutôt le sens général qui t'intéressait ?
-```
-
-```
 > ai model=sonnet "Peux tu m'expliquer le sens de cette phrase: Pierre prend la boule et la lance."
-# Explication de la phrase
-
-Cette phrase décrit **deux actions successives** accomplies par Pierre :
-
-## Les actions
-
-1. **"Pierre prend la boule"** = Pierre saisit/attrape une boule avec sa(ses) main(s)
-2. **"et la lance"** = ensuite, il projette cette boule (il la jette)
-
-## Structure grammaticale
-
-- **"la"** (pronom) remplace "la boule" pour éviter la répétition
-- La phrase complète serait : "Pierre prend la boule et **lance la boule**"
-
-## Sens global
-
-Pierre effectue un mouvement complet : il attrape d'abord un objet sphérique (une boule), puis il la projette dans une direction (peut-être vers quelqu'un ou quelque chose, ou simplement en l'air).
-
-## Contextes possibles
-
-Cela pourrait se passer dans différentes situations :
-- Un jeu de pétanque
-- Un jeu de bowling
-- Un jeu de balle entre amis
-- Une activité sportive
-
-La phrase est simple et décrit une **séquence d'actions concrètes et physiques**.
 ```
+
+claude_explaining_french_sonnet_lacks_nuance
+
+```
+> ai model=opus "Peux tu m'expliquer le sens de cette phrase: Pierre prend la boule et la lance."
+```
+
+claude_explaining_french_opus_introduces_nuance
 
 For non-French speakers: the sentence "Pierre prend la boule et la lance" is ambiguous. Does Pierre throw the ball ("lance" as verb), or does he grab the ball and the spear ("lance" as noun)? Opus catches this ambiguity. Sonnet doesn't even consider it.
 
