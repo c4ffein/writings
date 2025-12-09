@@ -346,66 +346,7 @@ KISS ("Keep it simple, stupid")[1] is a design principle first noted by the U.S.
 
 #### A good software engineer knows these acronyms and can use them with Claude
 
-```
-> Could both directly import then? To stay KISS? Or is it against your good practices?
-
-● Good point! Let's check if there's a conftest.py that could set up the path once for all tests:
-
-● Search(pattern: "backend/**/conftest.py")
-  ⎿  Found 0 files
-
-∴ Thinking…
-
-  No conftest.py exists. But we could:
-  1. Create one for tests
-  2. Have service.py set up the path itself
-
-  Or even simpler - Django settings or some init file could set up the path once for the whole backend.
-
-  Actually, let me check if there's already somewhere in Django where the path is set up.
-
-● Search([ the constant in the path ])
-  ⎿  Found 10 lines
-     XXX
-
-∴ Thinking…
-
-  Interesting! The path setup is already duplicated in backend/core/models.py (for [ Context ] import).
-  So we already have it in two places.
-
-  We could:
-  1. Put the path setup in Django settings (runs once at startup)
-  2. Or put it in backend/__init__.py
-  3. Or put it in a shared utility
-
-  The cleanest would be to put it in Django settings since that's guaranteed to run before anything else. Let me check if there's
-  an appropriate place.
-
-● The path setup is already duplicated - both [ path ] and [ another path ] do it.
-
-  We could put it in Django settings (runs once at startup) and then import directly.
-  Let me check:
-
-● Read([ settings.py ] · lines 1-30)
-  ⎿  Read 30 lines
-
-∴ Thinking…
-
-  We could add the path setup at the top of settings.py. Then:
-  1. Delete [ path ] entirely
-  2. Have service.py import directly from commons.[ module ]
-  3. Have tests import directly from commons.[ module ]
-  4. Remove the path setup from core/models.py (it'll already be set up)
-  This is cleaner and KISS. Let me propose this.
-
-● We could add the path setup once in settings.py, then:
-  1. Delete [ path ] entirely
-  2. service.py imports directly from commons.[ module ]
-  3. Tests import directly from commons.[ module ]
-  4. Remove duplicate path setup from [ another path ]
-
-  This is KISS - one path setup, direct imports. Want me to do it?
-```
+claude_acronym_kiss
 
 #### Don't repeat yourself
 
@@ -430,53 +371,8 @@ Could you please refactor to create a helper file that could mutualize the commo
 ##### Short prompts now work
 
 With thinking mode enabled
-```
-> file_a.py and file_b.py => DRY
 
-∴ Thinking…
-
-  The user wants me to apply the DRY (Don't Repeat Yourself) principle to file_a.py and file_b.py. I need to first read both
-  files to understand what code they contain and identify any duplication that can be refactored.
-
-● I'll read both files to identify duplicated code that can be consolidated.          01:04 PM  claude-opus-4-5-20251101
-
-● Read(file_a.py)
-  ⎿  Read 79 lines
-
-● Read(file_b.py)
-  ⎿  Read 77 lines
-
-∴ Thinking…
-
-  Looking at both files, I can see significant code duplication:
-
-  1. Name validation (identical in both):
-    - Clean name, check length >= 2, check only letters, capitalize each word
-  2. Email validation (identical in both):
-    - Clean email, check for @, check domain endings
-  3. Report formatting (nearly identical structure):
-    - Same pattern: header with "=" chars, centered title, "=" chars
-    - Same loop structure with items
-    - Same footer pattern
-  4. Stats calculation (same pattern):
-    - Same structure for calculating count, average, min, max
-
-  I should create a shared utilities module with:
-  1. validate_name(name: str) -> str - returns formatted name
-  2. validate_email(email: str) -> str - returns cleaned email
-  3. format_report(items: list[dict], title: str, item_label: str) -> str - generic report formatter
-  4. calculate_stats(items: list[dict], value_key: str, label_prefix: str) -> dict - generic stats calculator
-
-  Let me create a common.py file with shared utilities, then update both files to use it.
-
-● I can see significant duplication between these files:
-  1. Name validation - identical logic
-  2. Email validation - identical logic
-  3. Report formatting - same structure, different title/label
-  4. Stats calculation - same pattern, different field names
-
-  I'll extract shared utilities into a common module.
-```
+claude_acronym_dry_can_understand_short_prompts_with_thinking_mode
 
 
 
