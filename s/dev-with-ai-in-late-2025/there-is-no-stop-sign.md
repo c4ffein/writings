@@ -2,18 +2,29 @@
 
 TODO move this file
 
-Why this?
-have to give a talk
-had to clear my head
-hesitated on how to orient my talk
-infodumped everything before cleaning
-nothing new here, not trying to compete with the existant but still can get all the things I think people should know in a single place, and they can form their own opinion
-nothing to learn for an expert, but still think my take could be interesting to the average non-ai engineer once refined
-just the article I'll link when discussing with someone having opposite views to mine, they can form their own opinion but all the "have you taken this into consideration" stuff is there
+I am more and more disappointed by people having takes on where this AI thing is going without having any basic understanding of it whatsoever. I won't pretend to be an expert, I consider myself a competent engineer with an interest for AI, and I think basic engineering knowledge and scientific curiosity should still be enough to provide interesting takes in the current landscape - so anyway, hope you have fun reading this!
 
-## Do they know what an AI is
+Really, I wrote nothing new here, I'm not trying to compete with all the content already out there but get all the things I think people *that want to **understand** AI* should have at least heard about in a single place, and they can form their own opinion about where this whole thing is going.
 
-I am more and more disappointed by people having takes on where this AI thing is going without having any basic understanding of it whatsoever. I won't pretend to be an expert, I consider myself a competent engineer with an interest for AI, and I think basic engineering knowledge and scientific curiosity should still be enough to provide interesting takes - so anyway, hope you have fun reading this!
+## Disclaimer about why I wrote this
+
+TL;DR - infodumping my personal background here, you can skip this section!
+
+When I think that someone would **really** enjoy something, and that person doesn't try, I can be pushy enough for that person to actually try some day and remember me insisting.
+
+I couldn't recommend Claude Code enough to some of my friends, and one of them that ended up trying (and that organizes some of the tech meetups where I live) actually enjoyed it enough for them to propose me to give a talk about coding with AI.
+
+I wanted to take this chance to explain some concepts that I think anyone that tries to decide what to do in relation to the tech industry should at least have heard about - and, in all honesty, I'm fed up with the content most influencers keep pushing about AI, these LinkedIn posts about how AI will replace X and Y but not A and B, without any deeper insight, only the same arguments regurgitated again and again.
+
+My way to go is usually to mind dump everything then refine, get some slides out of it, and then give a talk from what I remembered from what I wrote.
+
+Obviously the whole "meta" part wouldn't fit in a 20-minutes talk, as I still have to give many examples about the actual "coding with Claude" part, so, if you were at my talk, here is the article I talked about, and if you weren't, you can still read the take from an early career engineer with a scientific curiosity that let him think he may have takes worth sharing with other engineers (or whoever cares to read).
+
+This is also the article I'll link when discussing with someone having opinions I find biased, of course everyone can form their own opinion but at least all the "have you taken this into consideration" stuff is there!
+
+
+## Do people actually know what an AI is
+
 
 I have my own definition of "intelligence", but it is not something everyone agrees upon. Well, even the researchers at the frontline don't all have the same definition of what AGI will be.
 
@@ -238,3 +249,7 @@ they rewrote everything with performance as the priority.
 #### So should I worry?
 - there is no value for writing the code yourself anymore
 - if you managed to learn how to code pre-ai, you'll learn whatever needs to be learned for what's to come
+
+# TODO
+https://cursor.com/blog/2-0 - now mainly agentic like Claude Code, can still show something like the previous layout
+https://mistral.ai/fr/news/devstral-2-vibe-cli - talk both about devstral 2 and the vibe cli
