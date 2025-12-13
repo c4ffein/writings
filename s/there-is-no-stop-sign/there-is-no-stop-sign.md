@@ -237,7 +237,14 @@ they rewrote everything with performance as the priority.
 - TODO place somewhere AoC depressing
 
 ### And the workforce?
-- Dario accurate for the last 5 years - 90% of the code - developers not dead, stay consistent with his promise actually
+https://www.cfr.org/event/ceo-speaker-series-dario-amodei-anthropic
+
+But now, getting to kind of the job side of this, I do have a fair amount of concern about this. On one hand, I think comparative advantage is a very powerful tool. If I look at coding, programming, which is one area where AI is making the most progress, what we are finding is we are not far from the world—I think we’ll be there in three to six months—where AI is writing 90 percent of the code. And then in twelve months, we may be in a world where AI is writing essentially all of the code. But the programmer still needs to specify, you know, what are—what are the conditions of what you’re doing, what—you know, what is the overall app you’re trying to make, what’s the overall design decision? How do we collaborate with other code that’s been written? You know, how do we have some common sense on whether this is a secure design or an insecure design?
+
+So as long as there are these small pieces that a programmer, a human programmer, needs to do, the AI isn’t good at, I think human productivity will actually be enhanced. But on the other hand, I think that eventually all those little islands will get picked off by AI systems. And then we will eventually reach the point where, you know, the AIs can do everything that humans can. And I think that will happen in every industry. I think it’s actually better that it happens to all of us than that it happens—you know, that it kind of picks people randomly. I actually think the most societally divisive outcome is if randomly 50 percent of the jobs are suddenly done by AI, because what that means—the societal message is we’re picking half—we’re randomly picking half of people and saying, you are useless, you are devalued, you are unnecessary.
+
+
+- Dario was kinda accurate in March 10, 2025
 - But in the next 5 years? Can only go better: "developer" is dead, either be
   - an excellent engineer - like, **really**
     - R&D should be somehow safer
