@@ -19,5 +19,5 @@ Feel free to drop an issue if you want to start a discussion (even just to corre
 - [Prophecies](s/prophecies/prophecies.md)
 - [Competency Cycle](s/competency-cycle/competency-cycle.md)
 - [Python for Programmers](s/learning-python-as-a-programmer/learning-python-as-a-programmer.md)
-- [Dev with AI in late 2025](s/dev-with-ai-in-late-2025/dev-with-ai-in-late-2025.md)
-- [My experience with Claude Code - In another repo, this is quite technical, but you can read my experience with them](https://github.com/c4ffein/pass/tree/master/chat_history/00-INDEX.md)
+- [There Is No Stop Sign](s/there-is-no-stop-sign/there-is-no-stop-sign.md) - Reflections on the Evolution of AI at the End of 2025
+- [Claude Code through 2025](s/claude-code-through-2025)
