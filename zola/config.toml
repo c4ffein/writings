@@ -1,0 +1,17 @@
+base_url = "https://writings.c4ffein.dev"
+title = "Writings"
+description = "Thoughts on tech, software engineering, and more"
+compile_sass = true
+generate_feeds = true
+feed_filenames = ["rss.xml"]
+
+taxonomies = [
+    { name = "tags", feed = true },
+]
+
+[markdown]
+highlight_code = true
+highlight_theme = "base16-ocean-dark"
+
+[extra]
+author = "c4ffein"
