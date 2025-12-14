@@ -1,0 +1,5 @@
+# Production: allow indexing
+User-agent: *
+Allow: /
+
+Sitemap: https://writings.c4ffein.dev/sitemap.xml

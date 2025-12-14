@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ config.title }}</h1>
+<p>{{ config.description }}</p>
+
+<h2>Recent Posts</h2>
+{% set posts = get_section(path="posts/_index.md") %}
+<ul>
+{% for post in posts.pages %}
+    <li>
+        <a href="{{ post.permalink }}">{{ post.title }}</a>
+        <span class="post-meta">- {{ post.date | date(format="%Y-%m-%d") }}</span>
+    </li>
+{% endfor %}
+</ul>
+{% endblock %}
