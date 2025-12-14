@@ -15,12 +15,13 @@ def make_frontmatter(article):
     lines.append(f'date = {article["date"]}')
     if article.get("description"):
         lines.append(f'description = "{article["description"]}"')
-    if article.get("tags"):
-        tags_str = ", ".join(f'"{t}"' for t in article["tags"])
-        lines.append(f"[taxonomies]")
-        lines.append(f"tags = [{tags_str}]")
     if article.get("draft"):
         lines.append("draft = true")
+    # [taxonomies] must come last (TOML section)
+    if article.get("tags"):
+        tags_str = ", ".join(f'"{t}"' for t in article["tags"])
+        lines.append("[taxonomies]")
+        lines.append(f"tags = [{tags_str}]")
     lines.append("+++\n")
     return "\n".join(lines)
 
