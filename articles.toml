@@ -5,3 +5,29 @@ title = "Competency Cycle"
 date = "2024-01-15"
 description = "On how technologies and methodologies cycle through hype and backlash"
 tags = ["tech", "opinion"]
+
+[[articles]]
+source = "s/puzzles/puzzles.md"
+slug = "puzzles"
+title = "Puzzles"
+date = "2024-02-01"
+description = "Puzzle games, books, and websites I enjoyed"
+tags = ["puzzles", "games"]
+
+[[articles]]
+source = "s/there-is-no-stop-sign/there-is-no-stop-sign.md"
+slug = "there-is-no-stop-sign"
+title = "There Is No Stop Sign"
+date = "2025-12-01"
+description = "Reflections on the evolution of AI at the end of 2025"
+tags = ["ai", "opinion"]
+draft = true
+
+[[articles]]
+source = "s/claude-code-through-2025/claude-code-through-2025.md"
+slug = "claude-code-through-2025"
+title = "Claude Code Through 2025"
+date = "2025-12-01"
+description = "My experience using Claude Code"
+tags = ["ai", "claude", "programming"]
+draft = true
