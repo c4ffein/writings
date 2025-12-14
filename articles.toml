@@ -15,6 +15,14 @@ description = "Puzzle games, books, and websites I enjoyed"
 tags = ["puzzles", "games"]
 
 [[articles]]
+source = "s/learning-python-as-a-programmer/learning-python-as-a-programmer.md"
+slug = "python-for-programmers"
+title = "Python for Programmers"
+date = "2025-03-01"
+description = "A guide to Python for developers coming from Java, C#, and similar languages"
+tags = ["python", "programming", "tutorial"]
+
+[[articles]]
 source = "s/there-is-no-stop-sign/there-is-no-stop-sign.md"
 slug = "there-is-no-stop-sign"
 title = "There Is No Stop Sign"
