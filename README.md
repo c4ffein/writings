@@ -12,6 +12,8 @@ Actually, the more I think about it, the more I consider the history provided by
 
 Feel free to drop an issue if you want to start a discussion (even just to correct my english, I'm a non-native speaker, and even that would be appreciated).
 
+A cleaner version *will be live* at [writings.c4ffein.dev](https://writings.c4ffein.dev). See the [Makefile](Makefile) for how it's built.
+
 ## Index
 - [The last stuff I enjoyed reading](s/what-i-enjoyed-reading/what-i-enjoyed-reading.md)
 - [Some puzzles](s/puzzles/puzzles.md)
