@@ -5,7 +5,7 @@
 # Architecture:
 #   This repo serves two purposes:
 #   1. GitHub browsing - raw markdown in s/, clean and readable, git history intact
-#   2. Blog at writings.c4ffein.dev - polished static site via Zola
+#   2. Blog at writings.cafine.dev - polished static site via Zola
 #
 # Why this setup?
 #   - Source markdown stays clean (no frontmatter) for GitHub preview
@@ -14,7 +14,7 @@
 #   - Same content, two presentations
 #
 # SEO notes:
-#   - All links use absolute URLs to production (writings.c4ffein.dev)
+#   - All links use absolute URLs to production (writings.cafeine.dev)
 #   - Canonical tags point to production
 #   - robots.txt blocks staging, robots-prod.txt allows indexing
 #   - Deploy script should copy robots-prod.txt to robots.txt on prod

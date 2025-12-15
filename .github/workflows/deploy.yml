@@ -32,7 +32,7 @@ jobs:
       - name: Create production archive
         run: |
           TIMESTAMP=$(date +%Y%m%d-%H%M%S)
-          ARCHIVE="archive-writings.c4ffein.dev-${TIMESTAMP}.tar.gz"
+          ARCHIVE="archive-writings.cafeine.dev-${TIMESTAMP}.tar.gz"
           BASE_URL="https://c4ffein.github.io/writings"
           # Copy to temp dir, swap robots, archive, put archive back in public/
           cp -r zola/public /tmp/site-prod
