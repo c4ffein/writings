@@ -18,6 +18,7 @@ A cleaner version is live at [writings.cafeine.dev](https://writings.cafeine.dev
 - [The last stuff I enjoyed reading](s/what-i-enjoyed-reading/what-i-enjoyed-reading.md)
 - [Some puzzles](s/puzzles/puzzles.md)
 - [How to start contributing to Open Source](s/contributing-to-open-source/contributing-to-open-source.md)
+- [Tough Love and Dale Carnegie](s/tough-love-and-dale-carnegie/tough-love-and-dale-carnegie.md)
 - [Prophecies](s/prophecies/prophecies.md)
 - [Competency Cycle](s/competency-cycle/competency-cycle.md)
 - [Python for Programmers](s/learning-python-as-a-programmer/learning-python-as-a-programmer.md)
