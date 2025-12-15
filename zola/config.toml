@@ -1,4 +1,4 @@
-base_url = "https://writings.c4ffein.dev"
+base_url = "https://writings.cafeine.dev"
 title = "Writings"
 description = "Thoughts on tech, software engineering, and more"
 compile_sass = true
