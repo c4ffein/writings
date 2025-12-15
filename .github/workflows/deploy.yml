@@ -29,6 +29,26 @@ jobs:
       - name: Build
         run: make build
 
+      - name: Create production archive
+        run: |
+          TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+          ARCHIVE="archive-writings.c4ffein.dev-${TIMESTAMP}.tar.gz"
+          BASE_URL="https://c4ffein.github.io/writings"
+          # Copy to temp dir, swap robots, archive, put archive back in public/
+          cp -r zola/public /tmp/site-prod
+          cp zola/static/robots-prod.txt /tmp/site-prod/robots.txt
+          tar -czf "zola/public/${ARCHIVE}" -C /tmp/site-prod .
+          # Generate release-infos.json
+          cat > zola/public/release-infos.json << EOF
+          {
+            "archive": "${ARCHIVE}",
+            "archive_url": "${BASE_URL}/${ARCHIVE}",
+            "timestamp": "${TIMESTAMP}",
+            "generated_at": "$(date -Iseconds)"
+          }
+          EOF
+          echo "Created ${ARCHIVE} and release-infos.json"
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
