@@ -20,35 +20,129 @@
     <meta name="twitter:title" content="{% block twitter_title %}{{ config.title }}{% endblock %}">
     <meta name="twitter:description" content="{% block twitter_description %}{{ config.description }}{% endblock %}">
 
+    <script>
+        // Apply theme immediately to prevent flash
+        (function() {
+            var match = document.cookie.match(/(^| )preferred-theme=([^;]+)/);
+            var pref = match ? match[2] : 'default';
+            var theme = pref === 'default'
+                ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+                : pref;
+            document.documentElement.setAttribute('data-theme', theme);
+            document.documentElement.setAttribute('data-pref', pref);
+        })();
+    </script>
     <style>
+        :root[data-theme="dark"] {
+            --bg: #1a1a1a;
+            --text: #e0e0e0;
+            --text-muted: #888;
+            --link: #6db3f2;
+            --border: #444;
+            --code-bg: #2d2d2d;
+            --tag-bg: #333;
+        }
+        :root[data-theme="light"] {
+            --bg: #ffffff;
+            --text: #333;
+            --text-muted: #666;
+            --link: #0066cc;
+            --border: #ddd;
+            --code-bg: #f5f5f5;
+            --tag-bg: #eee;
+        }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
-            max-width: 700px;
-            margin: 0 auto;
-            padding: 2rem;
-            color: #333;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: var(--bg);
+            color: var(--text);
         }
-        a { color: #0066cc; }
-        nav { margin-bottom: 2rem; }
-        nav a { margin-right: 1rem; }
+        h1, h2, h3 { border-bottom: 2px solid var(--border); padding-bottom: 10px; }
+        a { color: var(--link); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        ul { list-style: none; padding: 0; }
+        li { margin: 15px 0; }
+        code { background: var(--code-bg); padding: 0.2rem 0.4rem; border-radius: 3px; }
+        pre { background: var(--code-bg); padding: 1rem; border-radius: 5px; overflow-x: auto; }
+        pre code { background: none; padding: 0; }
+        blockquote { border-left: 3px solid var(--border); margin-left: 0; padding-left: 1rem; color: var(--text-muted); }
+        nav { margin-bottom: 2rem; display: flex; align-items: center; }
+        nav a { margin-right: 1rem; font-size: 1.1em; }
+        #theme-toggle {
+            margin-left: auto;
+            background: none; color: var(--text);
+            border: none; padding: 0;
+            cursor: pointer; font-size: 1.2rem;
+            width: 1.5em; height: 1.5em;
+            line-height: 1.5em; text-align: center;
+        }
+        #theme-toggle:hover { color: var(--link); }
         article { margin-bottom: 3rem; }
-        .post-meta { color: #666; font-size: 0.9rem; }
+        .post-meta { color: var(--text-muted); font-size: 0.9rem; }
         .tags { margin-top: 0.5rem; }
-        .tag {
-            background: #eee;
-            padding: 0.2rem 0.5rem;
-            border-radius: 3px;
-            font-size: 0.8rem;
-        }
+        .tag { background: var(--tag-bg); color: var(--text); padding: 0.2rem 0.5rem; border-radius: 3px; font-size: 0.8rem; }
         details { margin: 1rem 0; }
         summary { cursor: pointer; font-weight: bold; }
     </style>
+    <script>
+        (function() {
+            const COOKIE_NAME = 'preferred-theme';
+            const THEMES = ['default', 'light', 'dark'];
+            function getCookieDomain() {
+                const host = window.location.hostname;
+                return host.endsWith('.cafeine.dev') ? ';domain=.cafeine.dev' : '';
+            }
+            function getPreference() {
+                const match = document.cookie.match(new RegExp('(^| )' + COOKIE_NAME + '=([^;]+)'));
+                return match ? match[2] : 'default';
+            }
+            function setPreference(pref) {
+                document.cookie = `${COOKIE_NAME}=${pref}${getCookieDomain()};path=/;max-age=31536000;SameSite=Lax`;
+                applyTheme();
+            }
+            function getBrowserPreference() {
+                return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
+            function getEffectiveTheme() {
+                const pref = getPreference();
+                return pref === 'default' ? getBrowserPreference() : pref;
+            }
+            function applyTheme() {
+                document.documentElement.setAttribute('data-theme', getEffectiveTheme());
+                updateToggleButton();
+            }
+            function cycleTheme() {
+                const current = getPreference();
+                const next = THEMES[(THEMES.indexOf(current) + 1) % THEMES.length];
+                setPreference(next);
+            }
+            function updateToggleButton() {
+                const btn = document.getElementById('theme-toggle');
+                if (!btn) return;
+                const labels = { default: '◐', light: '☀', dark: '☾' };
+                btn.textContent = labels[getPreference()];
+            }
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', applyTheme);
+            } else {
+                applyTheme();
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+                if (getPreference() === 'default') applyTheme();
+            });
+            window.cycleTheme = cycleTheme;
+        })();
+    </script>
 </head>
 <body>
     <nav>
         <a href="{{ get_url(path='/') }}">Home</a>
         <a href="{{ get_url(path='posts') }}">Posts</a>
+        <a href="https://presentations.cafeine.dev">Presentations</a>
+        <button id="theme-toggle" onclick="cycleTheme()"><script>document.write({default:'◐',light:'☀',dark:'☾'}[document.documentElement.getAttribute('data-pref')])</script></button>
     </nav>
     {% block content %}{% endblock %}
 </body>
