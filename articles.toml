@@ -39,3 +39,11 @@ date = "2025-12-01"
 description = "My experience using Claude Code"
 tags = ["ai", "claude", "programming"]
 draft = true
+
+[[articles]]
+source = "s/tough-love-and-dale-carnegie/tough-love-and-dale-carnegie.md"
+slug = "tough-love-and-dale-carnegie"
+title = "Tough Love and Dale Carnegie"
+date = "2025-12-16"
+description = "Scattered thoughts on How to Win Friends and Influence People"
+tags = ["books", "personal"]
