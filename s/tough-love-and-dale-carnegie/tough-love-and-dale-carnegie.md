@@ -4,7 +4,7 @@ This is neither a regular review nor an essay, just a random collection of thoug
 
 I'm writing this mainly for myself, I wonder if writing about what I read will help consolidate memories, and, in a more general sense, help the content have a more lasting impact on me?
 
-Also, being French, it's a bit harder for me to articulate my thoughts in english when not talking about technical subjects, so I should be honest here: I did rely on Claude to reformulate what my mind produced.
+Also, being French, it's a bit harder for me to articulate my thoughts in English when not talking about technical subjects, so I should be honest here: Claude sometimes helped me reformulate sentences and gave feedback on flow.
 
 ---
 
