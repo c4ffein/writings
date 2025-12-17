@@ -13,6 +13,12 @@
 #   - generate.py injects frontmatter and outputs to zola/content/posts/
 #   - Same content, two presentations
 #
+# Theme sharing:
+#   - zola/templates/base.html is the single source of truth for the theme
+#   - presentations.toml lists slides for presentations.cafeine.dev
+#   - generate_presentations.py extracts theme from base.html and generates
+#     zola/public/presentations-index.html (available on GitHub Pages)
+#
 # SEO notes:
 #   - All links use absolute URLs to production (writings.cafeine.dev)
 #   - Canonical tags point to production
@@ -25,19 +31,20 @@
 ZOLA_VERSION := 0.19.2
 ZOLA_URL := https://github.com/getzola/zola/releases/download/v$(ZOLA_VERSION)/zola-v$(ZOLA_VERSION)-x86_64-unknown-linux-gnu.tar.gz
 
-.PHONY: help install generate serve serve-public build clean
+.PHONY: help install generate presentations serve serve-public build clean
 
 help:
 	@echo "Usage: make [target]"
 	@echo ""
 	@echo "Targets:"
-	@echo "  install       Install Zola to ~/.local/bin (Linux x86_64)"
-	@echo "  serve         Serve locally on localhost:1111"
-	@echo "  serve-public  Serve on LAN IP (Linux only)"
-	@echo "  build         Build static site to zola/public/"
-	@echo "  generate      Generate Zola content from s/ articles"
-	@echo "  clean         Remove generated content"
-	@echo "  help          Show this help"
+	@echo "  install        Install Zola to ~/.local/bin (Linux x86_64)"
+	@echo "  serve          Serve locally on localhost:1111"
+	@echo "  serve-public   Serve on LAN IP (Linux only)"
+	@echo "  build          Build static site to zola/public/"
+	@echo "  generate       Generate Zola content from s/ articles"
+	@echo "  presentations  Generate zola/public/presentations-index.html"
+	@echo "  clean          Remove generated content"
+	@echo "  help           Show this help"
 	@echo ""
 	@echo "See top of Makefile for architecture docs."
 
@@ -67,6 +74,9 @@ install:
 
 generate:
 	python3 zola/scripts/generate.py
+
+presentations:
+	python3 zola/scripts/generate_presentations.py
 
 serve: generate
 	cd zola && zola serve

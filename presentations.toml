@@ -1,0 +1,14 @@
+# Presentations list - used by generate_presentations.py to build presentations/index.html
+# The theme is extracted from zola/templates/base.html (single source of truth)
+
+[[presentations]]
+href = "slides/dev-with-ai-in-late-2025.html"
+title = "Coding with Claude Code - fin 2025"
+
+[[presentations]]
+href = "slides/django-ninja.html"
+title = "Django Ninja"
+
+[[presentations]]
+href = "slides/learning-python-as-a-programmer.html"
+title = "Learning Python as a Programmer"

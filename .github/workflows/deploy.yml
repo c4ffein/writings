@@ -29,6 +29,9 @@ jobs:
       - name: Build
         run: make build
 
+      - name: Generate presentations index
+        run: make presentations
+
       - name: Create production archive
         run: |
           TIMESTAMP=$(date +%Y%m%d-%H%M%S)
