@@ -2,7 +2,7 @@
 
 There is something I'm bitter about, it's the way information spreads both on social media and regular newspaper. The current landscape and incentives don't push the voices of measured people to the ones that are just curious and could benefit from it.
 
-From this, there is this whole industry of individuals that mastered looking like experts, while the actual experts stay underexposed. In particular, in my field (programming), the general opinion seems tainted with the fact that artificial neural networks, on which all the current AI wave is based on, work counterintuitively with what most old school programmers are used to. Which also explains the amount of scepticism AI first obtained when it reached the developer circles. While it was over-hyped by casual programmers, maybe there was some actual values, and the old-school programmers were too dismissive.
+From this, there is this whole industry of individuals that mastered looking like experts, while the actual experts stay underexposed. In particular, in my field (programming), the general opinion seems tainted with the fact that artificial neural networks, on which all the current AI wave is based on, work counterintuitively with what most old school programmers are used to. Which also explains the amount of scepticism AI first obtained when it reached the developer circles. While it was over-hyped by casual programmers, maybe there was some actual value, and the old-school programmers were too dismissive.
 
 I won't pretend to be an expert, the only project I carried out that involved custom neural networks was a visual editor that was used for teaching freshmen, in other projects I only used existing models for inference, or AI tooling for writing code. I consider myself an engineer far more than a scientist, and I think basic engineering knowledge and scientific curiosity should still be enough to produce something worth sharing.
 
@@ -157,11 +157,13 @@ For non-French speakers: the sentence "Pierre prend la boule et la lance" is amb
 
 This isn't about generational improvements - Sonnet 4 vs Opus 4.5 were released months apart. I observed the same pattern with previous gen models: Sonnet never caught this nuance, Opus always did. Parameter size is the determining factor here, not training iterations or release dates.
 
+You may argue that this is just a singular example, but it is something I observed through many different sentences, the bigger model generally has a far more nuanced view.
+
 More parameters → more nuance. Same bitter lesson, same scaling principle.
 
 ### How we used "AI" before
 
-LLMs worked a lot like "memory machines" before. Which also explains why some "experts" actually have the whole mental model wrong, believing they were only like a database of some sort. While we've seen that they develop more and more emergent behavior, it is true that the "remembering and spewing out" part was quite strong compared to the rest. So you may have thought about these specific usages:
+LLMs worked a lot like "memory machines" before. Which also explains why some media experts actually have the whole mental model wrong, believing they were only like a database of some sort. While we've seen that they develop more and more emergent behavior, it is true that the "remembering and spewing out" part was quite strong compared to the rest. So you may have thought about these specific usages:
 
 #### Replacing Google
 It is true it was a far better experience asking my question to Claude than to the enshittified Google. Google gave me ads, then a bunch of links that may or may not contain my answer, that I had to check one by one, hoping for a decent answer through a thread filled with useless comments. Claude giving me a list of the most plausible answers has been a joy, maybe if there was some occasional hallucination, I'd take it over Google every time (and I can still use it as a backup).
@@ -193,13 +195,6 @@ Early AI coding tools were "autocomplete on steroids" - you type, they suggest t
 
 The insight: if humans code through an iterative loop (read → search → edit → test → repeat), then AI should too.
 
-An "agentic" AI doesn't just generate text - it takes actions, observes results, and adjusts. It can:
-- Read files to understand your codebase
-- Search for patterns across thousands of files
-- Make edits and run tests
-- See the errors and fix them
-- Repeat until the task is done
-
 This is the paradigm shift. Not "AI writes code" but "AI does the same loop a human developer does."
 
 ### Claude Code
@@ -210,9 +205,9 @@ But here is the TL;DR.
 
 This is where agentic AI becomes concrete. [Claude Code](https://docs.anthropic.com/en/docs/claude-code) is Anthropic's terminal-based coding agent - it reads your files, searches your codebase, makes edits, runs your tests, sees the errors, and iterates until the task is done.
 
-It's not autocomplete. It's the full human software engineering loop, automated.
+It's not autocomplete, but the full human software engineering loop, automated.
 
-Even team collaboration is on the way. Claude can now read issues, and generate the PRs as a separate entity. Claude is now one of the main contributors on some really serious open source projects, there is no way to be in denial anymore.
+Even team collaboration is automated. Claude can now read issues, and generate the PRs as a separate entity. Claude is now one of the main contributors on some really serious open source projects, there is no way to be in denial anymore.
 
 It works. Not perfectly - it still hallucinates, still needs nudging on complex tasks, still doesn't know what it doesn't know. But for most day-to-day coding, the bottleneck is no longer the AI. It's everything else.
 
@@ -220,7 +215,9 @@ Using acronyms like KISS and DRY as shorthand, letting it manage git, discussing
 
 A reason why it works so well is that modern software engineering is *very* repetitive. It is rare that a problem that you feel smart by solving yourself didn't actually already exist in *many* different contexts, but, as the models get better, they are able to generalize and instinctively generate tokens to the right solution.
 
-Most of the engineers that dismiss the AI doing their job don't realise that most of their clever hacks already exist in nature. There is still some nudging to do. Some thinking on really new problems. But overall, "software-engineering" with the humans fully in charge is over.
+Most of the engineers that don't see the AI doing their job don't fail to realise that most of our clever hacks already exist in nature. Even if the AI was far worse at "thinking", it could generalize from far more examples than what our human brains are able to consume.
+
+There is still some nudging to do. Some thinking on really new problems. But overall, "software-engineering" with the humans fully in charge is nearing the end.
 
 #### Sovereignty concerns
 
