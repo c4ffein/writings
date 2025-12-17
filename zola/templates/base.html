@@ -90,7 +90,6 @@
     <script>
         (function() {
             const COOKIE_NAME = 'preferred-theme';
-            const THEMES = ['default', 'light', 'dark'];
             function getCookieDomain() {
                 const host = window.location.hostname;
                 return host.endsWith('.cafeine.dev') ? ';domain=.cafeine.dev' : '';
@@ -115,9 +114,7 @@
                 updateToggleButton();
             }
             function cycleTheme() {
-                const current = getPreference();
-                const next = THEMES[(THEMES.indexOf(current) + 1) % THEMES.length];
-                setPreference(next);
+                setPreference(getEffectiveTheme() === 'light' ? 'dark' : 'light');
             }
             function updateToggleButton() {
                 const btn = document.getElementById('theme-toggle');
