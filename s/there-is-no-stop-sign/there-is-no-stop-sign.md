@@ -1,8 +1,8 @@
 # There Is No Stop Sign
 
-I am more and more disappointed by people having takes on where this AI thing is going without having any basic understanding of it whatsoever. I won't pretend to be an expert, I consider myself a competent engineer with an interest for AI, and I think basic engineering knowledge and scientific curiosity should still be enough to provide interesting takes in the current landscape - so anyway, hope you have fun reading this!
+I'm tired of being fed AI takes that skip the basics through social networks, particularly from people posing as experts, or developers that aren't curious toward machine learning. I won't pretend to be an expert, the only project I carried out that involved custom neural networks was a visual editor that was used for teaching freshmen, in other projects I only used existing models for inference, or AI tooling for writing code. I consider myself an engineer far more than a scientist, and I think basic engineering knowledge and scientific curiosity should still be enough to produce something worth sharing.
 
-Really, I wrote nothing new here, I'm not trying to compete with all the content already out there but get all the things I think people *that want to **understand** AI* should have at least heard about in a single place, and they can form their own opinion about where this whole thing is going.
+Really, I wrote nothing new here, I'm not trying to compete with all the content already out there but get all the things I would have liked to know if I didn't already in a single place. That way you can form your own opinion about where this whole thing is going.
 
 ## Disclaimer about why I wrote this
 
@@ -63,7 +63,7 @@ This is why most software seems so slow.
 
 This is not real for AI software - they want maximum performance since there is a run to get the most powerful AI at the lowest cost.
 
-It's just a random fact for now but it will makes sense later.
+It's just a random fact for now but it will make sense later.
 
 ### What is a neural network
 
@@ -147,21 +147,13 @@ But here's the thing: the ChatGPT moment didn't come from nowhere. It came from 
 
 So now when people say "but LLMs can't do X" - I'm not surprised when the next version does X. The early criticisms (can't reason, can't code, can't follow instructions) got solved by throwing more compute at the problem. That's the bitter lesson playing out in real time.
 
-There's no reason to believe this stops.
+There's no reason for these improvements to plateau, even though there could be diminishing returns in sight.
 
 ### more parameters introduce nuance
 
-```
-> ai model=sonnet "Peux tu m'expliquer le sens de cette phrase: Pierre prend la boule et la lance."
-```
+One of the things that best shows the introduction of new capabilities, is how nuance is introduced with the model scaling. When asking what can be read both as "Can you explain to me the meaning of this sentence: Pierre takes the ball and throws it", but also "Pierre takes the ball and the spear":
 
-claude_explaining_french_sonnet_lacks_nuance
-
-```
-> ai model=opus "Peux tu m'expliquer le sens de cette phrase: Pierre prend la boule et la lance."
-```
-
-claude_explaining_french_opus_introduces_nuance
+> Peux tu m'expliquer le sens de cette phrase: Pierre prend la boule et la lance.
 
 For non-French speakers: the sentence "Pierre prend la boule et la lance" is ambiguous. Does Pierre throw the ball ("lance" as verb), or does he grab the ball and the spear ("lance" as noun)? Opus catches this ambiguity. Sonnet doesn't even consider it.
 
@@ -280,7 +272,7 @@ Here's a quote:
 > "I think we'll be there in three to six months—where AI is writing 90 percent of the code. And then in twelve months, we may be in a world where AI is writing essentially all of the code."
 - Dario Amodei, Anthropic's CEO, [March 2025](https://www.cfr.org/event/ceo-speaker-series-dario-amodei-anthropic)
 
-I'd recommend reading the whole transcript. He was accurate enough. And he was quite precise with his words. I read this at the time and agreed with him, even before time made him correct. He has the same insight: machines still need to be nudged, even though it will be less and less. Most newspapers took this direct quote as a title, to sell fear by removing all the nuance and turning this nuanced point of view into quite an inaccurate opinion, that he never pushed for.
+I'd recommend reading the whole transcript. He was accurate enough. And he was quite precise with his words. I read this at the time and agreed with him, even before time made him correct. He has the same insight: machines still need to be nudged, even though it will be less and less. Most newspapers took this direct quote as a title, to sell fear by removing all the nuance and turning this nuanced point of view into quite an inaccurate opinion, that he never pushed for. Also, having a voice that was extremely bullish yet nuanced was refreshing - I wouldn't have trusted an announcement by itself, well, since it's his own company, but from a purely technical standpoint this seemed accurate. The argument that AI hype doesn't deliver since it comes from the AI labs isn't valid.
 
 The Developers aren't dead yet - but the role is evolving fast. You still need a lot of knowledge outside "how to use an AI", but the need for "someone who just writes code" dropped sharply
 
