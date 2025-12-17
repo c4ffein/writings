@@ -1,7 +1,5 @@
 # There Is No Stop Sign
 
-TODO move this file
-
 I am more and more disappointed by people having takes on where this AI thing is going without having any basic understanding of it whatsoever. I won't pretend to be an expert, I consider myself a competent engineer with an interest for AI, and I think basic engineering knowledge and scientific curiosity should still be enough to provide interesting takes in the current landscape - so anyway, hope you have fun reading this!
 
 Really, I wrote nothing new here, I'm not trying to compete with all the content already out there but get all the things I think people *that want to **understand** AI* should have at least heard about in a single place, and they can form their own opinion about where this whole thing is going.
@@ -179,7 +177,7 @@ LLMs worked a lot like "memory machines" before. Which also explains why some "e
 It is true it was a far better experience asking my question to Claude than to the enshittified Google. Google gave me ads, then a bunch of links that may or may not contain my answer, that I had to check one by one, hoping for a decent answer through a thread filled with useless comments. Claude giving me a list of the most plausible answers has been a joy, maybe if there was some occasional hallucination, I'd take it over Google every time (and I can still use it as a backup).
 
 #### Replacing templates
-It also explains why juniors had such a high opinion of the past models, and the experts, not so much. You see, models were very good at always spewing out the same default app corresponding to the same need from the user. A Flappy Bird, a calculator, a dashboard... What was curious was how consistent these answers were. Even raising the temperature (todo link to another article, wont explain here...) still produced a really close output. Juniors were amazed at the machine giving in 2 minutes what would have taken them 2 days, experts weren't convinced since any real change past that broke everything. But even to the experts, LLM soup replaced the templates that you could buy online for $200, that helped you bootstrap a project.
+It also explains why juniors had such a high opinion of the past models, and the experts, not so much. You see, models were very good at always spewing out the same default app corresponding to the same need from the user. A Flappy Bird, a calculator, a dashboard... What was curious was how consistent these answers were. Even raising the temperature (a parameter controlling output randomness) still produced a really close output. Juniors were amazed at the machine giving in 2 minutes what would have taken them 2 days, experts weren't convinced since any real change past that broke everything. But even to the experts, LLM soup replaced the templates that you could buy online for $200, that helped you bootstrap a project.
 
 #### Autocomplete
 When you are in your developer environment, some of the most obvious grunt work was automated by the LLM. If you had a *really obvious* pattern in your code, or code that actually looked like very common knowledge, your editor could suggest the next changes. It was excruciating - even as an AI revolution believer, I didn't use it - as it was at a specific threshold that was just annoying. Not fast and accurate enough to be a joy to work with, I'd rather type that line of code than be interrupted by the AI that may or may not be right.
@@ -269,10 +267,11 @@ It already powers Claude Code. And yes, [Claude](https://github.com/claude) is a
 Now companies like Anthropic care about fast runtimes. Raw compute isn't enough if the software stack wastes it. The testing feedback loop gets faster, the agent iterates more, the results get better.
 
 
-### Pricing + Education
-- Only Claude weakness pricing, describe pricing, should do discounts for students
-- 1B in revenue though lol - they could reach rentability if they wanted, Anthropic can't die
-- TODO place somewhere AoC depressing
+### Why is Claude Code underused?
+
+Claude Code is underused because it's behind a paywall. But Anthropic knows this - recently, as a regular user, I got tickets to let friends try it free for a week. It just popped up in my terminal while the model was thinking.
+
+Even without the brand awareness of the competition, I think they'll win. Everyone I know who tried Claude Code seriously - with decent expectations, not "build me X" and come back three days later - has been mind blown.
 
 ### And the workforce?
 
