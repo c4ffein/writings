@@ -173,9 +173,19 @@ More parameters → more nuance. Same bitter lesson, same scaling principle.
 
 ### How we used "AI" before
 
-- google on steroid
-- very good for bootstraping, kinda killed the template industry TODO link numbers
-- autocomplete - a bit painful actually
+LLMs worked a lot like "memory machines" before. Which also explains why some "experts" actually have the whole mental model wrong, believing they were only like a database of some sort. While we've seen that they develop more and more emergent behavior, it is true that the "remembering and spewing out" part was quite strong compared to the rest. So you may have thought about these specific usages:
+
+#### Replacing Google
+It is true it was a far better experience asking my question to Claude than to the enshittified Google. Google gave me ads, then a bunch of links that may or may not contain my answer, that I had to check one by one, hoping for a decent answer through a thread filled with useless comments. Claude giving me a list of the most plausible answers has been a joy, maybe if there was some occasional hallucination, I'd take it over Google every time (and I can still use it as a backup).
+
+#### Replacing templates
+It also explains why juniors had such a high opinion of the past models, and the experts, not so much. You see, models were very good at always spewing out the same default app corresponding to the same need from the user. A Flappy Bird, a calculator, a dashboard... What was curious was how consistent these answers were. Even raising the temperature (todo link to another article, wont explain here...) still produced a really close output. Juniors were amazed at the machine giving in 2 minutes what would have taken them 2 days, experts weren't convinced since any real change past that broke everything. But even to the experts, LLM soup replaced the templates that you could buy online for $200, that helped you bootstrap a project.
+
+#### Autocomplete
+When you are in your developer environment, some of the most obvious grunt work was automated by the LLM. If you had a *really obvious* pattern in your code, or code that actually looked like very common knowledge, your editor could suggest the next changes. It was excruciating - even as an AI revolution believer, I didn't use it - as it was at a specific threshold that was just annoying. Not fast and accurate enough to be a joy to work with, I'd rather type that line of code than be interrupted by the AI that may or may not be right.
+
+
+These were real improvements to my workflow, but nothing that signaled what was coming - unless you understood why it was working.
 
 ### How does a human actually code
 
@@ -206,29 +216,57 @@ This is the paradigm shift. Not "AI writes code" but "AI does the same loop a hu
 
 ### Claude Code
 
-TODO - bridge to Claude Code specifically - the article
+There will be a full separate article about Claude Code, and why it's a revolution.
 
+But here is the TL;DR.
+
+This is where agentic AI becomes concrete. [Claude Code](https://docs.anthropic.com/en/docs/claude-code) is Anthropic's terminal-based coding agent - it reads your files, searches your codebase, makes edits, runs your tests, sees the errors, and iterates until the task is done.
+
+It's not autocomplete. It's the full human software engineering loop, automated.
+
+Even team collaboration is on the way. Claude can now read issues, and generate the PRs as a separate entity. Claude is now one of the main contributors on some really serious open source projects, there is no way to be in denial anymore.
+
+It works. Not perfectly - it still hallucinates, still needs nudging on complex tasks, still doesn't know what it doesn't know. But for most day-to-day coding, the bottleneck is no longer the AI. It's everything else.
+
+Using acronyms like KISS and DRY as shorthand, letting it manage git, discussing security tradeoffs, catching its mistakes when it confidently claims nothing was removed... I was able to pull out in days what would have taken me weeks before.
+
+A reason why it works so well is that modern software engineering is *very* repetitive. It is rare that a problem that you feel smart by solving yourself didn't actually already exist in *many* different contexts, but, as the models get better, they are able to generalize and instinctively generate tokens to the right solution.
+
+Most of the engineers that dismiss the AI doing their job don't realise that most of their clever hacks already exist in nature. There is still some nudging to do. Some thinking on really new problems. But overall, "software-engineering" with the humans fully in charge is over.
+
+#### Sovereignty concerns
+
+And if you can't use Claude? There's [Codex CLI](https://github.com/openai/codex), [Gemini CLI](https://github.com/google-gemini/gemini-cli), and more recently [Mistral Vibe CLI](https://github.com/mistralai/vibe). Mistral's latest models are closing the gap with Sonnet 4.5 for this kind of usage. They're not quite as good, but good enough to be a drop-in replacement in environments where Claude isn't an option - air-gapped networks, on-premise requirements, regulatory constraints.
+
+The argument that some pockets of software engineering are off-limits to agentic coding is over. You can bring the whole stack there.
+
+Even [Cursor redesigned their entire interface](https://cursor.com/blog/2-0) to be agent-centric rather than file-focused. The experiment phase is over. Agentic is the default.
 
 ## And what is the future now?
-- No stopping in sight
-- Machines are limited by Wirth's law
-  - in my feedback loop, as a developer, I'm now wasting more time waiting for tests than waiting for the model
-  - Wirth's law explains this: the average tech stack is slow. Most companies don't care. But it makes your tests slow
-- Anthropic acquires Bun - smartest move
-```
-Bun is a JavaScript/TypeScript runtime built from scratch in Zig, designed as a faster alternative to Node.js.
-It's an all-in-one toolkit: runtime, bundler, package manager, and test runner - all optimized for speed.
-Key point for your article: Bun is often 3-10x faster than Node.js for common operations.
-It's a direct counter to Wirth's law - instead of accepting that JS tooling is "just slow",
-they rewrote everything with performance as the priority.
-```
-  - Link - TL;DR powers Claude Code, and is already developed by Claude
-  - Now, companies like Anthropic care about fast runtimes. Raw compute isn't enough if the software stack wastes it.
-  - side effect: the testing feedback loop gets faster
 
-  If your AI agent is bottlenecked by a 30-second test suite that could run in 3
-  seconds, that's wasted compute, wasted user time, and worse results (fewer
-  iterations = less refinement).
+### No stopping in sight
+
+Moore's Law still holds. The Bitter Lesson still applies. Each generation unlocks new capabilities.
+
+But here's the twist: the bottleneck has shifted.
+
+### Wirth's Law is now the problem
+
+In my feedback loop as a developer, I'm now wasting more time waiting for tests than waiting for the model.
+
+Wirth's Law explains this. Most tech stacks are slow because companies don't care - they optimize for developer velocity, not runtime performance. The software just needs to be tolerable to humans.
+
+But agentic AI changes the equation. If your AI agent is bottlenecked by a 30-second test suite that could run in 3 seconds, that's wasted compute, wasted money, and worse results - fewer iterations means less refinement.
+
+### Anthropic acquires Bun
+
+This is why [Anthropic acquiring Bun](https://bun.sh/blog/anthropic-acquires-bun) is the smartest move.
+
+Bun is a JavaScript/TypeScript runtime built from scratch in Zig, usually 3-10x faster than Node.js thanks to some smart trade-offs. It's a direct counter to Wirth's Law - instead of accepting that JS tooling is "just slow", they rewrote nearly everything with performance as the priority.
+
+It already powers Claude Code. And yes, [Claude](https://github.com/claude) is already contributing to [Bun](https://github.com/oven-sh/bun)'s development - check the top contributors.
+
+Now companies like Anthropic care about fast runtimes. Raw compute isn't enough if the software stack wastes it. The testing feedback loop gets faster, the agent iterates more, the results get better.
 
 
 ### Pricing + Education
@@ -237,26 +275,30 @@ they rewrote everything with performance as the priority.
 - TODO place somewhere AoC depressing
 
 ### And the workforce?
-https://www.cfr.org/event/ceo-speaker-series-dario-amodei-anthropic
 
-But now, getting to kind of the job side of this, I do have a fair amount of concern about this. On one hand, I think comparative advantage is a very powerful tool. If I look at coding, programming, which is one area where AI is making the most progress, what we are finding is we are not far from the world—I think we’ll be there in three to six months—where AI is writing 90 percent of the code. And then in twelve months, we may be in a world where AI is writing essentially all of the code. But the programmer still needs to specify, you know, what are—what are the conditions of what you’re doing, what—you know, what is the overall app you’re trying to make, what’s the overall design decision? How do we collaborate with other code that’s been written? You know, how do we have some common sense on whether this is a secure design or an insecure design?
+Here's a quote:
 
-So as long as there are these small pieces that a programmer, a human programmer, needs to do, the AI isn’t good at, I think human productivity will actually be enhanced. But on the other hand, I think that eventually all those little islands will get picked off by AI systems. And then we will eventually reach the point where, you know, the AIs can do everything that humans can. And I think that will happen in every industry. I think it’s actually better that it happens to all of us than that it happens—you know, that it kind of picks people randomly. I actually think the most societally divisive outcome is if randomly 50 percent of the jobs are suddenly done by AI, because what that means—the societal message is we’re picking half—we’re randomly picking half of people and saying, you are useless, you are devalued, you are unnecessary.
+> "I think we'll be there in three to six months—where AI is writing 90 percent of the code. And then in twelve months, we may be in a world where AI is writing essentially all of the code."
+- Dario Amodei, Anthropic's CEO, [March 2025](https://www.cfr.org/event/ceo-speaker-series-dario-amodei-anthropic)
 
+I'd recommend reading the whole transcript. He was accurate enough. And he was quite precise with his words. I read this at the time and agreed with him, even before time made him correct. He has the same insight: machines still need to be nudged, even though it will be less and less. Most newspapers took this direct quote as a title, to sell fear by removing all the nuance and turning this nuanced point of view into quite an inaccurate opinion, that he never pushed for.
 
-- Dario was kinda accurate in March 10, 2025
-- But in the next 5 years? Can only go better: "developer" is dead, either be
-  - an excellent engineer - like, **really**
-    - R&D should be somehow safer
-  - good with product
-  - actually the guy that does everything with Claude in a small structure
-  - an ops: humans will be in charge there for a bit longer
-  - get a PhD or do something else idk
+The Developers aren't dead yet - but the role is evolving fast. You still need a lot of knowledge outside "how to use an AI", but the need for "someone who just writes code" dropped sharply
 
-#### So should I worry?
-- there is no value for writing the code yourself anymore
-- if you managed to learn how to code pre-ai, you'll learn whatever needs to be learned for what's to come
+So, the honest question: what happens in the next 5 years?
 
-# TODO
-https://cursor.com/blog/2-0 - now mainly agentic like Claude Code, can still show something like the previous layout
-https://mistral.ai/fr/news/devstral-2-vibe-cli - talk both about devstral 2 and the vibe cli
+The title "developer" as we knew it is fading. What remains:
+- **Excellent engineers** - and I mean *really* excellent. R&D, novel problems, things that don't exist in the training data yet.
+- **Product people** - understanding what to build matters more when building is cheap.
+- **The one-person army** - someone who does everything with Claude in a small structure. Startups of one.
+- **Ops and infrastructure** - humans will be in charge there for a bit longer. Someone still has to keep the lights on.
+
+### So should I worry?
+
+Here's my honest take:
+
+There is no value in writing the code yourself anymore. Typing out code fast, knowing the libs by heart, transpiling business rules into decent code - that's done.
+
+But here's the thing: if you managed to learn how to code pre-AI, you'll learn whatever needs to be learned for what's to come. The skill was never "writing code." It was problem-solving, system thinking, translating messy human needs into structured solutions. That translates.
+
+The people who should worry are those who thought the job was typing.
