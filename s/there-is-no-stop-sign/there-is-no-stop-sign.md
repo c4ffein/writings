@@ -12,19 +12,11 @@ Well, that way you can form your own opinion about where this whole thing is goi
 
 ## Disclaimer about why I wrote this
 
-TL;DR - infodumping my personal background here, you can skip this section!
-
-When I think that someone would **really** enjoy something, and that person doesn't try, I can be pushy enough for that person to actually try some day and remember me insisting.
-
 I couldn't recommend Claude Code enough to some of my friends, and one of them that ended up trying (and that organizes some of the tech meetups where I live) actually enjoyed it enough for them to propose me to give a talk about coding with AI.
-
-I wanted to take this chance to explain some concepts that I think anyone that tries to decide what to do in relation to the tech industry should at least have heard about - and, in all honesty, I'm fed up with the content most influencers keep pushing about AI, these LinkedIn posts about how AI will replace X and Y but not A and B, without any deeper insight, only the same arguments regurgitated again and again.
 
 My way to go is usually to mind dump everything then refine, get some slides out of it, and then give a talk from what I remembered from what I wrote.
 
-Obviously the whole "meta" part wouldn't fit in a 20-minutes talk, as I still have to give many examples about the actual "coding with Claude" part, so, if you were at my talk, here is the article I talked about, and if you weren't, you can still read the take from an early career engineer with a scientific curiosity that let him think he may have takes worth sharing with other engineers (or whoever cares to read).
-
-This is also the article I'll link when discussing with someone having opinions I find biased, of course everyone can form their own opinion but at least all the "have you taken this into consideration" stuff is there!
+Obviously the whole "meta" part wouldn't fit in a 20-minutes talk, as I still have to give many examples about the actual "coding with Claude" part, so, if you were at my talk, here is the companion article I talked about, and if you weren't, I hope this doesn't read too much like a mind-dump!
 
 
 ## Do people actually know what an AI is
