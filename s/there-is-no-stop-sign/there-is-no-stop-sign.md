@@ -1,8 +1,14 @@
 # There Is No Stop Sign
 
-I'm tired of being fed AI takes that skip the basics through social networks, particularly from people posing as experts, or developers that aren't curious toward machine learning. I won't pretend to be an expert, the only project I carried out that involved custom neural networks was a visual editor that was used for teaching freshmen, in other projects I only used existing models for inference, or AI tooling for writing code. I consider myself an engineer far more than a scientist, and I think basic engineering knowledge and scientific curiosity should still be enough to produce something worth sharing.
+There is something I'm bitter about, it's the way information spreads both on social media and regular newspaper. The current landscape and incentives don't push the voices of measured people to the ones that are just curious and could benefit from it.
 
-Really, I wrote nothing new here, I'm not trying to compete with all the content already out there but get all the things I would have liked to know if I didn't already in a single place. That way you can form your own opinion about where this whole thing is going.
+From this, there is this whole industry of individuals that mastered looking like experts, while the actual experts stay underexposed. In particular, in my field (programming), the general opinion seems tainted with the fact that artificial neural networks, on which all the current AI wave is based on, work counterintuitively with what most old school programmers are used to. Which also explains the amount of scepticism AI first obtained when it reached the developer circles. While it was over-hyped by casual programmers, maybe there was some actual values, and the old-school programmers were too dismissive.
+
+I won't pretend to be an expert, the only project I carried out that involved custom neural networks was a visual editor that was used for teaching freshmen, in other projects I only used existing models for inference, or AI tooling for writing code. I consider myself an engineer far more than a scientist, and I think basic engineering knowledge and scientific curiosity should still be enough to produce something worth sharing.
+
+Really, I wrote nothing new here, I'm not trying to compete with all the content already out there produced by actual experts, but to produce the connective tissue between all these things I would have liked to know if I didn't already, so they are available in a single place to the people that sometimes actually ask my opinion.
+
+Well, that way you can form your own opinion about where this whole thing is going.
 
 ## Disclaimer about why I wrote this
 
