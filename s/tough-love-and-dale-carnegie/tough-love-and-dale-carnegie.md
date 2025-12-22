@@ -1,10 +1,6 @@
 # Tough Love and Dale Carnegie
 
-This is neither a regular review nor an essay, just a random collection of thoughts I had since reading `How to Win Friends and Influence People` by Dale Carnegie.
-
-I'm writing this mainly for myself, I wonder if writing about what I read will help consolidate memories, and, in a more general sense, help the content have a more lasting impact on me?
-
-Also, being French, it's a bit harder for me to articulate my thoughts in English when not talking about technical subjects, so I should be honest here: Claude sometimes helped me reformulate sentences and gave feedback on flow.
+This is just a random collection of thoughts I had since reading `How to Win Friends and Influence People` by Dale Carnegie.
 
 ---
 
@@ -19,7 +15,7 @@ There is something quite weird: even though I can rationalize that what we went 
 
 Like, tough love was the default mode of communication.
 
-I've been tuning down lately, but from 15 to 25, being "nice" would always feel fake, and the guys I surrounded myself with were of the same vibe. Life is somehow supposed to be violent and sad, and trying to express some form of joyful optimism would just feel naive and stupid.
+I've been toning down lately, but from 15 to 25, being "nice" would always feel fake, and the guys I surrounded myself with were of the same vibe. Life is somehow supposed to be violent and sad, and trying to express some form of joyful optimism would just feel naive and stupid.
 
 All that to say, I think that the person I was 5 years ago would have dismissed this book as "stupid" after skimming through a bunch of random pages.
 
@@ -27,8 +23,7 @@ All that to say, I think that the person I was 5 years ago would have dismissed 
 
 The more I go through life, the more I consider that it's not about the information but about how you're receiving it. It's about whether you are ready to ponder what you read. Would you do it because it seems logical, according to your current intellectual framework? Because there's some form of authority - whether by the sheer number of people considering these writings good, or a smaller, specific category of people who can acknowledge that this content is worth reading?
 
-What IS this book? For those who didn't read it:
-Each chapter is a collection of little stories by Dale Carnegie himself, or his direct contacts, or related historical events... all pointing towards the moral of the chapter.
+Each chapter of this book is a collection of little stories by Dale Carnegie himself, or his direct contacts, or related historical events... all pointing towards the moral of the chapter.
 
 Here is the list of chapters, which should give you a good idea of what the book contains:
 
