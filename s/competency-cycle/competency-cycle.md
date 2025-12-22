@@ -40,7 +40,9 @@ Nothing is inherently bad with either route, but what you saved in development y
 
 TL;DR - Many people think they can't do with just a Postgres database. [Most of them actually could](https://www.amazingcto.com/postgres-for-everything/). Not that you should, but in most cases it is an option.
 
-To avoid my own accusations applying to me: experiment with these, but submitting to your environment's zeitgeist is often the most adequate move in contexts too complex for any of us to fully grasp. I also won't go into details because there are so many of them, but Postgres forks that solve the scalability problem are probably (one of) the next big thing though.
+I also won't go into details because there are so many of them, but Postgres forks that solve the scalability problem are probably (one of) the next big thing though.
+
+To avoid my own accusations applying to me: experiment with these, but submitting to your environment's zeitgeist is often the most adequate move in contexts too complex for any of us to fully grasp.
 
 ### Any methodology that got traction
 
@@ -64,4 +66,4 @@ Personally, the only type of person that I'm actually angry at are the ones that
 
 ---
 
-In all honesty, this started as a rant (and some people liked the vibe), but as I realized it might reach a broader audience, I toned it down. If you're curious about the original, you can find it [at this specific version in the git history](https://github.com/c4ffein/writings/blob/fafd1d9f67e4cd713fa5686766d732e71adb293e/s/competency-cycle/competency-cycle.md).
+In all honesty, this started as a rant (and some people liked the vibe), but as I realized it might reach a broader audience, I toned it down. If you're curious about the original, you can find it [at this specific version in the git history](https://github.com/c4ffein/writings/blob/bbe21c5c50a96aa553ea43af993c62602a8e2240/s/competency-cycle/competency-cycle.md).
