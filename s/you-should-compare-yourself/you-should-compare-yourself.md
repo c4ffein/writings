@@ -21,7 +21,7 @@ Yet I had the luck of observing them behaving in the most stupid ways sometimes.
 
 The earliest memory I have of one of my uncles is me reciting the alphabet. As soon as I finished, he goes like: "Great! Now, backwards!"
 
-There's also a more recent memory of another uncle, this one on my mother's side, that we had dinner with. As I was paraphrasing one of the last research projects my father was conducting "he did this, then that, then...", he starts squinting his eyes, slightly raising his head... I don't have the time to finish thinking "what the fuck" that he begins his sentence:
+There's also a more recent memory of another uncle, this one on my mother's side, that we had dinner with. As I was paraphrasing one of the last research projects my father was conducting "he did this, then that, then...", he starts squinting his eyes, slightly raising his hand... I don't have the time to finish thinking "what the fuck" that he begins his sentence:
 "You know... Your father is not really intelligent."
 Obviously I just burst out in laughter.
 
