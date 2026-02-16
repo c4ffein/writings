@@ -46,7 +46,7 @@ I saw the white page, I saw the need to rewrite multiple times, I saw the hesita
 
 And this doesn't dismiss his overall accomplishments. I don't need to see people struggle as a way to cope with my inability to deliver something meaningful.
 I need to see people I deeply respect struggle too — and that, actually, helps the most when I feel stuck and worthless myself.
-Everyone has those. The only people that somehow don't have those are the ones that are so used to producing content that it is now quite natural. They had years to experiment and make it seem seamless.
+Everyone has those moments. The only people that somehow don't are the ones that are so used to producing content that it is now quite natural. They had years to experiment and make it seem seamless.
 
 ---
 
