@@ -1,21 +1,22 @@
 # Competency Cycle
 
-There is this pattern in tech that I ended up noticing.
+There is this noticeable pattern in tech: adoption follows a hype cycle driven more by competency signaling than real problem-solving capabilities.
 
-A new tech or methodology appears. The original creators and early users are usually quite close — working at the same org, or at least part of the same ecosystem. There's a novelty appeal: it comes from bright minds, it's shiny, it's trending. Highly motivated people who follow the latest trends pick it up and do something with it, which leads to this tech actually becoming a marker of skill. Maybe people don't actually need it to solve their problems, but they use it anyway since they learned how to. Then less motivated people join the trend — not because they perceive value in it, but because it helps them belong to the group that deserves to be paid more. More and more projects use this tech in a broken way. To most people, there seems to be a problem to be fixed.
-
-It happened many times and will happen again.
-It may happen years apart, for the same tech or methodology,
-in different countries or even cities, or even across different industries.
-
-At some point, the trend has to go in the opposite direction. In part, to flee the people who pretend to care and are actually making everything so terrible.
+Recognizing this pattern helped me be less prone to hype, [choose boring tech](https://mcfunley.com/choose-boring-technology), reduce the FOMO fatigue, and in the end ship more.
 
 ## Some specific examples
 
 ### Microservices, then wanting to go back to a monolithic architecture.
 
 Maybe at first it helped to force people to split their logic, but then some people started splitting it in the most absurd way.
-At some point we end up with each microservice being far more bloated than one unique monolith should be. And even so, I think it will be even worse when they go back to that so glorious monolith after reading I don't know what blog post.
+At some point we may end up with specific microservices being far more bloated than one single monolith could be.
+And even so, I think it will be even worse when they go back to that so glorious monolith after reading I don't know what blog post.
+
+I've seen countless people argue over monolith vs microservices, sometimes shifting the whole architecture across years and circling back.
+Maybe both have tradeoffs, both can work, and overall success depends far more on the how than on this specific dichotomy.
+
+Suboptimal solutions can always work with a lot of duct tape. I've seen architects gain confidence in their future choices by having other engineers duct-tape their design.
+I would be very cautious of anyone telling me my problems would go away in case of a monolith/microservices switch (in both directions). The fact that their past architectures shipped isn't as strong a signal as it seems.
 
 ### SPA, then going back to SSR.
 
@@ -23,7 +24,7 @@ I do think HTMX is great, but if you currently think HTMX is the solution to mos
 
 I do think the overall HTMX experience could be terrible too, although not for the same reasons. The problems people blame on SPAs — 8MB bundles for basic components, request waterfalls slowing everything down — are usually symptoms of:
 - poor architectural decisions
-- the management of the development team that didn't let room for implementing it the correct way
+- the management of the development team that didn't leave room for implementing it the correct way
 - or just lack of skill/care from the developers.
 
 If any of these was the root cause for a bloated, sluggish react app, then you would also end up with a bloated, sluggish HTMX app.
@@ -34,35 +35,57 @@ There are indeed interesting tradeoffs when choosing between HTMX and React, and
 
 For scalability reasons, specific teams had to rely on databases that diverged from the ACID / relational database paradigms, and ended up with the whole suite of NoSQL solutions.
 
-There is also this whole trend of needing a big infra to be taken seriously as an engineer, somehow saying "we have so much traffic that we need Mongo + Redis + Celery + ..." rather than "we optimized our backend to run fully async and handling X millions of requests per day on a single server, even though we could scale to hundreds of workers without any change to the codebase" brings you more clout in the wrong circles.
+There is also this whole trend of needing a big infra to be taken seriously as an engineer.
+```
+We have so much traffic that we need Mongo + Redis + Celery + ...
+```
+Usually brings a lot of clout. Maybe this one should bring you more.
+```
+We optimized our backend to run fully async and handle X millions of requests per day on a single server. Scales if needed.
+```
 
-Nothing is inherently bad with either route, but what you saved in development you always pay back later in maintenance. Not that building cloud-based infrastructure isn't worth it from a scalability point of view.
-
-TL;DR - Many people think they can't do with just a Postgres database. [Most of them actually could](https://www.amazingcto.com/postgres-for-everything/). Not that you should, but in most cases it is an option.
-
-I also won't go into details because there are so many of them, but Postgres forks that solve the scalability problem are probably (one of) the next big thing though.
-
-To avoid my own accusations applying to me: experiment with these, but submitting to your environment's zeitgeist is often the most adequate move in contexts too complex for any of us to fully grasp.
+Nothing is inherently bad with either route, building cloud-based infrastructure is worth it from a scalability point of view, and there are downsides to using [Postgres for Everything](https://www.amazingcto.com/postgres-for-everything/).
+But whatever your choice, what you saved in development you usually pay back later in maintenance.
 
 ### Any methodology that got traction
 
 This is the most general example. Anything like Clean Code, Scrum, Extreme programming, came from quite good intentions, and did have a positive impact on early adoption, but seeing how far they strayed from their original purpose now fills me with a mix of sadness and anger whenever a new debate starts. I acknowledge there are still healthy discussions to have, but most end up as tribal battles.
 
+## The overall cycle
+
+It seems that each of these examples followed this exact pattern, regarding their adoption:
+
+- A new tech or methodology appears.
+- The original creators and early users of the shiny new thing are usually quite close.
+- Highly motivated people who follow the latest trends pick it up and build with it.
+- Using it actually becomes a marker of skill, whether adequate to the problem or not - it helps you belong in the group that is better paid.
+- This is now one of the standards, independently of the perceived value in it.
+- More and more projects use this tech in a broken way.
+- To most people, there seems to be a problem to be fixed. Maybe by a new language, framework, or methodology?
+
+Sometimes, across everything we built or adopted, we can be at different points at the same time. And this can feel endless, the ecosystem never stops spewing out new stuff to try, that take time that could be used by building with suboptimal tools you already master.
+
 ## Stuff that actually becomes better
 
 That said, these cycles do let developers experiment with multiple solutions, and sometimes real progress comes out of it. npm ended up focusing on performance because yarn gained traction. React is getting a compiler because other frameworks made it a selling point. The npm → yarn → pnpm → bun progression actually solved real problems iteratively. There are more examples, but that's a different post.
 
-## Is there someone to blame
+Regarding Postgres, in addition to all the recent features and performance improvements, there are forks that bring even more in specific domains.
+These things probably wouldn't exist in the current form without the wave of other solutions. Once again, there was a general improvement, independently of the tech you choose.
 
-The thing is, most of these techs and methodologies are decent choices when picked and applied wisely.
+To avoid falling into the same trap myself: experiment with these, but submitting to your environment's zeitgeist is often the most pragmatic move in contexts too complex for any of us to fully grasp.
 
-I do think we can blame the people who think something is utterly good or bad. In a way, these people thrive — they found their safe space and don't have to care about contexts where the rules differ. Maybe it's easier to advance when you just want to belong to tribe X and never question the mantra.
 
-Maybe we can also blame the people who oversell or overblame in their personal interest, sometimes not even consciously?
+## Is there someone to blame?
 
-Well, like most problems, in the end, it's mostly structural, pointing fingers is useless, human nature is what it is.
+I do think we can blame the people who think something is utterly good or bad, and then oversell or overblame - most of the time in their personal interest, sometimes not even consciously.
+In a way, these people thrive — they found their safe space and don't have to care about contexts where the rules differ. Maybe it's easier to advance when you just want to belong to tribe X and never question the mantra.
+It's all tradeoffs, and most of these techs and methodologies are decent choices when picked and applied wisely. More than that, they are usually still decent even when suboptimal, and the clout reward from the herd mentality seems to outweigh the cost of picking suboptimal techs.
 
-Personally, the only type of person that I'm actually angry at are the ones that pretend to care and actually don't, just want to belong and secure their access to good money and status. While I'm angry at those who made the whole field worse by pursuing status, I'm also sad for those that had to show submission to the mantras as they didn't have much choice if they wanted to jump on the tech wagon. I hope mentalities change, actual problem solvers win on the long term, and the way posturing is currently rewarded comes to a halt.
+I have nothing against anyone that had to show submission to the mantras, as they didn't have much choice if they wanted to jump on the tech wagon - my main target is the people that actively make the field worse by enforcing a false sense of modernity bringing fake solutions.
+
+But, even with this taken into account: in the end, like most problems, it's mostly structural, pointing fingers is useless, human nature is what it is.
+
+I still think spreading recognition of this pattern will help actual problem solvers win in the long term, and make posturing way less rewarded in the future.
 
 ---
 
