@@ -463,7 +463,7 @@ with open("example.txt", "w") as file:
 Python's asynchronous programming model uses `async`/`await` syntax to write concurrent code that's more maintainable than traditional callbacks or thread-based approaches. This allows you to handle many operations concurrently without the overhead of locking multiple threads.
 
 Here are some of the concepts python handles through the standard `asyncio` lib (this code doesn't work, just listing concepts):
-```
+```python
 result = await some_coroutine()  # Pauses execution until completed
 
 async def my_async_function():  # Defines an asynchronous function (coroutine)
