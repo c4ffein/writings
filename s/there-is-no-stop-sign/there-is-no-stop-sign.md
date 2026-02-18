@@ -70,7 +70,7 @@ Why does it matter? In the 1990s, getting a computer to recognize handwritten di
 
 It sounds trivial now, but this was the biggest proof of concept at the time: neural networks can learn to recognize patterns that humans can't explicitly describe in code.
 
-### emergent properties
+### Emergent properties
 
 Here's where it gets interesting. When you scale neural networks up - more parameters, more training data, more compute - they start doing things nobody explicitly trained them to do.
 
@@ -84,7 +84,7 @@ These are "emergent properties" - capabilities that appear at scale without bein
 
 This is why scaling matters. You're not just making the same thing faster - you're potentially unlocking entirely new capabilities.
 
-### the bitter lesson
+### The bitter lesson
 
 Rich Sutton's ["The Bitter Lesson" (2019)](http://www.incompleteideas.net/IncIdeas/BitterLesson.html) is one of the most important essays in AI.
 
@@ -155,10 +155,10 @@ More parameters → more nuance. Same bitter lesson, same scaling principle.
 LLMs worked a lot like "memory machines" before. Which also explains why some media experts actually have the whole mental model wrong, believing they were only like a database of some sort. While we've seen that they develop more and more emergent behavior, it is true that the "remembering and spewing out" part was quite strong compared to the rest. So you may have thought about these specific usages:
 
 #### Replacing Google
-It is true it was a far better experience asking my question to Claude than to the enshittified Google. Google gave me ads, then a bunch of links that may or may not contain my answer, that I had to check one by one, hoping for a decent answer through a thread filled with useless comments. Claude giving me a list of the most plausible answers has been a joy, there could still be some occasional hallucination, I'd take it over Google every time - which I can still use as a backup.
+It is true it was a far better experience asking my question to Claude than to the Google that went from user-acquisition to revenue maximization. Google gave me ads, then a bunch of links that may or may not contain my answer, that I had to check one by one, hoping for a decent answer through a thread filled with useless comments. Claude giving me a list of the most plausible answers has been a joy, there could still be some occasional hallucination, I'd take it over Google every time - which I can still use as a backup.
 
 #### Replacing templates
-It also explains why juniors had such a high opinion of the past models, and the experts, not so much. You see, models were very good at always spewing out the same default app corresponding to the same need from the user. A Flappy Bird, a calculator, a dashboard... What was curious was how consistent these answers were. Even raising the temperature (a parameter controlling output randomness) still produced a really close output. Juniors were amazed at the machine giving in 2 minutes what would have taken them 2 days, experts weren't convinced since any real change past that broke everything. But even to the experts, LLM soup replaced the templates that you could buy online for $200, that helped you bootstrap a project.
+It also explains why juniors had such a high opinion of the past models, and the experts, not so much. You see, models were very good at always generating the same default app corresponding to the same need from the user. A Flappy Bird, a calculator, a dashboard... What was curious was how consistent these answers were. Even raising the temperature (a parameter controlling output randomness) still produced a really close output. Juniors were amazed at the machine giving in 2 minutes what would have taken them 2 days, experts weren't convinced since any real change past that broke everything. But even to the experts, LLM soup replaced the templates that you could buy online for $200, that helped you bootstrap a project.
 
 #### Autocomplete
 When you are in your developer environment, some of the most obvious grunt work was automated by the LLM. If you had a *really obvious* pattern in your code, or code that actually looked like very common knowledge, your editor could suggest the next changes. It was excruciating - even as an AI revolution believer, I didn't use it - as it was at a specific threshold that was just annoying. Not fast and accurate enough to be a joy to work with, I'd rather type that line of code than be interrupted by the AI that may or may not be right.
@@ -256,7 +256,7 @@ Here's a quote:
 > "I think we'll be there in three to six months—where AI is writing 90 percent of the code. And then in twelve months, we may be in a world where AI is writing essentially all of the code."
 - Dario Amodei, Anthropic's CEO, [March 2025](https://www.cfr.org/event/ceo-speaker-series-dario-amodei-anthropic)
 
-I'd recommend reading the whole transcript. He was quite precise with his words. I read this at the time and agreed with him. He has the same insight: machines still need to be nudged, even though it will be less and less. Most newspapers took this direct quote as a title, to sell fear by removing all the nuance and turning this measured point of view into quite an inaccurate opinion that he never pushed for. Also, having a voice that was extremely bullish yet nuanced was refreshing. Personally, I now write >99% of my code with Claude Code. Whether the industry-wide number is exactly where he predicted, the direction is undeniable - and worst case, he was late by months. The argument that AI hype doesn't deliver since it comes from the AI labs isn't valid. We shouldn't consider them as authority figures, because they have their interest there, but it's just as wrong to infer the opposite.
+I'd recommend reading the whole transcript. He was quite precise with his words. I read this at the time and agreed with him. He has the same insight: machines still need to be nudged, even though it will be less and less. Most newspapers took this direct quote as a title, to sell fear by removing all the nuance and turning this measured point of view into quite an inaccurate opinion that he never pushed for. Also, having a voice that was extremely bullish yet nuanced was refreshing. Personally, I now write nearly all of my code with Claude Code. Whether the industry-wide number is exactly where he predicted, the direction is undeniable - and worst case, he was late by months. The argument that AI hype doesn't deliver since it comes from the AI labs isn't valid. We shouldn't consider them as authority figures, because they have their interest there, but it's just as wrong to infer the opposite.
 
 The developers aren't dead yet - but the role is evolving fast. You still need a lot of knowledge outside "how to use an AI", but the need for "someone who just writes code" dropped sharply.
 
