@@ -1,13 +1,11 @@
 # There Is No Stop Sign
 
 
-There is something I'm bitter about: the way information spreads both on social media and regular newspaper. The current landscape and incentives don't push the voices of measured people to the ones that are just curious and could benefit from it.
-
 Artificial neural networks, on which all the current AI wave is based, work counterintuitively with what most old school programmers are used to. Which also explains the amount of scepticism AI first obtained when it reached the developer circles. While it was over-hyped by casual programmers, maybe there was some actual value, and the old-school programmers were too dismissive.
 
 I won't pretend to be an expert, the only project I carried out that involved custom neural networks was a visual editor that was used for teaching freshmen, in other projects I only used existing models for inference, or AI tooling for writing code. I consider myself an engineer far more than a scientist, and I think basic engineering knowledge and scientific curiosity should still be enough to produce something worth sharing.
 
-I wrote nothing new here, I'm not trying to compete with all the content already produced by actual experts, but to produce the connective tissue between all these things - that I would have liked to know if I didn't already.
+I'm not trying to compete with all the content already produced by actual experts, but to produce the connective tissue between all these things - that I would have liked to know if I didn't already. This is what I want to send to my computer-aware friends who hear about AI progress through X and LinkedIn.
 
 
 ## Do we agree on what an AI is?
@@ -27,7 +25,7 @@ But now we must be asking, what separates the AIs everyone is talking about now,
 
 Before we dive in, there are also two concepts that I consider quite important here.
 
-#### Moore's law
+#### Moore's Law
 
 **Moore's Law** (1965): The observation that the number of transistors on a chip doubles roughly every two years, leading to exponential growth in computing power at similar cost.
 
@@ -38,7 +36,7 @@ It was predicted to hit physical limits (atoms are only so small), but it keeps 
 
 TL;DR - computers can still become more powerful, no real stop in sight
 
-#### Wirth's law
+#### Wirth's Law
 
 **Wirth's Law** (1995): "Software is getting slower more rapidly than hardware is getting faster."
 
@@ -84,7 +82,7 @@ These are "emergent properties" - capabilities that appear at scale without bein
 
 This is why scaling matters. You're not just making the same thing faster - you're potentially unlocking entirely new capabilities.
 
-### The bitter lesson
+### The Bitter Lesson
 
 Rich Sutton's ["The Bitter Lesson" (2019)](http://www.incompleteideas.net/IncIdeas/BitterLesson.html) is one of the most important essays in AI.
 
@@ -96,7 +94,7 @@ The lesson is "bitter" because it means human cleverness matters less than we'd 
 
 This is why we have huge, costly models instead of cleverly engineered smaller ones.
 
-### how does a transformer work
+### How does a transformer work
 
 The transformer (2017) is the architecture behind modern LLMs. The key innovation: **attention**.
 
@@ -122,7 +120,7 @@ If you want to actually understand this visually, 3Blue1Brown's series is the be
 
 Full playlist: [3blue1brown.com/topics/neural-networks](https://www.3blue1brown.com/topics/neural-networks)
 
-### my "whoa moment" happened before ChatGPT
+### My "whoa moment" with ChatGPT was different
 
 I heard about transformers, GPT-2, and OpenAI's bet on "just scale it up" back when it sounded almost naive. I didn't believe this was the path to general intelligence.
 
@@ -136,7 +134,7 @@ Actually, there are arguments for this to stop: the data wall (we're running out
 
 I have an engineer's gut feeling here. Non-engineers suppose our work is purely rational, but the gut feeling is formed after years of building stuff. Mine tells me all these are solvable, because even as a non-expert, I still have countless ideas I would try. And historically, the stats make "we'll find solutions for all of these" very plausible: the data wall was supposed to stop GPT-4 from improving over GPT-3, compute costs were supposed to make scaling uneconomical, and attention was supposed to not scale past a certain context length. Each time, someone found a way.
 
-### more parameters introduce nuance
+### More parameters introduce nuance
 
 One of the things that best shows the introduction of new capabilities, is how nuance is introduced with the model scaling. When asking what can be read both as "Can you explain to me the meaning of this sentence: Pierre takes the ball and throws it", but also "Pierre takes the ball and the spear":
 
@@ -265,12 +263,12 @@ So, the honest question: what happens in the next 5 years?
 The title "developer" as we knew it is fading. What remains:
 - **Excellent engineers** - and I mean *really* excellent. R&D, novel problems, things that don't exist in the training data yet.
 - **Product people** - understanding what to build matters more when building is cheap.
-- **The one-person army** - someone who does everything with Claude in a small structure. Startups of one.
+- **The one-person army** - someone who does everything with AI assistance in a small structure. Startups of one.
 - **Ops and infrastructure** - humans will be in charge there for a bit longer. Someone still has to keep the lights on.
 
 ### So should I worry?
 
-While Richard Sutton himself recognized the structural limitations of the transformer architecture makes it unlikely to be the single key to reaching AGI, [The Bitter Lesson](http://www.incompleteideas.net/IncIdeas/BitterLesson.html) still holds. Anything that is the frontier of the current model capabilities, where it fails in the real world, is more data for AI companies to make a next model providing solutions. There is no stop sign. Unless there is a global market crash, or another black swan, the models will keep getting more capable — each generation's failures become the next generation's training signal, and the investment shows no sign of slowing. There is no stop sign.
+While Richard Sutton himself recognized the structural limitations of the transformer architecture makes it unlikely to be the single key to reaching AGI, [The Bitter Lesson](http://www.incompleteideas.net/IncIdeas/BitterLesson.html) still holds. Anything that is the frontier of the current model capabilities, where it fails in the real world, is more data for AI companies to make a next model providing solutions. There is no stop sign. Unless there is a global market crash, or another black swan, the models will keep getting more capable — each generation's failures become the next generation's training signal, and the investment shows no sign of slowing.
 
 Here's my honest take:
 
@@ -278,6 +276,8 @@ There is no value in writing the code yourself anymore. Except learning and trai
 
 But here's the thing: if you managed to learn how to code pre-AI, you'll learn whatever needs to be learned for what's to come. The skill was never "writing code." It was problem-solving, system thinking, translating messy human needs into structured solutions. That translates.
 
-Oh, and understanding fast, and pinpointing a technical issue will still be valuable. We're already at the point where you can materialize what was a 2 weeks project out of thin air in something like 4 hours - and I expect the first number to keep going up, and the second to keep going down. It's just that this project will contain some bugs that need human investigation.
+Oh, and understanding fast, and pinpointing a technical issue will still be valuable. We're already past the point where you can materialize what was a 2 weeks project out of thin air in something like 4 hours - and I expect the first number to keep going up, and the second to keep going down. It's just that this project will contain some bugs that need human investigation.
+
+There is no stop sign.
 
 The people who should worry are those who thought the job was typing.
