@@ -1,0 +1,3 @@
+- Attributed as fixed solo: f7cd80c — missing suffix macros [report C. Pellegrini]
+- Not attributed as discovered with FP (test): 34ea137 — coloring check addition
+- Not attributed as fixed by him alone (fix): e0a90c7 — the actual bugfix, next day
