@@ -1,50 +1,47 @@
 # There Is No Stop Sign
 
 
-Artificial neural networks, on which all the current AI wave is based, work counterintuitively with what most old school programmers are used to. Which also explains the amount of scepticism AI first obtained when it reached the developer circles. While it was over-hyped by casual programmers, maybe there was some actual value, and the old-school programmers were too dismissive.
+The amount of both over-hype and denial AI first obtained when it reached the developer circles was astonishing.
 
-I won't pretend to be an expert, the only project I carried out that involved custom neural networks was a visual editor that was used for teaching freshmen, in other projects I only used existing models for inference, or AI tooling for writing code. I consider myself an engineer far more than a scientist, and I think basic engineering knowledge and scientific curiosity should still be enough to produce something worth sharing.
+In my opinion, this can be explained by two separate things:
+- Some junior developers were very adamant about something that was still in its infancy, and angered more experienced engineers that saw basic flaws.
+- Artificial neural networks, on which all the current AI wave is based, work counterintuitively with what most old school programmers are used to.
+
+Which means, a lot of experienced developers are now reluctant to keep up with the current advances.
+
+I'm not an expert, the only project I carried out that involved custom neural networks was a visual editor that was used for teaching freshmen. In other projects I only used existing models for inference, or AI tooling for writing code. I consider myself an engineer far more than a scientist, and I think basic engineering knowledge and scientific curiosity should still be enough to produce something worth sharing.
 
 TL;DR: this is the connective tissue between all these things that I consider worth hearing about. Also, this is what I want to send to my computer-aware friends who hear about AI progress through X and LinkedIn.
 
 
-## Do we agree on what an AI is?
+## Defining AI
 
 
-I have my own definition of "intelligence", but it is not something everyone agrees upon anyway. Well, even the researchers at the frontline don't all have the same definition of what AGI will be.
+Not everyone defines "intelligence" the same way, which means even the researchers at the frontline don't all have the same definition of what AGI is.
 
-What we can agree upon is the definition of "artificial", and how that thing, whether we want to call it "intelligent", "thinking", or "just a stochastic parrot", is built on.
-
-This runs on hardware that is close to regular computers. Without diving into the details, there is some level of high specialization for how the current hardware is running, but the bedrock is still a regular computer, for which the definition is:
-
-```
-A machine that takes in information, processes it by following instructions, and gives you results.
-```
+What is tangible, though, is that this thing can run on regular hardware. Without diving into the details: there is some level of high specialization for how the current hardware is running, but the bedrock is still a regular computer.
 
 Which means we should focus on what separates the AIs everyone is talking about now, and previous attempts at generalizing "problem-solving", since they are based on the same kind of machinery that only performs basic computations.
 
-There are two concepts that explain a lot about the evolution of computers, and how we could infer on the development of the current-gen AI.
+There are two concepts unrelated to AI that actually explain a lot about the evolution of computers, and knowing them will still help infer about the development of the current-gen AI.
 
 #### Moore's Law
 
 **Moore's Law** (1965): The observation that the number of transistors on a chip doubles roughly every two years, leading to exponential growth in computing power at similar cost.
 
-It was predicted to hit physical limits (atoms are only so small), but it keeps finding ways to continue through:
-- **3D chip stacking** - building up instead of shrinking down
-- **Chiplets** - multiple smaller chips working together instead of one monolithic die
-- **Specialized accelerators** - GPUs, TPUs, NPUs: purpose-built silicon for specific workloads
+It was predicted to hit physical limits (atoms are only so small), but it keeps finding ways to continue through [3D chip stacking](https://spectrum.ieee.org/3d-cmos), [chiplets](https://en.wikipedia.org/wiki/Chiplet), [specialized accelerators](https://en.wikipedia.org/wiki/Neural_processing_unit), and a lot of the remaining room for improvement.
 
-TL;DR - computers can still become more powerful, no real stop in sight
+To sum it up - computers can still become both more powerful and cheaper, no real stop in sight.
 
 #### Wirth's Law
 
 **Wirth's Law** (1995): "Software is getting slower more rapidly than hardware is getting faster."
 
-Companies are incentivized to develop inefficient software: they want efficient production processes, and are incentivized to maximize short-term feature delivery, even if they are coded in a naive way, and don't require costly developers.
+Companies are incentivized to develop inefficient software: they want efficient production processes, and prioritize short-term feature delivery through cheap developers, even if they are coded in a naive way.
 The only barrier is being **tolerable** according to the average human standard.
 This is why most software seems so slow.
 
-This is not real for AI software - they want maximum performance since there is a run to get the most powerful AI at the lowest cost.
+This is still true for parts of the AI software stack (they can't ditch tens of years of software development), but they want maximum performance since there is a run to get the most powerful AI at the lowest cost, and are ready to invest for long-term gains.
 
 We'll go back to how important this law is in relation to the current tech landscape.
 
@@ -89,7 +86,7 @@ Rich Sutton's ["The Bitter Lesson" (2019)](http://www.incompleteideas.net/IncIde
 
 The bitter lesson: **general methods that leverage computation scale better than clever domain-specific engineering.**
 
-Every time AI researchers tried to hand-craft knowledge or build in human expertise, they eventually got beaten by simpler methods that just used more compute and data. Chess engines with elaborate position evaluation were at some point beaten by tree search + compute. Carefully designed language rules were at some point beaten by statistical models trained on raw text.
+Every time AI researchers tried to hand-craft knowledge or build in human expertise, they eventually got beaten by simpler methods that just used more compute and data. Chess engines with elaborate position evaluation were at some point beaten by tree search + compute. Same for the carefully designed language rules beaten by statistical models trained on raw text.
 
 The lesson is "bitter" because it means human cleverness matters less than we'd like. The winning strategy is almost always: simpler architecture + more data + more compute.
 
@@ -129,13 +126,18 @@ Then I actually tried ChatGPT when it launched, and even with all the criticism 
 
 But here's the thing: the ChatGPT moment didn't come from nowhere. It came from GPT-2, which came from GPT, which came from scaling transformers. Each step was "just" more compute, more data, more parameters - and each step unlocked capabilities the previous one didn't have.
 
-So now when people say "but LLMs can't do X" - I'm not surprised when the next version does X. The early criticisms (can't reason, can't code, can't follow instructions) got solved by throwing more compute at the problem. That's the bitter lesson playing out in real time.
+So now when people say "but LLMs can't do X" - I'm not surprised when the next version does X. The early criticisms (can't reason, can't code, can't follow instructions) got solved by throwing more compute at the problem.
 
 Actually, there are arguments for this to stop: the data wall (we're running out of quality training data), energy costs (training runs consume as much power as small cities), diminishing returns on benchmarks, and regulatory risk. But there are also a lot of proposed solutions, and the brightest minds are working on them. Synthetic data generation, more efficient architectures, distillation, better data curation - each supposed wall has met a proposed ladder.
 
-I have an engineer's gut feeling here. Non-engineers suppose our work is purely rational, but the gut feeling is formed after years of building stuff. Mine tells me all these are solvable, because even as a non-expert, I still have countless ideas I would try. And historically, the stats make "we'll find solutions for all of these" very plausible: the data wall was supposed to stop GPT-4 from improving over GPT-3, compute costs were supposed to make scaling uneconomical, and attention was supposed to not scale past a certain context length. Each time, someone found a way.
+It's hard to quantify as an outsider to the field, but what we can witness is that the arguments the doubters recycle were raised and supposed to manifest years ago, and yet the models kept improving.
 
-There are actual limitations to the transformer architecture. But most of the arguments the doubters recycle were raised years ago, and the pool of working solutions greatly outweighed the challenges.
+There are actual limitations to the transformer architecture, and additional limitations that could or could not materialize.
+
+For these additional limitations, I have an engineer's gut feeling here. Non-engineers suppose our work is purely rational, but the gut feeling is formed after years of building stuff. Mine tells me that most of the remaining problems that should stall improvements are solvable. There are still countless ideas to try. And historically, the stats make "we'll find solutions for all of these" very plausible.
+
+The data wall was supposed to stop GPT-4 from improving over GPT-3, compute costs were supposed to make scaling uneconomical, and attention was supposed to not scale past a certain context length. This is old news, that still gets repeated. Each time, someone found a way.
+
 
 ### More parameters introduce nuance
 
@@ -149,21 +151,19 @@ For non-French speakers: the sentence "Pierre prend la boule et la lance" is amb
 
 This isn't about generational improvements - Sonnet 4.5 vs Opus 4.5 were released months apart. I observed the same pattern with previous gen models: Sonnet never caught this nuance, Opus always did. Scale seems to be the main determining factor here, not training iterations or release dates. If Anthropic could make Sonnet - their volume product - catch this level of nuance cheaply, they would. The fact that it requires Opus suggests it's a capability that comes with scale.
 
-You may argue that this is just a singular example, but it is something I observed through many different sentences, the bigger model generally has a far more nuanced view.
+This is just a singular example, but it is representative of something I observed through many different sentences, the bigger model generally has a far more nuanced view. I usually recognize Sonnet (the mid-sized model from Anthropic) as they get some of the meaning wrong.
 
-More parameters → more nuance. Same bitter lesson, same scaling principle.
+More parameters → more nuance.
 
 ### How we used "AI" before
 
-LLMs worked a lot like "memory machines" before. Which also explains why some media experts actually have the whole mental model wrong, believing they were only like a database of some sort. While we've seen that they develop more and more emergent behavior, it is true that the "remembering and spewing out" part was quite strong compared to the rest. So you may have thought about these specific usages:
+LLMs felt a lot like they were only good at spewing out known facts. Which also explains why it was so easy to form the wrong mental model, believing they were only like a database of some sort. While we've seen that they develop more and more emergent behavior, it is true that the "remembering and spewing out" part was quite strong compared to the rest. So these specific usages were already quite recognized:
 
 #### Replacing Google
-Google went from user-acquisition to revenue maximization. Asking Google somehow feels like a worse experience than before, because of ads, sponsored links, and, more generally, a ranking that favors sites that maximize engagement over direct answers.
-
-Claude giving me a list of the most plausible answers has been a joy, there could still be some occasional hallucination, I'd take it over Google every time - which I can still use as a backup.
+Google went from user-acquisition to revenue maximization. Because of ads, sponsored links, and, more generally, a ranking that favors sites that maximize engagement over direct answers, Claude giving me a list of the most plausible answers has been a far better experience. I'd take the occasional (and increasingly rare) hallucination over Google every time - which I can still use as a backup.
 
 #### Replacing templates
-It also explains why juniors had such a high opinion of the past models, and the experts, not so much. You see, models were very good at always generating the same default app corresponding to the same need from the user. A Flappy Bird, a calculator, a dashboard... What was curious was how consistent these answers were. Even raising the temperature (a parameter controlling output randomness) still produced a really close output. Juniors were amazed at the machine giving in 2 minutes what would have taken them 2 days, experts weren't convinced since any real change past that broke everything. But even to the experts, LLM soup replaced the templates that you could buy online for $200, that helped you bootstrap a project.
+It also explains why juniors had such a high opinion of the past models, and the experts, not so much. You see, models were very good at always generating the same default app corresponding to the same need from the user. A Flappy Bird, a calculator, a dashboard... What was curious was how consistent these answers were. Even raising the temperature (a parameter controlling output randomness) still produced a really close output. Juniors were amazed at the machine giving in 2 minutes what would have taken them 2 days, experts weren't convinced since any real change past that broke everything. But even to the experts, LLM soup replaced the templates that helped you bootstrap a project (that you previously bought online for $200).
 
 #### Autocomplete
 When you are in your developer environment, some of the most obvious grunt work was automated by the LLM. If you had a *really obvious* pattern in your code, or code that actually looked like very common knowledge, your editor could suggest the next changes. It was excruciating - even as an AI revolution believer, I didn't use it - as it was at a specific threshold that was just annoying. Not fast and accurate enough to be a joy to work with, I'd rather type that line of code than be interrupted by the AI that may or may not be right.
@@ -193,19 +193,19 @@ This is the paradigm shift. Not "AI writes code" but "AI does the same loop a hu
 
 ### Claude Code
 
-There will be a full separate article about [Claude Code](https://docs.anthropic.com/en/docs/claude-code), and why it's a revolution.
+There will be a full separate article about [Claude Code](https://docs.anthropic.com/en/docs/claude-code), and why I don't write code myself anymore. It still happens when I open a file, and the thing I want to change is right in front of me, or when I choose to do a code puzzle. But else, I don't need to anymore.
 
-But here is the TL;DR.
+Here is the TL;DR.
 
-This is the shift from AI in IDE (which was janky and frustrating, as it interrupts you every 10 seconds...) to a fully agentic process. [Claude Code](https://docs.anthropic.com/en/docs/claude-code) is Anthropic's terminal-based coding agent - it reads your files, searches your codebase, makes edits, runs your tests, sees the errors, and iterates until the task is done.
+This is the shift from AI in IDE (which was janky and frustrating, as it interrupts you every 10 seconds...) to a fully agentic process. [Claude Code](https://docs.anthropic.com/en/docs/claude-code) is Anthropic's terminal-based coding agent - it reads your files, searches your codebase, makes edits, runs your tests, sees the errors, and iterates until the task is done. It paved the way to a lot of others solutions like [Codex CLI](https://github.com/openai/codex), [Gemini CLI](https://github.com/google-gemini/gemini-cli), or the French [Mistral Vibe CLI](https://github.com/mistralai/vibe).
 
-It's not autocomplete, but the full human software engineering loop, automated.
+It's not autocomplete, but the automation of the full human software engineering loop. The model can generate text to the user. But the tools that harness the models also let them execute tools to make specific edits to specific files, write the tests and launch them, and, actually, execute anything through the cli like a real engineer would do in their feedback loop.
 
 Even team collaboration is automated. Claude can now read issues, and sometimes generate the PRs as a separate entity. Claude is now one of the main contributors on some really serious open source projects (see [Bun](https://github.com/oven-sh/bun/graphs/contributors) for example). And that's only counting the visible contributions — many developers disable Claude's co-authorship.
 
 Claude was able to [find vulnerabilities in Firefox](https://blog.mozilla.org/en/firefox/hardening-firefox-anthropic-red-team/). There is no way to be in denial anymore.
 
-It works. Not perfectly - it still hallucinates, still needs nudging on complex tasks, still doesn't know what it doesn't know. But for most day-to-day coding, the bottleneck is no longer the AI. It's everything else.
+It works. Not perfectly - it still hallucinates, still needs nudging on complex tasks, still doesn't know what it doesn't know. But for most day-to-day coding, the bottleneck is no longer the AI, but everything else.
 
 Using acronyms like KISS and DRY as shorthand, letting it manage git, discussing security tradeoffs, catching its mistakes when it confidently claims nothing was removed... I was able to pull out in days what would have taken me weeks before if I had to write every single line. I still can, but I don't want to.
 
@@ -219,7 +219,7 @@ There is still some nudging to do. Some thinking on really new problems. But ove
 
 #### Sovereignty concerns
 
-And if you can't use Claude? There's [Codex CLI](https://github.com/openai/codex), [Gemini CLI](https://github.com/google-gemini/gemini-cli), and more recently [Mistral Vibe CLI](https://github.com/mistralai/vibe). Mistral's latest models are closing the gap with Sonnet 4.5 for this kind of usage. They're not quite as good, but good enough to be a drop-in replacement in environments where Claude isn't an option - air-gapped networks, on-premise requirements, regulatory constraints.
+An argument I keep hearing is that there are air-gapped environment where we would never allow access to these models. Except the open source models you can self-host on a really powerful machine are now good enough to reach the "I'd rather let them type the code" threshold. For example, Mistral's latest models are closing the gap with Sonnet 4.5 for this kind of usage, and are getting released in air-gapped environment. They're not quite as good, but good enough to be a drop-in replacement in environments where frontier closed models aren't an option.
 
 The argument that some pockets of software engineering are off-limits to agentic coding is over. You can bring the whole stack there.
 
@@ -231,9 +231,7 @@ Even [Cursor redesigned their entire interface](https://cursor.com/blog/2-0) to 
 
 ### No stopping in sight
 
-Moore's Law still holds. The Bitter Lesson still applies. Each generation unlocks new capabilities.
-
-But here's the twist: the bottleneck has shifted.
+The models still improve. But here's the twist: the bottleneck has shifted.
 
 ### Wirth's Law is now the problem
 
@@ -254,27 +252,30 @@ It already powers Claude Code. And yes, [Claude](https://github.com/claude) is a
 Now companies like Anthropic care about fast runtimes. Raw compute isn't enough if the software stack wastes it. The testing feedback loop gets faster, the agent iterates more, the results get better.
 
 
-### Why is Claude Code underused?
+### Why were the good tools underused?
 
-Claude Code is underused because it's behind a paywall. But Anthropic knows this - as a regular user, I get tickets to let friends try it free for a week. That offer once popped up in my terminal while the model was thinking.
+The best tools were underused because they're behind a paywall. Companies fight this by giving temporary access to the best models, sometimes through invite codes, but they also provide free models - which are subpar.
 
 The regular models aren't that good. I hear a lot of complaints from people about the models failing to reason on X, while working with mid-sized models. If you want to form an opinion, you need the best models, and the best environment for them to operate agentically. If you've tried *state of the art* more than 6 months ago, or an agentic environment that didn't manage the context well, or a cheap model - you're building your worldview on outdated information.
 
-Even without the brand awareness of the competition, I still think Anthropic will win (at least on code). Everyone I know who tried Claude Code seriously - with decent expectations, not "build me X" and come back three days later - has been mind blown.
+Everyone I know who tried state of the art agentic coding seriously - with decent expectations, not "build me X" and come back three days later - has been mind blown.
+State of the art for me is Claude Code with Opus 4.6, personal choice. But once again, you don't want to form an opinion on anything that is not at least to this level, or the one of Google Antigravity.
 
 ### Why each session makes the next model better
 
-Code has a structural advantage over other AI domains: it's verifiable. Tests pass or fail. Code compiles or doesn't. Types check or they don't. When an AI generates an image that's "almost right", there's no automated way to quantify what's wrong. When an AI generates code that's almost right, the test suite tells you exactly where it broke.
+Code has a structural advantage over other AI domains: there is usually quite a short feedback loop for correctness.
+We had years pre-genAI to experiment with methodologies to get the previous stochastic parrots (us, the humans) to make better code.
+Whether it's testing, stronger type systems, the introduction of pipelines and quality metrics - we have a history of trying to do better.
 
-Now consider what happens every time someone uses Claude Code. The user asks for a change, the model tries, the user corrects it - maybe the model silently removed a useful test, maybe it hallucinated an API that doesn't exist. That correction is a data point. Multiply that by thousands of paying users running sessions daily, and you have a massive, continuously generated dataset of "what the model got wrong and what the right answer was." I don't know the specifics of Anthropic's training pipeline, but the incentive structure is obvious - and they've offered some people $1,000 in free credits to use their platform in "user research mode." They're not hiding it.
+Every time someone uses Claude Code, there is an opportunity for the user to correct the output of the AI.
+Maybe the model silently removed a useful test, maybe it hallucinated an API that doesn't exist.
+The flock of users represent a massive, continuously generated dataset of "what the model got wrong and what could have been the right answer."
 
-Here's where it gets interesting as a thought experiment. Not all corrections are equal. A senior engineer who catches the model sneaking in a subtle regression is providing far more signal than someone who can't tell if the output compiles. If you can classify your users by competence - even roughly, using proxy signals like CI pass rates or how often they revert changes - you can filter your training data at the source. Train on corrections from your best users, ignore the noise. This is speculative, but the pieces are all there.
+But you can even classify your users by competence - even roughly, using proxy signals. This is speculative, but there is nothing preventing the AI companies from doing this once you accept them training on your data.
 
-The obvious counter-argument: this only works when users actually catch the mistakes. Hallucinations that slip past human review become training signal too - bad signal. The feedback loop is powerful, but it's not self-correcting by default. It requires curation. Still, code is the domain where curation is cheapest, because you can cross-reference human corrections with automated verification. That combination - human expertise plus machine-checkable outputs - is why I expect code models to keep improving faster than their counterparts in other domains.
+It may or may not work depending on multiple factors leading to the final quality of the curation. But it's only one of the countless solutions to get more and more useful data to train the next generation of models on. The numbers of potential techniques make a compelling argument for at least some of them to work, and the models to keep improving.
 
-This is close in spirit to [RLHF (Reinforcement Learning from Human Feedback)](https://en.wikipedia.org/wiki/Reinforcement_learning_from_human_feedback), the technique already used to fine-tune models — though what I described above would happen earlier in the pipeline, at the data curation stage rather than during fine-tuning.
-
-### And the workforce?
+### What about the workforce
 
 Here's a quote:
 
@@ -283,7 +284,13 @@ Here's a quote:
 
 I'd recommend reading the whole transcript. He was quite precise with his words. I read this at the time and agreed with him. He has the same insight: machines still need to be nudged, even though it will be less and less. Most newspapers took this direct quote as a title, to sell fear by removing all the nuance and turning this measured point of view into quite an inaccurate opinion that he never pushed for. Also, having a voice that was extremely bullish yet nuanced was refreshing.
 
-Personally, I now write nearly all of my code with Claude Code. Whether the industry-wide number is exactly where he predicted, the direction is undeniable - and worst case, he was late by months. The argument that AI hype doesn't deliver since it comes from the AI labs isn't valid. We shouldn't consider them as authority figures, because they have their interest there, but it's just as wrong to infer the opposite.
+Personally, I now write nearly all of my code with Claude Code. Whether the industry-wide number is exactly where he predicted, the direction is undeniable. He may be late by months but for specific reasons.
+
+He is more of a scientist than an engineer, and the barriers that appeared are not the ones he's used to. We're talking about adoption friction in big companies where things have to move slowly, and processes have to be validated by the management, not actual technical limitations.
+
+Once again, in my experience, anyone that tried agentic coding seriously doesn't want to go back.
+
+The argument that AI hype doesn't deliver since it comes from the AI labs isn't valid. We shouldn't consider them as authority figures, because they have their interest there, but it's just as wrong to infer the opposite.
 
 The developers aren't dead yet - but the role is evolving fast. You still need a lot of knowledge outside "how to use an AI", but the need for "someone who just writes code" dropped sharply.
 
@@ -297,16 +304,23 @@ The title "developer" as we knew it is fading. What remains:
 
 ### So should I worry?
 
-While Richard Sutton himself recognized the structural limitations of the transformer architecture make it unlikely to be the single key to reaching AGI, [The Bitter Lesson](http://www.incompleteideas.net/IncIdeas/BitterLesson.html) still holds. Anything that is the frontier of the current model capabilities, where it fails in the real world, is more data for AI companies to make a next model providing solutions. There is no stop sign. Unless there is a global market crash, or another black swan, the models will keep getting more capable — each generation's failures become the next generation's training signal, and the investment shows no sign of slowing.
+It may be unlikely for the transformer architecture to be the single key to reaching AGI. But anything that is the frontier of the current model capabilities, where it fails in the real world, is more data for AI companies to make a next model providing solutions. Unless there is a global market crash, or another black swan, the models will keep getting more capable — each generation's failures become the next generation's training signal, and the investment shows no sign of slowing.
 
 Here's my honest take:
 
-There is no value in writing the code yourself anymore. Except learning and training, of course, which will even make you a way better nudger. And fun, if you're a fellow nerd. But typing out code fast, knowing the libs by heart, transpiling business rules into decent code - that's done.
+I still write code. When the thing I want to change is right in front of me. For learning and training, also, which will even make you a way better nudger. And fun, if you're a fellow nerd.
 
-But here's the thing: if you managed to learn how to code pre-AI, you'll learn whatever needs to be learned for what's to come. The skill was never "writing code." It was problem-solving, system thinking, translating messy human needs into structured solutions. That translates.
+But typing out code fast, it may be fun, but not if it's the plan for 40 hours a week through most of my life. Knowing the libs by heart, grinding through the transpilation of business rules from Jira tickets into decent code... I'm so glad this is over.
+I dump a slangish train of thoughts into one of the most complex machinery mankind ever built, and I get the codebase I want.
+The train of thought is even more compatible with the machine because I started coding in C at 13, and I walked through the whole software stack, and every slangish term I use conveys implicit nudges.
+But typing all this code, for one more project? No.
 
-Oh, and understanding fast, and pinpointing a technical issue will still be valuable. We're already past the point where you can materialize what was a 2 weeks project out of thin air in something like 4 hours - and I expect the first number to keep going up, and the second to keep going down. It's just that this project will contain some bugs that need human investigation.
+The real value is, was, and will continue to be for a long time: understanding fast, and easily pinpointing logical flaws. We're already past the point where you can materialize what was a 2 weeks project out of thin air in something like 4 hours - and I expect the first number to keep going up, and the second to keep going down. It's just that this project will contain some bugs that need human investigation.
 
-There is no stop sign.
+So, here's the thing: if you managed to learn how to code pre-AI, you'll learn whatever needs to be learned for what's to come. The skill was never "writing code." It was problem-solving, system thinking, translating messy human needs into structured solutions.
 
-The people who should worry are those who thought the job was typing.
+I think there is only one thing that could put you in danger, it's the thought that "writing code" was what made you special.
+
+Because while doing what you did, and what I did, proved our cognitive capabilities, and helped form our minds, the machine is already better at converting my slangish train of thought into a beautiful and structured codebase.
+
+We keep pouring data, compute and research into the next generations of models. There is no stop sign.
