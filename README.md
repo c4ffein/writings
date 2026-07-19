@@ -23,5 +23,34 @@ A cleaner version is live at [writings.cafeine.dev](https://writings.cafeine.dev
 - [Prophecies](s/prophecies/prophecies.md)
 - [Competency Cycle](s/competency-cycle/competency-cycle.md)
 - [Python for Programmers](s/learning-python-as-a-programmer/learning-python-as-a-programmer.md)
+- [From MNIST to Transformers](s/from-mnist-to-transformers/from-mnist-to-transformers.md) - The minimal background on how neural networks and LLMs actually work
 - [There Is No Stop Sign](s/there-is-no-stop-sign/there-is-no-stop-sign.md) - Reflections on the Evolution of AI at the End of 2025
 - [Claude Code through 2025](s/claude-code-through-2025)
+
+## Deployment
+
+The site is `zola build`'d to `zola/public/` and served by nginx. Two things need caching set
+up, or fonts and JS re-download on every navigation.
+
+**They're safe to cache forever.** The article template requests the webfont and the wave
+script with a content hash in the URL (`…/source-serif-4.woff2?h=c1df…`, via Zola's
+`cachebust=true`), so the URL changes only when the file's bytes change. That means they can be
+served `immutable` with no risk of ever serving a stale file — update a font, the hash changes,
+browsers fetch the new one. (The *mock* font is inlined as a data URI in each page, so it needs
+no request or caching of its own.)
+
+nginx, in the `server` block (or an `include`d `.conf`):
+
+```nginx
+location /fonts/ { expires 1y; add_header Cache-Control "public, immutable"; access_log off; }
+location /js/    { expires 1y; add_header Cache-Control "public, immutable"; }
+# HTML is not hashed — keep it revalidated so a rebuild is picked up:
+location = /     { add_header Cache-Control "no-cache"; }
+```
+
+`immutable` is the important part: browsers won't even revalidate (no 304 round-trip) on repeat
+visits — the font is reused straight from disk cache across every page.
+
+**Verify locally before deploying:** `make serve-cached` builds the static site and serves it
+with these exact headers (unlike `make serve`, which sends none). Load a post, click another,
+and the font should show as served from cache (`0 B` transferred) instead of re-downloading.

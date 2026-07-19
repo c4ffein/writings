@@ -8,8 +8,35 @@ ROOT = Path(__file__).parent.parent.parent
 ARTICLES_FILE = ROOT / "articles.toml"
 OUTPUT_DIR = ROOT / "zola" / "content" / "posts"
 
+# Per-article body font, set with `font = "..."` in articles.toml. Values are roles, not
+# typefaces, so swapping which serif we ship is a change here and nowhere else.
+# "system" opts an article out of webfonts entirely (and so out of the wave).
+FONTS = {
+    "sans": {
+        "family": "IBM Plex Sans",
+        "file": "ibm-plex-sans",
+        "stack": '"IBM Plex Sans", system-ui, sans-serif',
+        "mock": "MockSans",
+    },
+    "serif": {
+        "family": "Source Serif 4",
+        "file": "source-serif-4",
+        "stack": '"Source Serif 4", Georgia, serif',
+        "mock": "MockSerif",
+    },
+    "system": None,
+}
+DEFAULT_FONT = "sans"
 
-def make_frontmatter(article):
+
+
+def make_frontmatter(article, template=None, extra=None):
+    font = article.get("font", DEFAULT_FONT)
+    if font not in FONTS:
+        raise ValueError(
+            f"{article['slug']}: unknown font {font!r} (expected one of {', '.join(sorted(FONTS))})"
+        )
+
     lines = ["+++"]
     lines.append(f'title = "{article["title"]}"')
     lines.append(f'date = {article["date"]}')
@@ -17,7 +44,18 @@ def make_frontmatter(article):
         lines.append(f'description = "{article["description"]}"')
     if article.get("draft"):
         lines.append("draft = true")
-    # [taxonomies] must come last (TOML section)
+    if template:
+        lines.append(f'template = "{template}"')
+    # [extra] and [taxonomies] are TOML sections, so both must come after the scalars
+    if FONTS[font]:
+        lines.append("[extra]")
+        lines.append(f'font_family = "{FONTS[font]["family"]}"')
+        lines.append(f'font_file = "{FONTS[font]["file"]}"')
+        lines.append(f'mock_family = "{FONTS[font]["mock"]}"')
+        # literal string: the stack contains double quotes
+        lines.append(f"font_stack = '{FONTS[font]['stack']}'")
+        for k, v in (extra or {}).items():
+            lines.append(f'{k} = "{v}"')
     if article.get("tags"):
         tags_str = ", ".join(f'"{t}"' for t in article["tags"])
         lines.append("[taxonomies]")
@@ -26,8 +64,39 @@ def make_frontmatter(article):
     return "\n".join(lines)
 
 
+def check_titles(articles):
+    """Fail the build if a source's leading `# H1` doesn't equal its articles.toml title.
+
+    The template renders the title itself and strip_title removes the source H1, so a
+    mismatch (even just case) silently renders two different titles. Better to stop the
+    build and make the author reconcile them. A source with no leading H1 is fine — there
+    is simply nothing to strip.
+    """
+    problems = []
+    for article in articles:
+        source = ROOT / article["source"]
+        if not source.exists():
+            continue
+        first = source.read_text().split("\n", 1)[0].strip()
+        if first.startswith("# ") and first != f'# {article["title"]}':
+            problems.append(
+                f"  {article['source']}\n"
+                f"    source H1 : {first}\n"
+                f"    toml title: # {article['title']}"
+            )
+    if problems:
+        raise SystemExit(
+            "Title mismatch — a source's leading # heading must equal its articles.toml "
+            "title exactly (case included):\n" + "\n".join(problems)
+        )
+
+
 def strip_title(content, title):
-    """Remove # Title line if it matches."""
+    """Remove the leading `# Title` line so the template's own <h1> isn't doubled.
+
+    check_titles() has already guaranteed any leading H1 matches the title exactly, so an
+    exact compare here is safe.
+    """
     lines = content.split("\n")
     if lines and lines[0].strip() == f"# {title}":
         return "\n".join(lines[1:]).lstrip("\n")
@@ -46,6 +115,7 @@ def main():
     section_index.write_text('+++\ntitle = "Posts"\nsort_by = "date"\ntemplate = "posts.html"\n+++\n')
 
     articles = tomllib.loads(ARTICLES_FILE.read_text())["articles"]
+    check_titles(articles)  # fail early, before writing anything, on a title mismatch
 
     for article in articles:
         source_path = ROOT / article["source"]

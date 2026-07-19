@@ -31,25 +31,33 @@
             document.documentElement.setAttribute('data-theme', theme);
             document.documentElement.setAttribute('data-pref', pref);
         })();
+        // Opt-in "lava lamp" chrome (see CSS): ?lava to try it.
+        if (new URLSearchParams(location.search).has('lava')) document.documentElement.classList.add('lava');
     </script>
     <style>
-        :root[data-theme="dark"] {
-            --bg: #1a1a1a;
-            --text: #e0e0e0;
-            --text-muted: #888;
-            --link: #6db3f2;
-            --border: #444;
-            --code-bg: #2d2d2d;
-            --tag-bg: #333;
-        }
+        /* Two themes, both monochrome — black-and-white, no colour anywhere. Links carry no
+           hue; the underline (below) is what marks them. */
         :root[data-theme="light"] {
             --bg: #ffffff;
             --text: #333;
             --text-muted: #666;
-            --link: #0066cc;
+            --link: #111;
             --border: #ddd;
             --code-bg: #f5f5f5;
             --tag-bg: #eee;
+            --lava-1: #505050; --lava-2: #909090;
+        }
+        :root[data-theme="dark"] {
+            /* Pure black. Text a hair off white to soften halation. */
+            color-scheme: dark;
+            --bg: #000000;
+            --text: #ededed;
+            --text-muted: #808080;
+            --link: #ffffff;
+            --border: #4a4a4a;
+            --code-bg: #141414;
+            --tag-bg: #202020;
+            --lava-1: #aaaaaa; --lava-2: #eeeeee;
         }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -61,8 +69,7 @@
             color: var(--text);
         }
         h1, h2, h3 { border-bottom: 2px solid var(--border); padding-bottom: 10px; }
-        a { color: var(--link); text-decoration: none; }
-        a:hover { text-decoration: underline; }
+        a { color: var(--link); text-decoration: underline; }
         ul, ol { padding-left: 1.5rem; margin: 1rem 0; }
         li { margin: 0.5rem 0; }
         nav ul { list-style: none; padding: 0; margin: 0; }
@@ -71,8 +78,15 @@
         pre { background: var(--code-bg); padding: 1rem; border-radius: 5px; overflow-x: auto; }
         pre code { background: none; padding: 0; }
         blockquote { border-left: 3px solid var(--border); margin-left: 0; padding-left: 1rem; color: var(--text-muted); }
-        nav { margin-bottom: 2rem; display: flex; align-items: center; }
-        nav a { margin-right: 1rem; font-size: 1.1em; }
+        nav { margin-bottom: 2.9rem; display: flex; align-items: center; }
+        /* Poppins (700) for the nav labels — inlined below, so no request/flash. No underline:
+           they read as navigation, not body links. Falls back to the system sans if unloaded. */
+        nav a {
+            /* Fluid: loud on desktop, scales down so it never overflows a narrow phone. */
+            margin-right: 1rem; font-size: clamp(1rem, 3.4vw, 1.5rem);
+            font-family: "Poppins", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-weight: 700; text-decoration: none; letter-spacing: -0.01em;
+        }
         #theme-toggle {
             margin-left: auto;
             background: none; color: var(--text);
@@ -88,6 +102,43 @@
         .tag { background: var(--tag-bg); color: var(--text); padding: 0.2rem 0.5rem; border-radius: 3px; font-size: 0.8rem; }
         details { margin: 1rem 0; }
         summary { cursor: pointer; font-weight: bold; }
+
+        /* "Lava lamp" — two greys drifting slowly, filling the chrome (nav, date, tag pills,
+           rules) instead of a flat colour. Greyscale, so it stays monochrome. Opt-in via the
+           .lava class (added by the ?lava script). Same drifting field on each; text elements
+           clip it to their glyphs, pills and rules take it as a fill. */
+        html.lava nav a, html.lava .post-meta, html.lava .tag, html.lava hr {
+            /* Hard two-tone: each pixel is --lava-1 or --lava-2, with only a ~1px transition
+               band at a blob's edge. Blobs are flat --lava-2 circles that union where they
+               overlap — not true metaball merging (that needs a shader), but crisp and blobby. */
+            background:
+                radial-gradient(circle at 22% 28%, var(--lava-2) 0 19.6%, transparent 20%),
+                radial-gradient(circle at 78% 60%, var(--lava-2) 0 23.6%, transparent 24%),
+                radial-gradient(circle at 52% 90%, var(--lava-2) 0 17.6%, transparent 18%),
+                radial-gradient(circle at 62% 12%, var(--lava-2) 0 15.6%, transparent 16%),
+                var(--lava-1);
+            background-size: 210% 270%;
+            animation: lava 26s ease-in-out infinite alternate;
+        }
+        html.lava nav a, html.lava .post-meta {
+            -webkit-background-clip: text; background-clip: text; color: transparent;
+        }
+        html.lava .tag { color: var(--bg); -webkit-background-clip: border-box; background-clip: border-box; }
+        html.lava hr { border: none; height: 2px; }
+        @keyframes lava { from { background-position: 0% 15%; } to { background-position: 100% 85%; } }
+        @media (prefers-reduced-motion: reduce) {
+            html.lava nav a, html.lava .post-meta, html.lava .tag, html.lava hr { animation: none; }
+        }
+    </style>
+    {# Poppins (700), subset to the nav's letters and inlined as a data URI so the nav font is
+       never a request and never flashes. Kept in its own <style> — generate_presentations.py
+       scrapes only the first <style>, so this Tera call stays out of the presentations page. #}
+    <style>
+        @font-face {
+            font-family: "Poppins";
+            font-style: normal; font-weight: 700; font-display: swap;
+            src: url(data:font/woff2;base64,{{ load_data(path="static/fonts/poppins-nav.b64", format="plain") | trim | safe }}) format("woff2");
+        }
     </style>
     <script>
         (function() {
@@ -121,8 +172,7 @@
             function updateToggleButton() {
                 const btn = document.getElementById('theme-toggle');
                 if (!btn) return;
-                const labels = { light: '☀︎', dark: '⏾' };
-                btn.textContent = labels[getEffectiveTheme()];
+                btn.textContent = getEffectiveTheme() === 'dark' ? '⏾' : '☀︎';
             }
             if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', applyTheme);
@@ -135,14 +185,21 @@
             window.cycleTheme = cycleTheme;
         })();
     </script>
+    {# Per-page additions. Deliberately kept out of the blocks above: generate_presentations.py
+       scrapes the theme's <style>/<script> out of this file by regex, and the presentations
+       page has no <article> and can't serve /fonts from its own origin. #}
+    {% block extra_head %}{% endblock %}
 </head>
 <body>
     <nav>
-        <a href="{{ get_url(path='/') }}">Home</a>
+        {# Plain "/" not get_url(path='/'): the latter renders empty when base_url is "/"
+           (zola build -u /, used behind the nginx proxy). "/" is correct either way, root-served. #}
+        <a href="/">Home</a>
         <a href="{{ get_url(path='posts') }}">Posts</a>
         <a href="https://presentations.cafeine.dev">Presentations</a>
-        <button id="theme-toggle" onclick="cycleTheme()"><script>document.write({light:'☀︎',dark:'⏾'}[document.documentElement.getAttribute('data-theme')])</script></button>
+        <button id="theme-toggle" onclick="cycleTheme()"><script>document.write(document.documentElement.getAttribute('data-theme')==='dark'?'⏾':'☀︎')</script></button>
     </nav>
     {% block content %}{% endblock %}
+    {% block extra_body %}{% endblock %}
 </body>
 </html>

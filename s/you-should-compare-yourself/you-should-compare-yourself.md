@@ -1,4 +1,4 @@
-# You should compare yourself to others
+# You Should Compare Yourself to Others
 
 I tend to not even notice who wrote the article (or even message on a board) that I'm currently reading, as the message is far more important than the messenger.
 There are two effects I consider positive from this:

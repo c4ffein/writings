@@ -7,8 +7,94 @@
 {% block twitter_title %}{{ page.title }}{% endblock %}
 {% block twitter_description %}{{ page.description | default(value=config.description) }}{% endblock %}
 
+{% block extra_head %}
+{% if page.extra.font_family %}
+{% set mf = page.extra.font_file %}
+{# cachebust appends a content hash (?h=…) so the URL changes only when the file does. That
+   lets the server cache these forever (immutable) without ever serving a stale font. See the
+   README "Deployment" section for the matching nginx config. #}
+{% set roman = get_url(path="fonts/" ~ mf ~ ".woff2", cachebust=true) %}
+{% set italic = get_url(path="fonts/" ~ mf ~ "-italic.woff2", cachebust=true) %}
+{# The mock font (blank-glyph twin, metrically identical) is inlined so the page lays out in
+   its final shape with no round-trip; the wave measures tile positions from it before the real
+   font arrives. The real font renders under the tiles and surfaces as they lift. #}
+{% set m400 = load_data(path="static/fonts/mock-" ~ mf ~ "-400.b64", format="plain") %}
+{% set m700 = load_data(path="static/fonts/mock-" ~ mf ~ "-700.b64", format="plain") %}
+{% set mital = load_data(path="static/fonts/mock-" ~ mf ~ "-italic.b64", format="plain") %}
+<link rel="preload" as="font" type="font/woff2" crossorigin href="{{ roman }}">
+<style>
+    @font-face {
+        font-family: "{{ page.extra.mock_family }}";
+        font-style: normal; font-weight: 400;
+        src: url(data:font/woff2;base64,{{ m400 | trim | safe }}) format("woff2");
+    }
+    @font-face {
+        font-family: "{{ page.extra.mock_family }}";
+        font-style: normal; font-weight: 700;
+        src: url(data:font/woff2;base64,{{ m700 | trim | safe }}) format("woff2");
+    }
+    @font-face {
+        font-family: "{{ page.extra.mock_family }}";
+        font-style: italic; font-weight: 400;
+        src: url(data:font/woff2;base64,{{ mital | trim | safe }}) format("woff2");
+    }
+    {# One variable roman covers 400 and 700 — declare the weight *range* or the browser
+       fetches the same bytes twice. `| safe`: Tera escapes "/" to "&#x2F;", which CSS won't
+       decode, breaking the url(). #}
+    @font-face {
+        font-family: "{{ page.extra.font_family }}";
+        font-style: normal; font-weight: 400 700; font-display: swap;
+        src: url("{{ roman | safe }}") format("woff2");
+    }
+    @font-face {
+        font-family: "{{ page.extra.font_family }}";
+        font-style: italic; font-weight: 400; font-display: swap;
+        src: url("{{ italic | safe }}") format("woff2");
+    }
+
+    /* Base = no-JS-safe: real font, native everything, fully readable. Everything wave-specific
+       is gated on .waving, which the inline script below adds before first paint. So no-JS — or
+       a reader whose reveal is skipped — just gets the article. */
+    article { font-family: {{ page.extra.font_stack | safe }}; }
+    /* Wave state: the mock font lays out (drawing nothing) while the article is hidden; the
+       wave's tile layer occludes the ink, and JS makes the article visible again once the tiles
+       are up, so nothing flashes. .font-ready switches to the real font under the tiles. */
+    .waving article { font-family: "{{ page.extra.mock_family }}", {{ page.extra.font_stack | safe }}; visibility: hidden; }
+    .waving article.font-ready { font-family: {{ page.extra.font_stack | safe }}; }
+</style>
+<script>
+    // Decide BEFORE first paint whether the reveal plays this load, so a skip never hides the
+    // article (no blank-then-pop blink). Rule: play on the reader's first page of the day (or
+    // forced with ?wave/?debug); otherwise skip — the article just renders normally, instantly.
+    // localStorage is synchronous, so this is safe here; cache state isn't known yet, so the
+    // early call is the daily gate only.
+    (function () {
+        var h = document.documentElement;
+        var q = new URLSearchParams(location.search);
+        var play = q.has("wave") || q.has("debug");
+        if (!play) {
+            try { play = localStorage.getItem("wave-day") !== new Date().toDateString(); }
+            catch (e) { play = true; }
+        }
+        if (play) {
+            h.classList.add("waving"); // hide the article; the wave will reveal it
+            // Fail-safe: if the wave hasn't confirmed within 2s (script failed, threw…), drop
+            // back to the readable base state so nothing stays hidden.
+            setTimeout(function () { if (!h.dataset.waveOk) h.classList.remove("waving"); }, 2000);
+        }
+    })();
+</script>
+{% endif %}
+{% endblock %}
+
+{% block extra_body %}
+{% if page.extra.font_family %}
+<script src="{{ get_url(path='js/font-wave.js', cachebust=true) }}" defer></script>
+{% endif %}
+{% endblock %}
+
 {% block content %}
-<article>
+<article{% if page.extra.font_family %} data-font="{{ page.extra.font_family }}" data-mock="{{ page.extra.mock_family }}" data-seed="{{ page.slug }}" data-font-file="{{ page.extra.font_file }}"{% endif %}>
     <header>
         <h1>{{ page.title }}</h1>
         <p class="post-meta">
