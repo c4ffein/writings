@@ -87,4 +87,4 @@ I decided to write and commit this as I reflected on this book months after I fi
 
 Personally I'm walking out of this with the idea that success through being "nice" is actually something timeless, and that I shouldn't have dismissed this kind of advice earlier in my life. Rationalizing the behavior of a very marginal group (that actually did show some form of care for each other) as being more real and honest than what the average person usually internalizes before becoming a functioning adult was probably a mistake.
 
-If you're a decent person but can still seem inconsiderate sometimes, I think this is a decent read—do as you see fit!
+If you're a decent person but can still seem inconsiderate sometimes, I think this is a decent read... Well, do as you see fit.
