@@ -25,6 +25,8 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).parent.parent.parent
 BASE_HTML = REPO_ROOT / "zola" / "templates" / "base.html"
+FIELD_JS = REPO_ROOT / "zola" / "static" / "field-chrome.js"
+NAV_FONT_B64 = REPO_ROOT / "zola" / "static" / "fonts" / "poppins-nav.b64"
 PRESENTATIONS_TOML = REPO_ROOT / "presentations.toml"
 DEFAULT_OUTPUT = REPO_ROOT / "zola" / "public" / "presentations-index.html"
 
@@ -68,7 +70,7 @@ def drop_region(text: str, start: str, end: str, what: str) -> str:
     return text[:i].rstrip() + "\n" + text[j + len(end):].lstrip()
 
 
-def generate_html(theme: dict, presentations: list) -> str:
+def generate_html(theme: dict, presentations: list, field_js: str, nav_font_b64: str) -> str:
     # Blog-only CSS (article / post-meta / tags / details / summary) is fenced in base.html;
     # the presentations page has no <article>, so drop that whole region by exact slicing.
     style = drop_region(
@@ -91,6 +93,16 @@ def generate_html(theme: dict, presentations: list) -> str:
     <title>Presentations</title>
     {theme["flash"]}
     {style}
+    <style>
+    /* Poppins nav font, inlined from the same committed .b64 the blog uses. In base.html
+       this @font-face lives outside the extracted theme region (it needs a Tera call the
+       raw-template extraction can't render), so the generator inlines it here itself. */
+    @font-face {{
+        font-family: "Poppins";
+        font-style: normal; font-weight: 700; font-display: block;
+        src: url(data:font/woff2;base64,{nav_font_b64}) format("woff2");
+    }}
+    </style>
     {theme["cookie"]}
 </head>
 <body>
@@ -104,6 +116,15 @@ def generate_html(theme: dict, presentations: list) -> str:
     <ul>
 {items}
     </ul>
+    <script>
+    /* field-chrome, inlined from zola/static/field-chrome.js (single source): this page
+       lives on another origin (GitHub Pages), so the theme's external loader 404s there —
+       harmless, the curtain's 0.3s CSS fallback covers it — and this inline copy is the
+       one that actually runs. Default-on, like the blog; ?field=off is the kill switch. */
+    if (new URLSearchParams(location.search).get('field') !== 'off') {{
+{field_js}
+    }}
+    </script>
 </body>
 </html>
 '''
@@ -122,7 +143,8 @@ def main():
     presentations = config.get("presentations", [])
 
     # Generate HTML
-    html = generate_html(theme, presentations)
+    html = generate_html(theme, presentations, FIELD_JS.read_text(),
+                         NAV_FONT_B64.read_text().strip())
 
     # Write output
     output_path.parent.mkdir(parents=True, exist_ok=True)
