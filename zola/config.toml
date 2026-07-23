@@ -11,7 +11,10 @@ taxonomies = [
 
 [markdown]
 highlight_code = true
-highlight_theme = "base16-ocean-dark"
+# "css" emits class-based tokens (z-*) instead of baked inline styles, so token colors
+# live in base.html's CSS and follow the light/dark theme (palette: the c4ffein nvim
+# colorscheme for dark, plus a hue-faithful darkened twin for light).
+highlight_theme = "css"
 
 [extra]
 author = "c4ffein"
