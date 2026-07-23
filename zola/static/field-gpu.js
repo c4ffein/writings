@@ -368,7 +368,7 @@ fn fmain(@builtin(position) fc : vec4f) -> @location(0) vec4f {
         // document offset = the window's origin, constant between jumps (scroll is free)
         uf[0] = 0; uf[1] = originY * dpr;
         uf[2] = canvas.width; uf[3] = canvas.height;
-        uf[4] = (now / 1000) * 4; uf[5] = dark; uf[6] = dpr; // TEMP: 4x time for review — revert the *4
+        uf[4] = (now / 1000) * 4; uf[5] = dark; uf[6] = dpr;
         device.queue.writeBuffer(ubuf, 0, uf);
         var enc = device.createCommandEncoder();
         var pass = enc.beginRenderPass({ colorAttachments: [{
