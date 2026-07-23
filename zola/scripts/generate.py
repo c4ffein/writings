@@ -8,6 +8,28 @@ ROOT = Path(__file__).parent.parent.parent
 ARTICLES_FILE = ROOT / "articles.toml"
 OUTPUT_DIR = ROOT / "zola" / "content" / "posts"
 
+
+def toml_str(value: str) -> str:
+    """Return `value` as a quoted TOML *basic* string, safely escaped.
+
+    Escapes the two characters that would otherwise break a basic string —
+    backslash and double quote — so any title/description/tag survives intact
+    (this is emitted into frontmatter, so escaping is the right layer; HTML
+    escaping here would render literally, e.g. `&quot;` in the title).
+
+    Control characters (newlines, tabs, …) have no business in a frontmatter
+    scalar and almost always signal a mistake in articles.toml or a stray H1,
+    so they're rejected with a clear error rather than silently escaped.
+    """
+    bad = next((c for c in value if ord(c) < 0x20 or ord(c) == 0x7F), None)
+    if bad is not None:
+        raise ValueError(
+            f"control character {bad!r} (U+{ord(bad):04X}) in TOML value {value!r}; "
+            "remove it from articles.toml (or the source H1)"
+        )
+    escaped = value.replace("\\", "\\\\").replace('"', '\\"')
+    return f'"{escaped}"'
+
 # Per-article body font, set with `font = "..."` in articles.toml. Values are roles, not
 # typefaces, so swapping which serif we ship is a change here and nowhere else.
 # "system" opts an article out of webfonts entirely (and so out of the wave).
@@ -38,26 +60,26 @@ def make_frontmatter(article, template=None, extra=None):
         )
 
     lines = ["+++"]
-    lines.append(f'title = "{article["title"]}"')
+    lines.append(f"title = {toml_str(article['title'])}")
     lines.append(f'date = {article["date"]}')
     if article.get("description"):
-        lines.append(f'description = "{article["description"]}"')
+        lines.append(f"description = {toml_str(article['description'])}")
     if article.get("draft"):
         lines.append("draft = true")
     if template:
-        lines.append(f'template = "{template}"')
+        lines.append(f"template = {toml_str(template)}")
     # [extra] and [taxonomies] are TOML sections, so both must come after the scalars
     if FONTS[font]:
         lines.append("[extra]")
-        lines.append(f'font_family = "{FONTS[font]["family"]}"')
-        lines.append(f'font_file = "{FONTS[font]["file"]}"')
-        lines.append(f'mock_family = "{FONTS[font]["mock"]}"')
-        # literal string: the stack contains double quotes
+        lines.append(f"font_family = {toml_str(FONTS[font]['family'])}")
+        lines.append(f"font_file = {toml_str(FONTS[font]['file'])}")
+        lines.append(f"mock_family = {toml_str(FONTS[font]['mock'])}")
+        # literal string: the stack contains double quotes (controlled constant, no escaping)
         lines.append(f"font_stack = '{FONTS[font]['stack']}'")
         for k, v in (extra or {}).items():
-            lines.append(f'{k} = "{v}"')
+            lines.append(f"{k} = {toml_str(v)}")
     if article.get("tags"):
-        tags_str = ", ".join(f'"{t}"' for t in article["tags"])
+        tags_str = ", ".join(toml_str(t) for t in article["tags"])
         lines.append("[taxonomies]")
         lines.append(f"tags = [{tags_str}]")
     lines.append("+++\n")
