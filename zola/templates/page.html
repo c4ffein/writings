@@ -64,15 +64,16 @@
 </style>
 <script>
     // Decide BEFORE first paint whether the reveal plays this load, so a skip never hides the
-    // article (no blank-then-pop blink). Rule: play on the reader's first page of the day (or
-    // forced with ?wave/?debug); otherwise skip — the article just renders normally, instantly.
+    // article (no blank-then-pop blink). Rule: play on the reader's first page of the day;
+    // ?reveal=now forces it, ?reveal=off suppresses it (?debug also forces, with logging).
     // localStorage is synchronous, so this is safe here; cache state isn't known yet, so the
     // early call is the daily gate only.
     (function () {
         var h = document.documentElement;
         var q = new URLSearchParams(location.search);
-        var play = q.has("wave") || q.has("debug");
-        if (!play) {
+        var rv = q.get("reveal");
+        var play = rv === "now" || q.has("debug");
+        if (!play && rv !== "off") {
             try { play = localStorage.getItem("wave-day") !== new Date().toDateString(); }
             catch (e) { play = true; }
         }
