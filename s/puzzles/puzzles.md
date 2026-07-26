@@ -33,7 +33,7 @@ But at least [they're making young engineers think about AI and consciousness](h
 
 Thanks to [Unreal Engine 5](https://www.unrealengine.com/en-US/developer-interviews/inside-croteam-s-transition-from-in-house-tech-to-ue5-for-the-talos-principle-2), it's really beautiful for a 3D puzzle game with that artistic direction, you can't compare with [The Witness](https://store.steampowered.com/app/210970/The_Witness/) (still aesthetically pleasant imo, but it's not like it could compete with a AAA).
 
-### [Portal 2](store.steampowered.com/app/620/Portal_2/)
+### [Portal 2](https://store.steampowered.com/app/620/Portal_2/)
 First person, portals and momentum, dialogues you may find funny, not that hard but you may enjoy the vibe.
 
 ### [We Were Here](https://store.steampowered.com/app/582500/We_Were_Here/)
