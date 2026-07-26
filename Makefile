@@ -16,8 +16,10 @@
 # Theme sharing:
 #   - zola/templates/base.html is the single source of truth for the theme
 #   - presentations.toml lists slides for presentations.cafeine.dev
-#   - generate_presentations.py extracts theme from base.html and generates
-#     zola/public/presentations-index.html (available on GitHub Pages)
+#   - generate_presentations.py ferries that list into zola/content/presentations-index.md;
+#     templates/presentations.html (extends base.html) renders it like any other page.
+#     Post-build, build targets copy it to zola/public/presentations-index.html — the
+#     stable flat URL served on GitHub Pages and curled by the presentations repo.
 #
 # SEO notes:
 #   - All links use absolute URLs to production (writings.cafeine.dev)
@@ -43,7 +45,7 @@ help:
 	@echo "  serve-public   Serve on LAN IP (Linux only)"
 	@echo "  build          Build static site to zola/public/"
 	@echo "  generate       Generate Zola content from s/ articles"
-	@echo "  presentations  Generate zola/public/presentations-index.html"
+	@echo "  presentations  Generate zola/content/presentations-index.md (rendered by build)"
 	@echo "  fonts          Re-download webfonts (already committed; only for updates)"
 	@echo "  clean          Remove generated content"
 	@echo "  help           Show this help"
@@ -83,24 +85,25 @@ presentations:
 fonts:
 	python3 zola/scripts/fetch_fonts.py
 
-serve: generate
+serve: generate presentations
 	cd zola && zola serve
 
 # Build a real static site (root-relative URLs, for an nginx in front) and serve it with the
 # same cache headers production should send — so caching can be verified locally. See README.
-serve-cached: generate
+serve-cached: generate presentations
 	cd zola && zola build -u / --force
-	python3 zola/scripts/generate_presentations.py
+	cp zola/public/presentations-index/index.html zola/public/presentations-index.html
 	python3 zola/scripts/serve_cached.py
 
-serve-public: generate
+serve-public: generate presentations
 	@[ "$$(uname)" = "Linux" ] || { echo "Requires Linux"; exit 1; }
 	$(eval IP := $(shell hostname -I | awk '{print $$1}'))
 	@echo "Serving on http://$(IP):1111"
 	cd zola && zola serve -i $(IP) -u http://$(IP)
 
-build: generate
+build: generate presentations
 	cd zola && zola build
+	cp zola/public/presentations-index/index.html zola/public/presentations-index.html
 
 clean:
-	rm -rf zola/content/posts/*.md zola/public/
+	rm -rf zola/content/posts/*.md zola/content/presentations-index.md zola/public/

@@ -36,16 +36,20 @@ up, or fonts and JS re-download on every navigation.
 script with a content hash in the URL (`…/source-serif-4.woff2?h=c1df…`, via Zola's
 `cachebust=true`), so the URL changes only when the file's bytes change. That means they can be
 served `immutable` with no risk of ever serving a stale file — update a font, the hash changes,
-browsers fetch the new one. (The *mock* font is inlined as a data URI in each page, so it needs
-no request or caching of its own.)
+browsers fetch the new one.
 
 nginx, in the `server` block (or an `include`d `.conf`):
 
 ```nginx
+# Everything under /fonts/ and /js/ is content-hashed in its URL (the field engine's
+# hashed URLs are published as <html data-fc-*> attributes, since its loader can't run
+# Tera) — so immutable is always safe, zero revalidation round-trips:
 location /fonts/ { expires 1y; add_header Cache-Control "public, immutable"; access_log off; }
 location /js/    { expires 1y; add_header Cache-Control "public, immutable"; }
-# HTML is not hashed — keep it revalidated so a rebuild is picked up:
-location = /     { add_header Cache-Control "no-cache"; }
+# HTML is not hashed — no-cache EVERYTHING else so a rebuild is picked up; this must also
+# return real 404s (no index.html fallback), or broken links become invisible soft-404s
+# (and spa-nav.js would happily dissolve a broken link into the homepage):
+location / { add_header Cache-Control "no-cache"; }
 ```
 
 `immutable` is the important part: browsers won't even revalidate (no 304 round-trip) on repeat
