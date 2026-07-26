@@ -10,5 +10,9 @@ href = "slides/django-ninja.html"
 title = "Django Ninja"
 
 [[presentations]]
+href = "slides/hypothesis.html"
+title = "Hypothesis"
+
+[[presentations]]
 href = "slides/learning-python-as-a-programmer.html"
 title = "Learning Python as a Programmer"
