@@ -14,10 +14,9 @@
  * ?field=flat  fallback tier in an unmistakable debug skin (--chrome -> #ffdddd/#441111)
  * ?field=off   kill switch — the loader in base.html runs nothing at all
  * ?field=diag  GPU tier + always show the diagnostic panel
- * (?reveal=now|off forces/suppresses the font-wave — handled in page.html)
  *
  * The pre-paint curtain (html.fielding) is added by base.html's loader and dropped here
- * once the chosen tier is in place; a pure-CSS 0.3s reveal is the fail-safe.
+ * once the chosen tier is in place; a pure-CSS 0.9s reveal is the fail-safe.
  */
 (function () {
   "use strict";
@@ -28,7 +27,12 @@
 
   var MODE = new URLSearchParams(location.search).get("field"); // null=auto | gpu|flat|off|diag
   function uncurtain() { document.documentElement.classList.remove("fielding"); }
-  if (MODE === "off") { uncurtain(); return; } // belt-and-suspenders: loader already skips
+  if (MODE === "off") {
+    // Still define the refresh hook (as a no-op): spa-nav.js reads its absence as "older
+    // field-chrome.js cached" and falls back to full navigations — off-mode must not.
+    window.__fieldChromeRefresh = function () {};
+    uncurtain(); return; // belt-and-suspenders: loader already skips
+  }
 
   var SEL = "nav a, #theme-toggle, h1, h2, h3, article hr, article blockquote, .fc-date, .fc-slab, .fc-ring, li .post-meta, .fc-bullet";
 
@@ -139,14 +143,21 @@
   function tryGPU() {
     return new Promise(function (resolve) {
       if (!navigator.gpu || MODE === "flat") return resolve(false);
-      var s = document.createElement("script");
-      s.src = "/field-gpu.js";
-      s.onload = function () {
+      function go() {
         prep();
         var els = Array.prototype.slice.call(document.querySelectorAll(SEL));
         window.__fieldGPUInit({ els: els, onLost: function () { flat(); } })
           .then(resolve, function () { resolve(false); });
-      };
+      }
+      // base.html's loader preloads the GPU engine in parallel with this file; if it's
+      // already in, go. Otherwise load it here (fallback: pages without the preload,
+      // or the preload still in flight — same URL, so the browser coalesces the fetch).
+      if (window.__fieldGPUInit) return go();
+      var s = document.createElement("script");
+      // Hashed URL from <html> (see base.html) so the GPU engine caches immutable and
+      // always matches this file's generation; root literal as last-resort fallback.
+      s.src = document.documentElement.getAttribute("data-fc-gpu") || "/field-gpu.js";
+      s.onload = go;
       s.onerror = function () {
         window.__fieldGPUDiag = ["script load FAILED (404/network?)"];
         resolve(false);
@@ -155,13 +166,29 @@
     });
   }
 
+  // Re-theme content that arrived AFTER boot (spa-nav.js swaps #content): prep() is
+  // idempotent (every mutation is guarded), and the GPU tier re-collects + re-inks the
+  // current SEL set. Undefined until this script runs — callers must feature-check.
+  window.__fieldChromeRefresh = function () {
+    prep();
+    if (window.__fieldGPURefresh) {
+      window.__fieldGPURefresh(Array.prototype.slice.call(document.querySelectorAll(SEL)));
+    }
+  };
+
   function boot() {
     var ready = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
     ready.then(function () {
       requestAnimationFrame(function () {
         tryGPU().then(function (ok) {
           if (MODE === "diag" || (!ok && MODE === "gpu")) showDiag();
-          if (ok) { uncurtain(); return; }
+          if (ok) {
+            uncurtain();
+            // The els list fed to init was collected at script load; if a swap landed while
+            // the device was booting, re-sync so the new content is inked and atlased too.
+            window.__fieldChromeRefresh();
+            return;
+          }
           flat();
         });
       });

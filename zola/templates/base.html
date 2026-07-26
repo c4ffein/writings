@@ -1,5 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+{# data-fc-src / data-fc-gpu: content-hashed URLs for the field engine, computed HERE
+   because the loader that consumes them (inside the theme:flash region below) is
+   extracted verbatim into the presentations page, where no Tera runs. The scripts can
+   therefore be cached immutable like everything else under /js/ — no revalidation
+   round-trip, and a stale engine can never pair with newer pages (the hash moves with
+   the bytes). Pages lacking the attributes (presentations) fall back to the old root
+   literals, whose 404 is handled by the loader's onerror. #}
+<html lang="en"
+      data-fc-src="{{ get_url(path='js/field-chrome.js', cachebust=true) }}"
+      data-fc-gpu="{{ get_url(path='js/field-gpu.js', cachebust=true) }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +16,12 @@
 
     <!-- SEO: Canonical URL (always points to production) -->
     <link rel="canonical" href="{{ config.base_url }}{{ current_path }}">
+
+    {# NO <link rel="expect" blocking="render"> here, deliberately: combined with
+       @view-transition it can wedge the first render entirely (seen in headless Chromium),
+       and a blocked first render also freezes the curtain's pure-CSS 0.9s fail-safe —
+       the one thing that must never be defeated. VT capturing a near-complete parse is
+       already the common case; the guarantee isn't worth a can-stay-blank-forever risk. #}
 
     <!-- Open Graph / Social sharing -->
     <meta property="og:type" content="{% block og_type %}website{% endblock %}">
@@ -37,12 +52,28 @@
         // (see field-chrome.js for the full ?field=gpu|flat|off|diag scheme).
         if (new URLSearchParams(location.search).get('field') !== 'off') {
             // Curtain until the field has measured & built (fonts settled), so a hard
-            // refresh doesn't flash unstyled chrome. Pure-CSS 0.3s reveal is the fail-safe:
+            // refresh doesn't flash unstyled chrome. Pure-CSS 0.9s reveal is the fail-safe:
             // even if the script 404s or dies, the page shows.
             document.documentElement.classList.add('fielding');
             var fs = document.createElement('script');
-            fs.src = '/field-chrome.js'; fs.defer = true;
+            // Hashed URL from the <html> data attribute (Tera-computed, immutable-cacheable);
+            // the root literal is the fallback for pages without it (presentations).
+            fs.src = document.documentElement.getAttribute('data-fc-src') || '/field-chrome.js';
+            fs.defer = true;
+            // Missing script (e.g. another origin serving this page) => lift the curtain
+            // NOW instead of paying the full 0.9s CSS fail-safe for a known no-show.
+            fs.onerror = function () { document.documentElement.classList.remove('fielding'); };
             document.head.appendChild(fs);
+            // WebGPU machines will need the GPU engine too — fetch it IN PARALLEL (the
+            // file is pure definitions, safe to execute any time). field-chrome uses the
+            // preloaded copy instead of chaining a second request after its own load,
+            // which would cost a serial round-trip on a cold cache.
+            var gsrc = document.documentElement.getAttribute('data-fc-gpu');
+            if (gsrc && navigator.gpu) {
+                var gs = document.createElement('script');
+                gs.src = gsrc; gs.defer = true;
+                document.head.appendChild(gs);
+            }
         }
     </script>
     <!-- theme:flash end -->
@@ -154,10 +185,16 @@
             line-height: 1.5em; text-align: center;
         }
         #theme-toggle:hover { color: var(--link); }
-        /* ?field curtain: hidden until the engine reveals (class removed), or 0.3s passes —
+        /* ?field curtain: hidden until the engine reveals (class removed), or 0.9s passes —
            the keyframe fires on pure CSS, so no JS failure can leave the page blank. */
-        html.fielding body { visibility: hidden; animation: fc-reveal 0s 0.3s forwards; }
+        html.fielding body { visibility: hidden; animation: fc-reveal 0s 0.9s forwards; }
         @keyframes fc-reveal { to { visibility: visible; } }
+        /* No transition animations, deliberately: the living field is the site's ONLY
+           motion. Navigation is atomic — spa-nav.js stages fonts and redraws the field
+           atlas synchronously inside the swap, so the switch is a single complete frame
+           (the click-time equivalent of the first-load curtain above). */
+        #content:focus { outline: none; } /* spa-nav focuses it after a swap (a11y), no ring */
+        @keyframes fc-hold { to { opacity: 1; } }
         /* presentations-omit start */
         article { margin-bottom: 3rem; }
         .post-meta { color: var(--chrome); font-size: 0.9rem; }
@@ -235,14 +272,19 @@
 </head>
 <body>
     <nav>
-        {# Plain "/" not get_url(path='/'): the latter renders empty when base_url is "/"
-           (zola build -u /, used behind the nginx proxy). "/" is correct either way, root-served. #}
-        <a href="/">Home</a>
+        {# trim_end_matches + "/": prod build -> "https://writings.cafeine.dev/" (absolute,
+           so the presentations page works from its foreign origins); local `-u /` build ->
+           base_url "/" trims to "" -> href "/". (get_url(path='/') renders empty on "/".) #}
+        <a href="{{ config.base_url | trim_end_matches(pat='/') }}/">Home</a>
         <a href="{{ get_url(path='posts') }}">Posts</a>
         <a href="https://presentations.cafeine.dev">Presentations</a>
         <!-- theme:toggle start --><button id="theme-toggle" onclick="cycleTheme()"><script>document.write(document.documentElement.getAttribute('data-theme')==='dark'?'⏾':'☀︎')</script></button><!-- theme:toggle end -->
     </nav>
-    {% block content %}{% endblock %}
+    {# #content is the SPA swap unit (spa-nav.js): everything outside it — nav, theme,
+       field canvas — persists across same-origin navigations, so the GPU field never
+       reboots. Without JS this is just a semantic <main>. #}
+    <main id="content">{% block content %}{% endblock %}</main>
     {% block extra_body %}{% endblock %}
+    <script src="{{ get_url(path='js/spa-nav.js', cachebust=true) }}" defer></script>
 </body>
 </html>

@@ -15,29 +15,12 @@
    README "Deployment" section for the matching nginx config. #}
 {% set roman = get_url(path="fonts/" ~ mf ~ ".woff2", cachebust=true) %}
 {% set italic = get_url(path="fonts/" ~ mf ~ "-italic.woff2", cachebust=true) %}
-{# The mock font (blank-glyph twin, metrically identical) is inlined so the page lays out in
-   its final shape with no round-trip; the wave measures tile positions from it before the real
-   font arrives. The real font renders under the tiles and surfaces as they lift. #}
-{% set m400 = load_data(path="static/fonts/mock-" ~ mf ~ "-400.b64", format="plain") %}
-{% set m700 = load_data(path="static/fonts/mock-" ~ mf ~ "-700.b64", format="plain") %}
-{% set mital = load_data(path="static/fonts/mock-" ~ mf ~ "-italic.b64", format="plain") %}
-<link rel="preload" as="font" type="font/woff2" crossorigin href="{{ roman }}">
-<style>
-    @font-face {
-        font-family: "{{ page.extra.mock_family }}";
-        font-style: normal; font-weight: 400;
-        src: url(data:font/woff2;base64,{{ m400 | trim | safe }}) format("woff2");
-    }
-    @font-face {
-        font-family: "{{ page.extra.mock_family }}";
-        font-style: normal; font-weight: 700;
-        src: url(data:font/woff2;base64,{{ m700 | trim | safe }}) format("woff2");
-    }
-    @font-face {
-        font-family: "{{ page.extra.mock_family }}";
-        font-style: italic; font-weight: 400;
-        src: url(data:font/woff2;base64,{{ mital | trim | safe }}) format("woff2");
-    }
+{# data-page-css marks head nodes that belong to THIS page: spa-nav.js removes the old
+   page's set and imports the new page's on every content swap (the fonts and the article
+   font rule travel with the article). It also pre-imports them and awaits the faces via
+   stageFonts() BEFORE swapping, so a swap never shows fallback glyphs. #}
+<link rel="preload" as="font" type="font/woff2" crossorigin href="{{ roman }}" data-page-css>
+<style data-page-css>
     {# One variable roman covers 400 and 700 — declare the weight *range* or the browser
        fetches the same bytes twice. `| safe`: Tera escapes "/" to "&#x2F;", which CSS won't
        decode, breaking the url(). #}
@@ -51,51 +34,13 @@
         font-style: italic; font-weight: 400; font-display: swap;
         src: url("{{ italic | safe }}") format("woff2");
     }
-
-    /* Base = no-JS-safe: real font, native everything, fully readable. Everything wave-specific
-       is gated on .waving, which the inline script below adds before first paint. So no-JS — or
-       a reader whose reveal is skipped — just gets the article. */
     article { font-family: {{ page.extra.font_stack | safe }}; }
-    /* Wave state: the mock font lays out (drawing nothing) while the article is hidden; the
-       wave's tile layer occludes the ink, and JS makes the article visible again once the tiles
-       are up, so nothing flashes. .font-ready switches to the real font under the tiles. */
-    .waving article { font-family: "{{ page.extra.mock_family }}", {{ page.extra.font_stack | safe }}; visibility: hidden; }
-    .waving article.font-ready { font-family: {{ page.extra.font_stack | safe }}; }
 </style>
-<script>
-    // Decide BEFORE first paint whether the reveal plays this load, so a skip never hides the
-    // article (no blank-then-pop blink). Rule: play on the reader's first page of the day;
-    // ?reveal=now forces it, ?reveal=off suppresses it (?debug also forces, with logging).
-    // localStorage is synchronous, so this is safe here; cache state isn't known yet, so the
-    // early call is the daily gate only.
-    (function () {
-        var h = document.documentElement;
-        var q = new URLSearchParams(location.search);
-        var rv = q.get("reveal");
-        var play = rv === "now" || q.has("debug");
-        if (!play && rv !== "off") {
-            try { play = localStorage.getItem("wave-day") !== new Date().toDateString(); }
-            catch (e) { play = true; }
-        }
-        if (play) {
-            h.classList.add("waving"); // hide the article; the wave will reveal it
-            // Fail-safe: if the wave hasn't confirmed within 2s (script failed, threw…), drop
-            // back to the readable base state so nothing stays hidden.
-            setTimeout(function () { if (!h.dataset.waveOk) h.classList.remove("waving"); }, 2000);
-        }
-    })();
-</script>
-{% endif %}
-{% endblock %}
-
-{% block extra_body %}
-{% if page.extra.font_family %}
-<script src="{{ get_url(path='js/font-wave.js', cachebust=true) }}" defer></script>
 {% endif %}
 {% endblock %}
 
 {% block content %}
-<article{% if page.extra.font_family %} data-font="{{ page.extra.font_family }}" data-mock="{{ page.extra.mock_family }}" data-seed="{{ page.slug }}" data-font-file="{{ page.extra.font_file }}"{% endif %}>
+<article{% if page.extra.font_family %} data-font="{{ page.extra.font_family }}"{% endif %}>
     <header>
         <h1>{{ page.title }}</h1>
         <p class="post-meta">

@@ -308,9 +308,12 @@ fn fmain(@builtin(position) fc : vec4f) -> @location(0) vec4f {
         originY = Math.max(0, Math.min(sy - vh, Math.max(0, docH - WIN * vh)));
         var h = Math.min(WIN * vh, docH - originY);
         canvas.style.top = originY + "px";
-        if (force || Math.abs(h - winH) > 1) {
+        // Reallocate ONLY when the backing size truly changed: sizeAll() clears the
+        // canvas (reconfigure), and a gratuitous clear during a content swap is a
+        // one-frame blank of ALL ink — with instant swaps there's no dissolve to hide it.
+        if (Math.abs(h - winH) > 1 || canvas.width !== Math.floor(innerWidth * dpr)) {
           winH = h;
-          sizeAll(); // reallocates backing + texture at the new window height
+          sizeAll(); // reallocates backing + texture at the new window size
         } else {
           canvas.style.height = winH + "px"; // restore after the measurement zeroing
         }
@@ -337,17 +340,32 @@ fn fmain(@builtin(position) fc : vec4f) -> @location(0) vec4f {
       }
 
       // originals go invisible-but-real: text keeps layout/selection, boxes keep geometry
-      cfg.els.forEach(function (el) {
-        var prev = el.getAttribute("style") || "";
-        cleanup.push(function () { el.setAttribute("style", prev); });
-        if (el.classList.contains("fc-slab") || el.classList.contains("fc-ring") ||
-            el.classList.contains("fc-bullet") || el.tagName === "HR") {
-          el.style.opacity = "0";
-        } else {
-          el.style.color = "transparent";
-          el.style.borderColor = "transparent";
-        }
-      });
+      function inkEls(els) {
+        els.forEach(function (el) {
+          var prev = el.getAttribute("style") || "";
+          cleanup.push(function () { el.setAttribute("style", prev); });
+          if (el.classList.contains("fc-slab") || el.classList.contains("fc-ring") ||
+              el.classList.contains("fc-bullet") || el.tagName === "HR") {
+            el.style.opacity = "0";
+          } else {
+            el.style.color = "transparent";
+            el.style.borderColor = "transparent";
+          }
+        });
+      }
+      inkEls(cfg.els);
+
+      // Adopt a new element set after a content swap (spa-nav.js): ink only the newcomers
+      // (re-inking a survivor would capture our own transparent style as its "restore"
+      // state), retarget the atlas, and force a re-layout — the document height changed.
+      window.__fieldGPURefresh = function (els) {
+        if (dead) return;
+        inkEls(els.filter(function (el) { return cfg.els.indexOf(el) === -1; }));
+        cfg.els = els;
+        layoutWindow(true);
+        redrawAtlas(); // SYNCHRONOUS: the very next painted frame must show the new ink
+        if (reduced) requestAnimationFrame(frame); // no continuous loop to present it
+      };
 
       layoutWindow(true); redrawAtlas();
       diag("sized " + canvas.width + "x" + canvas.height + " dpr" + dpr + ", atlas drawn");
@@ -357,6 +375,18 @@ fn fmain(@builtin(position) fc : vec4f) -> @location(0) vec4f {
         document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
 
       var reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      // Field clock: resumes at the phase the PREVIOUS page saved (sessionStorage), so a
+      // navigation freezes the ink mid-pattern and the next page picks it up exactly there.
+      // Frozen, not wall-clock-advanced: the last rendered frame is what a view transition
+      // holds on screen during the switch, so resuming AT it (t0 anchors to our first
+      // frame, load time excluded) is the seamless choice — advancing by elapsed time
+      // would visibly jump. The 1e5 cap (~7h of animation) keeps t in f32-friendly range.
+      var tBase = 0, tNow = 0, t0 = null;
+      try { tBase = parseFloat(sessionStorage.getItem("fc-clock")) || 0; } catch (_) {}
+      if (!isFinite(tBase) || tBase < 0 || tBase > 1e5) tBase = 0;
+      window.addEventListener("pagehide", function () {
+        try { sessionStorage.setItem("fc-clock", String(tNow)); } catch (_) {}
+      });
       var uf = new Float32Array(8);
       var frames = 0, dead = false;
       function frame(now) {
@@ -365,10 +395,12 @@ fn fmain(@builtin(position) fc : vec4f) -> @location(0) vec4f {
         if (frames === 1 || frames === 60) diag("frame " + frames + " @" + Math.round(now) + "ms");
         if (atlasDirty) redrawAtlas();
         var dark = document.documentElement.getAttribute("data-theme") === "dark" ? 1 : 0;
+        if (t0 === null) t0 = now;
+        tNow = tBase + ((now - t0) / 1000) * 4;
         // document offset = the window's origin, constant between jumps (scroll is free)
         uf[0] = 0; uf[1] = originY * dpr;
         uf[2] = canvas.width; uf[3] = canvas.height;
-        uf[4] = (now / 1000) * 4; uf[5] = dark; uf[6] = dpr;
+        uf[4] = tNow; uf[5] = dark; uf[6] = dpr;
         device.queue.writeBuffer(ubuf, 0, uf);
         var enc = device.createCommandEncoder();
         var pass = enc.beginRenderPass({ colorAttachments: [{

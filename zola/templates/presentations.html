@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{# The presentations index is a NORMAL Zola page: the shared theme arrives by rendering
+   base.html like every other page — not by slicing its source text (the old
+   generate_presentations.py approach). The list itself comes from presentations.toml,
+   ferried into [extra] frontmatter by the (now tiny) generator script. This page is
+   served on foreign origins (GitHub Pages, presentations.cafeine.dev), which works
+   because the production build renders every URL absolute. #}
+
+{% block title %}Presentations{% endblock %}
+{% block og_title %}Presentations{% endblock %}
+{% block og_description %}Slides and presentations{% endblock %}
+{% block twitter_title %}Presentations{% endblock %}
+{% block twitter_description %}Slides and presentations{% endblock %}
+
+{% block content %}
+<h1>Presentations</h1>
+<ul>
+    {% for p in page.extra.presentations %}
+    <li><a href="{{ p.href }}">{{ p.title }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}

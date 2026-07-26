@@ -17,13 +17,20 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).parent.parent / "public"
+# Everything under /fonts/ and /js/ — INCLUDING the field engine, whose hashed URLs are
+# published as <html data-fc-*> attributes since its loader can't run Tera — is
+# content-hashed in its URL, so immutable is always safe.
 IMMUTABLE_PREFIXES = ("/fonts/", "/js/")
 
 
 class Handler(http.server.SimpleHTTPRequestHandler):
+    no_store = False  # --no-store: forbid ALL caching, so every load is a cold first load
+
     def end_headers(self):
         path = self.path.split("?", 1)[0]
-        if path.startswith(IMMUTABLE_PREFIXES):
+        if self.no_store:
+            self.send_header("Cache-Control", "no-store")
+        elif path.startswith(IMMUTABLE_PREFIXES):
             self.send_header("Cache-Control", "public, max-age=31536000, immutable")
         elif path.endswith((".html", "/")):
             self.send_header("Cache-Control", "no-cache")
@@ -34,12 +41,16 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 
 
 def main():
-    host = sys.argv[1] if len(sys.argv) > 1 else "0.0.0.0"
-    port = int(sys.argv[2]) if len(sys.argv) > 2 else 8080
+    args = [a for a in sys.argv[1:] if a != "--no-store"]
+    Handler.no_store = "--no-store" in sys.argv
+    host = args[0] if len(args) > 0 else "0.0.0.0"
+    port = int(args[1]) if len(args) > 1 else 8080
     if not ROOT.exists():
         sys.exit(f"{ROOT} not found — run `zola build` first (make serve-cached does this).")
     handler = functools.partial(Handler, directory=str(ROOT))
-    print(f"Serving {ROOT} on http://{host}:{port}  (/fonts/ /js/ immutable, HTML no-cache)")
+    mode = "EVERYTHING no-store (cold first load, always)" if Handler.no_store \
+        else "/fonts/ /js/ immutable, HTML no-cache"
+    print(f"Serving {ROOT} on http://{host}:{port}  ({mode})")
     http.server.ThreadingHTTPServer((host, port), handler).serve_forever()
 
 
