@@ -38,13 +38,11 @@ FONTS = {
         "family": "IBM Plex Sans",
         "file": "ibm-plex-sans",
         "stack": '"IBM Plex Sans", system-ui, sans-serif',
-        "mock": "MockSans",
     },
     "serif": {
         "family": "Source Serif 4",
         "file": "source-serif-4",
         "stack": '"Source Serif 4", Georgia, serif',
-        "mock": "MockSerif",
     },
     "system": None,
 }
@@ -73,7 +71,6 @@ def make_frontmatter(article, template=None, extra=None):
         lines.append("[extra]")
         lines.append(f"font_family = {toml_str(FONTS[font]['family'])}")
         lines.append(f"font_file = {toml_str(FONTS[font]['file'])}")
-        lines.append(f"mock_family = {toml_str(FONTS[font]['mock'])}")
         # literal string: the stack contains double quotes (controlled constant, no escaping)
         lines.append(f"font_stack = '{FONTS[font]['stack']}'")
         for k, v in (extra or {}).items():

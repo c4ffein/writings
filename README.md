@@ -55,3 +55,28 @@ visits — the font is reused straight from disk cache across every page.
 **Verify locally before deploying:** `make serve-cached` builds the static site and serves it
 with these exact headers (unlike `make serve`, which sends none). Load a post, click another,
 and the font should show as served from cache (`0 B` transferred) instead of re-downloading.
+
+## Architecture note: the field and spa-nav are a couple
+
+`spa-nav.js` exists so the GPU field (`field-gpu.js` + `field-chrome.js`) never reboots
+across navigations — the persistent canvas, device, and clock are the whole reason the SPA
+layer (manual scroll restoration included) is worth its complexity. If the field ever
+retires, retire spa-nav and the first-load curtain with it: scaffolding must not outlive
+its reason (see the mock-font pipeline, removed below).
+
+## Previous versions
+
+Removed code stays reachable in git history. Named restore points:
+
+- [`914c671`](https://github.com/c4ffein/writings/tree/914c671) — last version before the
+  wave / black design / webfont work (2026-03-24)
+- [`b074ba5`](https://github.com/c4ffein/writings/tree/b074ba5) — last version before the
+  big clean, which removed:
+  - the dead mock-font pipeline: `zola/scripts/make_mock_fonts.py`, the 12 committed
+    `mock-*.woff2`/`.b64` files, and the `mock_family` frontmatter emitted by `generate.py`
+    (superseded by external content-hashed fonts + `stageFonts()` in spa-nav.js)
+  - the scraper-era markers and comments in `base.html` (`theme:* start/end`,
+    `presentations-omit`) left over from when `generate_presentations.py` sliced the
+    template by regex, plus the unused `fc-hold` keyframe
+  - `compile_sass` in `config.toml` (no sass in the repo) and the redundant
+    "Generate presentations index" step in `deploy.yml` (`make build` already runs it)
