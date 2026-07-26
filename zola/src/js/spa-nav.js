@@ -17,8 +17,9 @@
  * below) and restored on back/forward.
  *
  * Every unexpected shape falls back to a real navigation: modified clicks, other
- * origins, downloads, fetch errors, a page without #content, a version-skewed field
- * engine. Without JS none of this exists and links are just links.
+ * origins, downloads, fetch errors, a page without #content. Without JS none of this
+ * exists and links are just links. (All three runtime scripts, this one included, are
+ * INLINED by base.html — no external JS, so engine/page version skew cannot exist.)
  */
 (function () {
   "use strict";
@@ -69,10 +70,6 @@
     var next = doc.querySelector("#content");
     var cur = document.querySelector("#content");
     if (!next || !cur) return false;
-    // Version-skew guard: if the field engine ran (__fieldChrome) but has no refresh API,
-    // the browser cached an older field-chrome.js than this script — a swap would leave the
-    // GPU canvas painting the OLD page's ink over the new content. A real navigation can't.
-    if (window.__fieldChrome && !window.__fieldChromeRefresh) return false;
     document.querySelectorAll("head [data-page-css]").forEach(function (n) { n.remove(); });
     doc.querySelectorAll("head [data-page-css]").forEach(function (n) {
       document.head.appendChild(document.importNode(n, true));

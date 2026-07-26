@@ -1,14 +1,5 @@
 <!DOCTYPE html>
-{# data-fc-src / data-fc-gpu: content-hashed URLs for the field engine, computed HERE
-   because the loader that consumes them (inside the theme:flash region below) is
-   extracted verbatim into the presentations page, where no Tera runs. The scripts can
-   therefore be cached immutable like everything else under /js/ — no revalidation
-   round-trip, and a stale engine can never pair with newer pages (the hash moves with
-   the bytes). Pages lacking the attributes (presentations) fall back to the old root
-   literals, whose 404 is handled by the loader's onerror. #}
-<html lang="en"
-      data-fc-src="{{ get_url(path='js/field-chrome.js', cachebust=true) }}"
-      data-fc-gpu="{{ get_url(path='js/field-gpu.js', cachebust=true) }}">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -53,27 +44,8 @@
         if (new URLSearchParams(location.search).get('field') !== 'off') {
             // Curtain until the field has measured & built (fonts settled), so a hard
             // refresh doesn't flash unstyled chrome. Pure-CSS 0.9s reveal is the fail-safe:
-            // even if the script 404s or dies, the page shows.
+            // even if the engine (inlined at the end of <body>) dies, the page shows.
             document.documentElement.classList.add('fielding');
-            var fs = document.createElement('script');
-            // Hashed URL from the <html> data attribute (Tera-computed, immutable-cacheable);
-            // the root literal is the fallback for pages without it (presentations).
-            fs.src = document.documentElement.getAttribute('data-fc-src') || '/field-chrome.js';
-            fs.defer = true;
-            // Missing script (e.g. another origin serving this page) => lift the curtain
-            // NOW instead of paying the full 0.9s CSS fail-safe for a known no-show.
-            fs.onerror = function () { document.documentElement.classList.remove('fielding'); };
-            document.head.appendChild(fs);
-            // WebGPU machines will need the GPU engine too — fetch it IN PARALLEL (the
-            // file is pure definitions, safe to execute any time). field-chrome uses the
-            // preloaded copy instead of chaining a second request after its own load,
-            // which would cost a serial round-trip on a cold cache.
-            var gsrc = document.documentElement.getAttribute('data-fc-gpu');
-            if (gsrc && navigator.gpu) {
-                var gs = document.createElement('script');
-                gs.src = gsrc; gs.defer = true;
-                document.head.appendChild(gs);
-            }
         }
     </script>
     <!-- theme:flash end -->
@@ -93,6 +65,16 @@
                meta, pills) renders in this when the field isn't painting — so no-JS and
                no-GPU pages show the designed look with zero script involvement. */
             --chrome: #111111;
+        }
+        /* Light palette PER TIER (html.fc-gpu is set by field-chrome when the GPU tier
+           boots): flat/no-JS users live with solid chrome ink forever, so they keep the
+           classic strong pairing above. GPU users' chrome is the living texture — their
+           flat values only flash at boot — so prose takes the near-black (the protagonist)
+           and the chrome recedes to a soft grey. Dark mode is one palette for everyone:
+           on black, halation does the separating (whites bloom; blacks don't). */
+        :root[data-theme="light"].fc-gpu {
+            --text: #111111;
+            --chrome: #444444;
         }
         :root[data-theme="dark"] {
             /* Pure black. Text a hair off white to soften halation. */
@@ -116,8 +98,10 @@
             color: var(--text);
         }
         /* Masthead hierarchy: the h1 gets the page's one rule; sections stand bare.
-           Headings + rules are chrome — they carry the field when it paints. */
-        h1, h2, h3 { color: var(--chrome); padding-bottom: 10px; }
+           Headings + rules are chrome — they carry the field when it paints.
+           Weight 400 (not browser-default bold): size + the rule carry the hierarchy,
+           the regular strokes keep the field texture calm instead of massive. */
+        h1, h2, h3 { color: var(--chrome); padding-bottom: 10px; font-weight: 400; }
         h1 { border-bottom: 2px solid var(--chrome); }
         hr { border: none; height: 2px; background: var(--chrome); }
         a { color: var(--link); text-decoration: underline; }
@@ -167,13 +151,14 @@
         .z-entity.z-name.z-type, .z-support.z-type, .z-support.z-class { color: var(--syn-type); }
         blockquote { border-left: 3px solid var(--chrome); margin-left: 0; padding-left: 1rem; color: var(--text-muted); }
         nav { margin-bottom: 2.9rem; display: flex; align-items: center; }
-        /* Poppins (700) for the nav labels — inlined below, so no request/flash. No underline:
-           they read as navigation, not body links. Falls back to the system sans if unloaded. */
+        /* Poppins (400, regular — regenerate via make_nav_font.py to change) for the nav
+           labels — inlined below, so no request/flash. No underline: they read as
+           navigation, not body links. Falls back to the system sans if unloaded. */
         nav a {
-            /* Fluid: loud on desktop, scales down so it never overflows a narrow phone. */
-            margin-right: 1rem; font-size: clamp(1rem, 3.4vw, 1.5rem);
+            /* Fluid: present on desktop, scales down so it never overflows a narrow phone. */
+            margin-right: 1rem; font-size: clamp(0.95rem, 3vw, 1.3rem);
             font-family: "Poppins", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            font-weight: 700; text-decoration: none; letter-spacing: -0.01em;
+            font-weight: 400; text-decoration: none; letter-spacing: -0.01em;
             color: var(--chrome);
         }
         #theme-toggle {
@@ -214,7 +199,7 @@
             /* block, not swap: the face is inlined (data URI below), so its decode is effectively
                instant — there's no real invisible period — but block avoids painting the system
                fallback first and then reflowing to Poppins (the nav "glitch" swap caused). */
-            font-style: normal; font-weight: 700; font-display: block;
+            font-style: normal; font-weight: 400; font-display: block;
             src: url(data:font/woff2;base64,{{ load_data(path="static/fonts/poppins-nav.b64", format="plain") | trim | safe }}) format("woff2");
         }
     </style>
@@ -285,6 +270,15 @@
        reboots. Without JS this is just a semantic <main>. #}
     <main id="content">{% block content %}{% endblock %}</main>
     {% block extra_body %}{% endblock %}
-    <script src="{{ get_url(path='js/spa-nav.js', cachebust=true) }}" defer></script>
+    {# The full runtime, INLINED from zola/src/js/ — no external JS at all: single-request
+       pages (fonts aside), no hashes or loader indirection to keep coherent, and version
+       skew is impossible by construction (the engine can never be older or newer than the
+       page it ships in). Unminified on purpose: view-source stays readable and gzip does
+       the shrinking (~11 KB over the wire for all three). Fonts remain external and
+       content-hashed — inlining THOSE was the mock-font bloat this design replaced.
+       Order: gpu (pure definitions) before chrome (its consumer); spa-nav last. #}
+    <script>{{ load_data(path="src/js/field-gpu.js", format="plain") | safe }}</script>
+    <script>{{ load_data(path="src/js/field-chrome.js", format="plain") | safe }}</script>
+    <script>{{ load_data(path="src/js/spa-nav.js", format="plain") | safe }}</script>
 </body>
 </html>

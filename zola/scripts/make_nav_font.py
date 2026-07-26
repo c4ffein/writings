@@ -1,14 +1,18 @@
 #!/usr/bin/env python3
-"""Subset Poppins (700) to the nav labels' letters, for inlining as a data URI so the nav font
+"""Subset Poppins to the nav labels' letters, for inlining as a data URI so the nav font
 never causes a request or a first-load flash. Requires fonttools + brotli.
 
+Usage: make_nav_font.py [weight]   (default 500 — keep base.html's two font-weight
+declarations, the inline @font-face and the `nav a` rule, in sync with this)
+
 Output (poppins-nav.woff2 + poppins-nav.b64) is committed; base.html inlines the .b64. Re-run
-only if the nav labels gain a letter not already covered.
+only if the nav labels gain a letter not already covered, or to change the weight.
 """
 
 import base64
 import io
 import re
+import sys
 import urllib.request
 from pathlib import Path
 
@@ -17,7 +21,7 @@ from fontTools.ttLib import TTFont
 
 FONTS = Path(__file__).parent.parent / "static" / "fonts"
 NAV_TEXT = "HomePostsPresentations"  # every letter the nav needs
-WEIGHT = 700
+WEIGHT = int(sys.argv[1]) if len(sys.argv) > 1 else 500
 UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36"
 
 

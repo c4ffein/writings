@@ -29,26 +29,23 @@ A cleaner version is live at [writings.cafeine.dev](https://writings.cafeine.dev
 
 ## Deployment
 
-The site is `zola build`'d to `zola/public/` and served by nginx. Two things need caching set
-up, or fonts and JS re-download on every navigation.
+The site is `zola build`'d to `zola/public/` and served by nginx. All JS is inlined into the
+pages (from `zola/src/js/`, via `load_data` in base.html) — fonts are the only external
+assets, and the only thing that needs cache configuration.
 
-**They're safe to cache forever.** The article template requests the webfont and the wave
-script with a content hash in the URL (`…/source-serif-4.woff2?h=c1df…`, via Zola's
-`cachebust=true`), so the URL changes only when the file's bytes change. That means they can be
-served `immutable` with no risk of ever serving a stale file — update a font, the hash changes,
-browsers fetch the new one.
+**Fonts are safe to cache forever.** The article template requests each webfont with a
+content hash in the URL (`…/source-serif-4.woff2?h=c1df…`, via Zola's `cachebust=true`), so
+the URL changes only when the file's bytes change. That means they can be served `immutable`
+with no risk of ever serving a stale file — update a font, the hash changes, browsers fetch
+the new one.
 
 nginx, in the `server` block (or an `include`d `.conf`):
 
 ```nginx
-# Everything under /fonts/ and /js/ is content-hashed in its URL (the field engine's
-# hashed URLs are published as <html data-fc-*> attributes, since its loader can't run
-# Tera) — so immutable is always safe, zero revalidation round-trips:
 location /fonts/ { expires 1y; add_header Cache-Control "public, immutable"; access_log off; }
-location /js/    { expires 1y; add_header Cache-Control "public, immutable"; }
 # HTML is not hashed — no-cache EVERYTHING else so a rebuild is picked up; this must also
 # return real 404s (no index.html fallback), or broken links become invisible soft-404s
-# (and spa-nav.js would happily dissolve a broken link into the homepage):
+# (and the SPA layer would happily swap a broken link into the homepage):
 location / { add_header Cache-Control "no-cache"; }
 ```
 

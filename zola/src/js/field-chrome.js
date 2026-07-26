@@ -20,8 +20,8 @@
  */
 (function () {
   "use strict";
-  // Idempotence: the engine can arrive twice (external loader + the copy inlined into the
-  // presentations page); a second run would restructure the DOM twice.
+  // Idempotence: guards against any double-inclusion (a second run would restructure
+  // the DOM twice). With everything inlined per page this shouldn't occur — kept anyway.
   if (window.__fieldChrome) return;
   window.__fieldChrome = true;
 
@@ -114,6 +114,10 @@
   // only restructures. As ?field=flat it wears an unmistakable debug skin instead, so a
   // forced fallback can never be confused with the real one.
   function flat() {
+    // Tier signal off: the light palette reverts to the strong flat pairing (base.html).
+    // Matters on the device-lost path — the page must not keep GPU-tier colours with
+    // no texture left to justify them.
+    document.documentElement.classList.remove("fc-gpu");
     prep();
     if (MODE === "flat") {
       var st = document.createElement("style");
@@ -143,26 +147,14 @@
   function tryGPU() {
     return new Promise(function (resolve) {
       if (!navigator.gpu || MODE === "flat") return resolve(false);
-      function go() {
-        prep();
-        var els = Array.prototype.slice.call(document.querySelectorAll(SEL));
-        window.__fieldGPUInit({ els: els, onLost: function () { flat(); } })
-          .then(resolve, function () { resolve(false); });
-      }
-      // base.html's loader preloads the GPU engine in parallel with this file; if it's
-      // already in, go. Otherwise load it here (fallback: pages without the preload,
-      // or the preload still in flight — same URL, so the browser coalesces the fetch).
-      if (window.__fieldGPUInit) return go();
-      var s = document.createElement("script");
-      // Hashed URL from <html> (see base.html) so the GPU engine caches immutable and
-      // always matches this file's generation; root literal as last-resort fallback.
-      s.src = document.documentElement.getAttribute("data-fc-gpu") || "/field-gpu.js";
-      s.onload = go;
-      s.onerror = function () {
-        window.__fieldGPUDiag = ["script load FAILED (404/network?)"];
-        resolve(false);
-      };
-      document.head.appendChild(s);
+      // field-gpu.js is inlined in the same document, just before this file (base.html),
+      // and is pure definitions — by boot time it HAS run. Absent means something is
+      // deeply wrong with the page itself; the flat tier is the only sane answer.
+      if (!window.__fieldGPUInit) return resolve(false);
+      prep();
+      var els = Array.prototype.slice.call(document.querySelectorAll(SEL));
+      window.__fieldGPUInit({ els: els, onLost: function () { flat(); } })
+        .then(resolve, function () { resolve(false); });
     });
   }
 
@@ -183,6 +175,9 @@
         tryGPU().then(function (ok) {
           if (MODE === "diag" || (!ok && MODE === "gpu")) showDiag();
           if (ok) {
+            // Tier signal (see base.html): GPU-tier light palette. Added BEFORE the
+            // curtain lifts, so a full load never shows the flat palette shifting.
+            document.documentElement.classList.add("fc-gpu");
             uncurtain();
             // The els list fed to init was collected at script load; if a swap landed while
             // the device was booting, re-sync so the new content is inked and atlased too.

@@ -2,10 +2,10 @@
 """Serve zola/public/ locally with the same cache headers production should send, so the
 caching behaviour can be verified before deploying. Zero dependencies (Python 3.11+).
 
-`make serve` (zola serve) sends NO cache headers, so fonts/js re-download on every navigation.
+`make serve` (zola serve) sends NO cache headers, so fonts re-download on every navigation.
 This mimics the intended nginx setup instead:
-  - /fonts/ and /js/ are content-hashed in their URLs (?h=…), so they're immutable — cache a
-    year, never revalidate.
+  - /fonts/ are content-hashed in their URLs (?h=…), so they're immutable — cache a year,
+    never revalidate. (All JS is inlined into the pages; fonts are the only external assets.)
   - HTML is not hashed, so it's no-cache (always revalidated) to reflect the latest build.
 
 Run `make serve-cached` (builds first). Point your nginx/browser at it exactly as with `serve`.
@@ -17,10 +17,9 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).parent.parent / "public"
-# Everything under /fonts/ and /js/ — INCLUDING the field engine, whose hashed URLs are
-# published as <html data-fc-*> attributes since its loader can't run Tera — is
-# content-hashed in its URL, so immutable is always safe.
-IMMUTABLE_PREFIXES = ("/fonts/", "/js/")
+# Fonts are the ONLY external assets left (all JS is inlined into the pages by
+# base.html); their URLs are content-hashed, so immutable is always safe.
+IMMUTABLE_PREFIXES = ("/fonts/",)
 
 
 class Handler(http.server.SimpleHTTPRequestHandler):
@@ -49,7 +48,7 @@ def main():
         sys.exit(f"{ROOT} not found — run `zola build` first (make serve-cached does this).")
     handler = functools.partial(Handler, directory=str(ROOT))
     mode = "EVERYTHING no-store (cold first load, always)" if Handler.no_store \
-        else "/fonts/ /js/ immutable, HTML no-cache"
+        else "/fonts/ immutable, HTML no-cache"
     print(f"Serving {ROOT} on http://{host}:{port}  ({mode})")
     http.server.ThreadingHTTPServer((host, port), handler).serve_forever()
 
