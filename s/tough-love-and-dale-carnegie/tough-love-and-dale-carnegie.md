@@ -4,7 +4,7 @@ This is just a random collection of thoughts I had since reading `How to Win Fri
 
 ---
 
-To understand how I perceived this book at first: I consider myself a somehow broken person.
+To understand how I perceived this book at first: I consider myself a somewhat broken person.
 Not going into details here, but I had to live through difficult situations, and so did most of the people I clicked with.
 
 It's really hard to assess whether I naturally find myself befriending other broken persons, or if statistically most people at some point have to go through complicated events. Maybe I only have this bias since only my friends would talk to me about these?
@@ -77,7 +77,7 @@ Once again, it's not about the content of the book, it's about how and when you'
 
 If you just want a specific example of how I would reflect about all that: Chapter 5, smile. Well, it just struck me, but most of the guys I feel the closest to don't smile much, and I usually don't smile around them. I somehow always understood implicitly that I had to smile with other people, but it's not the same as reading Dale Carnegie rambling for a whole chapter about the value of a real, warm smile.
 
-There's also something I started pondering years ago when reading any book that managed to go through the excellent filter that time is: how relatable it would feel. While the world is changing, human nature is still nearly what it was hundreds (or even thousands) of years ago. I'm sure you could post some of these 100-year-old stories on LinkedIn, just rephrasing the first and last sentence to match the current LLM era impact-writing style, and it would work. The only thing going for Carnegie is that he wrote a whole book with somehow good intentions?
+There's also something I started pondering years ago when reading any book that managed to go through the excellent filter that time is: how relatable it would feel. While the world is changing, human nature is still nearly what it was hundreds (or even thousands) of years ago. I'm sure you could post some of these 100-year-old stories on LinkedIn, just rephrasing the first and last sentence to match the current LLM era impact-writing style, and it would work. The only thing going for Carnegie is that he wrote a whole book with somewhat good intentions?
 
 Another thing that seems interesting is how different people get such a different takeaway from this book: for some, this is about faking it, and for some, this is about building a genuine interest in people. I consider some of the phrasing that Carnegie picked to be a good indication that he intends it as some form of method acting. The way someone interprets all this advice is a good indication of how they view their interactions with other people.
 
