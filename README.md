@@ -23,7 +23,6 @@ A cleaner version is live at [writings.cafeine.dev](https://writings.cafeine.dev
 - [Prophecies](s/prophecies/prophecies.md)
 - [Competency Cycle](s/competency-cycle/competency-cycle.md)
 - [Python for Programmers](s/learning-python-as-a-programmer/learning-python-as-a-programmer.md)
-- [From MNIST to Transformers](s/from-mnist-to-transformers/from-mnist-to-transformers.md) - The minimal background on how neural networks and LLMs actually work
 - [There Is No Stop Sign](s/there-is-no-stop-sign/there-is-no-stop-sign.md) - Reflections on the Evolution of AI at the End of 2025
 - [Claude Code through 2025](s/claude-code-through-2025)
 
