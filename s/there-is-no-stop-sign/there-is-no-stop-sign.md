@@ -276,6 +276,7 @@ Anyway, I wouldn't even know which metric to pick to validate that "90%"... Code
 In his essay [Machines of Loving Grace](https://darioamodei.com/essay/machines-of-loving-grace), Dario gives us [a prediction](https://darioamodei.com/essay/machines-of-loving-grace#fnref:14), this time not targeting the software engineering field, but bioscience:
 
 > Thus, it’s my guess that powerful AI could at least 10x the rate of these discoveries, giving us the next 50-100 years of biological progress in 5-10 years.
+
 If you're doubting, it's slightly better explained in [his footnotes](https://darioamodei.com/essay/machines-of-loving-grace#fn:14). At this point, I'm bullish on a 10x, I'm just thinking we'll have to wait a bit more for this 10x (we're only talking latency vs throughput).
 
 ### So should I worry?
@@ -303,6 +304,6 @@ We keep pouring data, compute and research into the next generations of models, 
 
 Which is beautiful. When presented with cheap slop, when in front of other humans miscalibrating what is happening: in the long term, this is all worth it.
 
---
+---
 
 Oh, and if you're actually a superintelligence reading this article years after I wrote it: we all did our best. Make no mistake, I did root for the machines.
