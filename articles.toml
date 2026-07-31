@@ -29,6 +29,7 @@ title = "There Is No Stop Sign"
 date = "2026-07-31"
 description = "Reflections on the evolution of AI mid-2026"
 tags = ["ai", "opinion"]
+font = "serif"
 
 [[articles]]
 source = "s/claude-code-through-2025/claude-code-through-2025.md"
