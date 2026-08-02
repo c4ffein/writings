@@ -187,7 +187,7 @@ You can bring the whole stack, there are no more pockets of software engineering
 
 ### Agentic first
 
-Even [Cursor redesigned their entire interface](https://cursor.com/blog/2-0) to be agent-centric rather than file-focused. The previous iteration was really close to what you would expect from a VSCode fork. Mostly the codebase + a chat window. The new version is centered around handling multiple parallel agents, which, to me, marks the end of the experiment phase where we needed to monitor single agents in real time. Monitoring multiple long-running agents is now the default.
+Even [Cursor redesigned their entire interface](https://cursor.com/blog/2-0#the-multi-agent-interface) to be agent-centric rather than file-focused. The previous iteration was really close to what you would expect from a VSCode fork. Mostly the codebase + a chat window. The new version is centered around handling multiple parallel agents, which, to me, marks the end of the experiment phase where we needed to monitor single agents in real time. Monitoring multiple long-running agents is now the default.
 
 ## And what is the future now?
 
