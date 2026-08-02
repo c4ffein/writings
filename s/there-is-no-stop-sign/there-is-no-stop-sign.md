@@ -56,7 +56,7 @@ Instead of processing text one word at a time, the model learns which parts of t
 Take "the human let the model pick an example because it was tired": current LLMs understand that "it" refers to the human - even though "it" is not even the right word for a human. Grammar helps less than world knowledge here. Models don't get tired, and a tired human is exactly the kind that delegates. Previous systems (from hand-written grammar rules to earlier statistical NLP) had no chance on a sentence this sloppy, and most human-produced content is quite sloppy, even compared to LLM output.
 
 OpenAI bet that the emergent capabilities that started to appear, and seemed to scale through datasets and compute manageable through a few gaming GPUs, could actually keep scaling through models hundreds, then thousands of times bigger, and that led to the release of ChatGPT (with intermediary models).  
-They announced these scaling laws before the release of ChatGPT in their paper [Scaling Laws for Neural Language Models](https://arxiv.org/abs/2001.08361) (January 2020), with the [web summary](https://openai.com/index/scaling-laws-for-neural-language-models/) as a shorter and more accessible read. You can see there's already the awareness of scaling laws, the willingness to make a bet, and actual forecasting of what would become ChatGPT.  
+They already showcased how capabilities scaled with model size before the release of ChatGPT, in their blog post [Better Language Models and Their Implications](https://openai.com/index/better-language-models/) (February 2019). You can see there's already the awareness of scaling laws, the willingness to make a bet, and actual forecasting of what would become ChatGPT. These scaling laws were then formalized in the now classic [Scaling Laws for Neural Language Models](https://arxiv.org/abs/2001.08361) paper (January 2020).
 I still had conflicting feelings when I heard about it. I believed in [neurosymbolic AI](https://en.wikipedia.org/wiki/Neuro-symbolic_AI). Just scaling transformers felt like it would need an unavailable amount of power to reach actually decent capabilities. But insane amounts of compute have been thrown at training, and it did work well enough to justify more investments.  
 The release of ChatGPT seemed like a single break-through, but it was actually just a point on a curve, representing when the bullshit generator seemed to be somewhat useful to the average human, however full of hallucinations and lacking actual reasoning the output seemed.
 
@@ -289,7 +289,7 @@ Here's my honest take:
 I still write code. When the thing I want to change is right in front of me. For learning and training, also, which will even make you a way better nudger. And fun, if you're a fellow nerd.
 
 Still, typing out code fast, it may be fun, but not if it's the plan for 40 hours a week through most of my life. Knowing the libs by heart, grinding through the transpilation of business rules from Jira tickets into decent code... I'm so glad this is over.
-I dump a slangish train of thoughts into one of the most complex machines mankind ever built, and I get the codebase I want.
+I dump a slangish train of thought into one of the most complex machines mankind ever built, and I get the codebase I want.
 The train of thought is even more compatible with the machine because I started coding in C at 13, and I walked through the whole software stack, and every slangish term I use conveys implicit nudges.
 But typing all this code, for one more project? No.
 
@@ -299,7 +299,7 @@ So, here's the thing: if you managed to learn how to code pre-AI, you'll learn w
 
 I think there are only a few things that could put you in danger, one being the thought that "writing code" was what made you special, and another being not wanting to update your priors.
 
-Because while doing what you and I did pre agentic coding proved our cognitive capabilities, and helped form our minds, the machine is already better at converting slangish train of thoughts into a beautiful and structured codebase.
+Because while doing what you and I did pre agentic coding proved our cognitive capabilities, and helped form our minds, the machine is already better at converting a slangish train of thought into a beautiful and structured codebase.
 
 We keep pouring data, compute and research into the next generations of models, and there is no stop sign.
 
