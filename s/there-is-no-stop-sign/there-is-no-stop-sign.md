@@ -15,7 +15,7 @@ Nothing new here, only the connective tissue between concepts this article may i
 
 The definition of "intelligence" has high variance. Even the researchers at the frontline don't seem to agree on when to claim [AGI](https://en.wikipedia.org/wiki/Artificial_general_intelligence).
 
-An interesting split can be this one, can act in an intelligent manner vs matches the inner working of our minds (for example, see [this article](https://cacm.acm.org/blogcacm/two-concepts-of-intelligence/) for the generally American versus generally European view).
+An interesting split can be this one: "can act in an intelligent manner" vs "matches the inner workings of our minds" (for example, see [this article](https://cacm.acm.org/blogcacm/two-concepts-of-intelligence/) for the generally American versus generally European view).
 
 What is tangible, though, is that this thing can get results, and can run on regular hardware. Without diving into the details: there is some level of high specialization for how the current hardware is running, but the bedrock is still a regular computer.
 
@@ -84,7 +84,7 @@ It may feel counterintuitive to most, as not everyone followed the curve from th
 Some tasks don't require a very capable model. We may imagine having more specialized slightly smaller models that can compete decently on small specific tasks.
 But we have to consider how much cheaper the tokens are getting. This is counterintuitive, as top AI labs keep announcing models that seem more and more expensive. But the small models are still getting cheaper.
 
-There is also a concept that is widely overlooked, it's the price/token vs price/task.
+There is also a concept that is widely overlooked: price/token vs price/task.
 As models write in a "thinking" block before answering, or loop in agentic environments, a seemingly more expensive smarter model can outcompete a smaller, seemingly cheaper one, as it can one-shot the complex tasks.
 For the same task, you usually need way less thinking (i.e. letting the model talk to themself through a shorter or bigger scratchpad) when you let the bigger model do the job.
 
@@ -128,8 +128,8 @@ Up until now, it seems at least one person has found a way.
 
 LLMs felt a lot like they were only good at spewing out known facts (also including actual hallucinations). Which also explains why it was so easy to form the wrong mental model, believing they were only like a database of some sort. Even without reflective capabilities, LLMs were still useful at many things, including:
 - Replacing Google search and the enshittified web, that went from user-acquisition to revenue maximization. LLMs with the occasional (and increasingly rare) hallucination are so much more efficient. Google is still useful on edge cases, but definitely is the second choice.
-- Replacing templates, as models were very good at always generating the same default app corresponding to the same need from the user. What was curious was how consistent these answers were, even when raising the [temperature](https://www.ibm.com/think/topics/llm-temperature). Juniors were amazed at the machine giving in 2 minutes what would have taken them 2 days, experts weren't convinced since any real change past that broke everything. Still, I'd take the 2024 LLM soup over a $200 template someone sold me to bootstrap my project.
-- Basic autocomplete in your developer environment, as some of the most obvious grunt work was automatable. In my opinion it was at a specific threshold that was just annoying. Not fast and accurate enough to be nice to work with, I'd rather type that line of code than be interrupted by the AI that may or may not be right.
+- Replacing templates, as models were very good at always generating the same default app corresponding to the same need from the user. What was curious was how consistent these answers were, even when raising the [temperature](https://www.ibm.com/think/topics/llm-temperature). Juniors were amazed at the machine giving in 2 minutes what would have taken them 2 days; experts weren't convinced since any real change past that broke everything. Still, I'd take the 2024 LLM soup over a $200 template someone sold me to bootstrap my project.
+- Basic autocomplete in your developer environment, as some of the most obvious grunt work was automatable. In my opinion it was at a specific threshold that was just annoying. Not fast and accurate enough to be nice to work with; I'd rather type that line of code than be interrupted by the AI that may or may not be right.
 
 Real capabilities, but not enough to replace most of the work of the average developer. The missing link was the execution of the human software engineers' feedback cycle, on which earlier models weren't trained.
 
@@ -219,7 +219,7 @@ Now, companies like Anthropic care about fast runtimes. Raw compute isn't enough
 
 The best tools were underused because they're behind a paywall. Companies fight this by giving temporary access to the best models, sometimes through invite codes, but they also provide free models, which are way behind the frontier.
 
-The regular models are WAY worse than the frontier ones. I hear a lot of complaints from people about the models failing to reason on a given problem, while working with mid-sized models. If you want to form an opinion, you need the best models, and the best environment for them to operate agentically. It stays true at the release date of this article: if you've tried *state of the art* more than 6 months ago, or in an agentic environment that didn't manage the context well, or a cheap model... you're building your worldview on outdated information.
+The regular models are *way* worse than the frontier ones. I hear a lot of complaints from people about the models failing to reason on a given problem, while working with mid-sized models. If you want to form an opinion, you need the best models, and the best environment for them to operate agentically. It stays true at the release date of this article: if you've tried *state of the art* more than 6 months ago, or in an agentic environment that didn't manage the context well, or a cheap model... you're building your worldview on outdated information.
 
 State of the art for me is Claude Code with Fable 5, personal choice. You don't want to form an opinion on anything that is not at least to this level, for now that only means GPT 5.6 Sol, and you probably want to try SOTA at least every 6 months to feel the progression.
 
