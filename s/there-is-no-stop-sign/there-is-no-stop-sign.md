@@ -92,11 +92,12 @@ Trying to cut costs that way usually ends up costing more.
 
 ### The benefit from generalization
 
-Some parts of the industry favor indie hackers, and some parts of the industry require billions in investment. LLMs still require billions in investment, and fine-tuning is **generally** not worth it.
+Some parts of the industry favor indie hackers, and some parts of the industry require billions in investment. LLMs still require billions in investment, and even just fine-tuning as the last engineer in the chain, the one building a system on top of a model, is usually not worth it. For most use cases, a frontier model with a custom system prompt (the first instructions you give to the models, which represent the will of the builder and not that of the end-user) gives you a far better result than a smaller fine-tuned model. It is also generally less costly, as you need enough inference volume for the training and research time to pay off.
+
 It seems the capabilities of the LLMs reinforce each other: training in code can make a more logical English writer, and training in English text will make a programming model more versatile in its understanding of client needs.
-Fine-tuning has a place, but is a really niche thing compared to "off-the-shelf" + custom context.
+So, as we said, fine-tuning a smaller model is worth it only for really niche use cases: the larger "off-the-shelf" model will often do quite well already when nudged by the right system prompt.
 Wanting to feel smart by doing it yourself is once again usually not the cost-effective option.
-I'd still recommend to train your own models, but only for learning purposes.
+I'd still recommend training your own models, but only for learning purposes.
 
 ### More parameters introduce nuance
 
@@ -161,7 +162,7 @@ There will be a full separate article about [Claude Code](https://docs.anthropic
 
 Here is the TL;DR.
 
-This is the shift from AI in IDE (which was janky and frustrating, as it interrupts you every 10 seconds...) to a fully agentic process. [Claude Code](https://docs.anthropic.com/en/docs/claude-code) arrived as Anthropic's terminal-based coding agent. It does read your files, search your codebase, make edits, run your tests, see the errors, and iterate until the task is done. It paved the way to a lot of other solutions like [Codex CLI](https://github.com/openai/codex), [Gemini CLI](https://github.com/google-gemini/gemini-cli), or the French [Mistral Vibe CLI](https://github.com/mistralai/vibe).
+I had seen other experiments at the time, but to me, the research preview release of [Claude Code](https://docs.anthropic.com/en/docs/claude-code) was the first one that gave me somewhat satisfactory results. It was the shift from basic AI help in IDE (which was janky and frustrating, as it interrupts you every 10 seconds...) to a fully agentic process. [Claude Code](https://docs.anthropic.com/en/docs/claude-code) arrived as Anthropic's terminal-based coding agent. It does read your files, search your codebase, make edits, run your tests, see the errors, and iterate until the task is done. It paved the way to a lot of other solutions like [Codex CLI](https://github.com/openai/codex), [Gemini CLI](https://github.com/google-gemini/gemini-cli), or the French [Mistral Vibe CLI](https://github.com/mistralai/vibe).
 
 It's not autocomplete anymore, it was the inflection point towards the full human software engineering loop. The model can generate text to the user. But the tools that harness the models also let them execute other tools to make specific edits to specific files, write the tests and launch them, and, actually, execute anything through the cli like a real engineer would do in their feedback loop.
 
