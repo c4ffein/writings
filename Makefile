@@ -89,7 +89,7 @@ serve: generate presentations
 	cd zola && zola serve
 
 # Build a real static site (root-relative URLs, for an nginx in front) and serve it with the
-# same cache headers production should send — so caching can be verified locally. See README.
+# same cache headers production should send — so caching can be verified locally. See zola/README.md.
 serve-cached: generate presentations
 	cd zola && zola build -u / --force
 	cp zola/public/presentations-index/index.html zola/public/presentations-index.html
