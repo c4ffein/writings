@@ -1,23 +1,25 @@
 # There Is No Stop Sign
 
 
+Some found this text meandering, and they're right.  
+This article is the connective tissue between some of the key concepts / events I consider worth hearing about to understand where *AI* is going.  
+I intend for this article to be quite accessible, but my target audience is: experienced software engineers that are now reluctant to keep up with the current advances. (this you?)
+
+---
+
 The amount of both over-hype and denial AI first attracted when it reached the developer circles can in my opinion be explained by two separate things:
 - Some junior developers were very adamant about something that was still in its infancy, and angered more experienced engineers who saw basic flaws.
 - Artificial neural networks, on which all the current AI wave is based, work counterintuitively with what most old school programmers are used to. These engineers may not be aware of transformer scaling laws and of the foreseeable future progress they imply.
 
 I'm not an expert, the only project I carried out that involved custom neural networks was a visual editor that was used for teaching freshmen. In other projects I only used existing models for inference, or AI tooling for writing code. Obviously I consider myself an engineer far more than a scientist, yet I think basic engineering knowledge and scientific curiosity should still be enough to forecast, and to produce something worth sharing.
 
-Nothing new here, only the connective tissue between concepts this article may introduce to you and that I consider worth hearing about. I intend for this article to be quite accessible, but my target audience is: experienced software engineers that are now reluctant to keep up with the current advances. (this you?)
-
-
 ## Defining AI
-
 
 The definition of "intelligence" has high variance. Even the researchers at the frontline don't seem to agree on when to claim [AGI](https://en.wikipedia.org/wiki/Artificial_general_intelligence).
 
 An interesting split can be this one: "can act in an intelligent manner" vs "matches the inner workings of our minds" (for example, see [this article](https://cacm.acm.org/blogcacm/two-concepts-of-intelligence/) for the generally American versus generally European view).
 
-What is tangible, though, is that this thing can get results, and can run on regular hardware. Without diving into the details: there is some level of high specialization for how the current hardware is running, but the bedrock is still a regular computer.
+What is tangible is that this thing can get results, and can run on regular hardware. Without diving into the details: there is some level of high specialization for how the current hardware is running, but the bedrock is still a regular computer.
 
 Which should put the focus on what separates the AIs everyone is talking about now, and previous attempts at generalizing "problem-solving", since they are based on the same kind of machinery that only performs basic computations.
 
@@ -112,7 +114,7 @@ Scale seems to be the main determining factor here, not training iterations or r
 
 TL;DR: the bigger model generally has a far more nuanced view. I usually recognize Sonnet (the mid-sized model from Anthropic) as they get some of the meaning wrong. Generally, more parameters = deeper understanding.
 
-### Actual reasons for a stop to the scaling laws
+### Arguments for a potential stop to the scaling laws
 
 Actually, there are arguments for this to stop: the data wall (we're running out of quality training data), energy costs (training runs consume as much power as small cities), diminishing returns on benchmarks, and regulatory risk. But there are also a lot of proposed solutions, and the brightest minds are working on them. Synthetic data generation, more efficient architectures, distillation, better data curation... each supposed wall already has proposed solutions.
 
@@ -191,13 +193,35 @@ You can bring the whole stack, there are no more pockets of software engineering
 
 Even [Cursor redesigned their entire interface](https://cursor.com/blog/2-0#the-multi-agent-interface) to be agent-centric rather than file-focused. The previous iteration was really close to what you would expect from a VSCode fork. Mostly the codebase + a chat window. The new version is centered around handling multiple parallel agents, which, to me, marks the end of the experiment phase where we needed to monitor single agents in real time. Monitoring multiple long-running agents is now the default.
 
+### A prediction from Amodei I consider mostly fulfilled
+
+> "I think we'll be there in three to six months—where AI is writing 90 percent of the code. And then in twelve months, we may be in a world where AI is writing essentially all of the code."
+- Dario Amodei, Anthropic's CEO, [March 2025](https://www.cfr.org/event/ceo-speaker-series-dario-amodei-anthropic)
+
+He was quite precise, and people took that prediction as meaning developers are dead, which he obviously didn't mean. Also made for engaging headlines. I really recommend reading the whole transcript.
+
+Personally, I now write nearly all of my code with Claude Code. Whether the industry-wide number is exactly where he predicted, the direction is undeniable. He may be late by months but for specific reasons.
+
+He is clearly more of a scientist than an engineer, and the barriers that appeared are not the ones he's used to. We're talking about adoption friction in big companies where things have to move slowly, and processes have to be validated by the management, not actual technical limitations.
+
+Once again, in my experience, anyone that tried agentic coding seriously doesn't want to go back.
+
+The argument that AI hype doesn't deliver since it comes from the AI labs isn't valid. We shouldn't consider them as authority figures, because they have their interest there, but it's just as wrong to infer the opposite.
+
+The developers aren't dead yet, but the role is evolving fast. You still need a lot of knowledge outside "how to use an AI", but the need for "someone who just writes code" dropped sharply.
+
+The value of the "developer" title now lies in everything else, i.e. engineering excellence, product understanding/communication, adaptability to complex environments, the final human verification before putting something in production...
+
+Anyway, I wouldn't even know which metric to pick to validate that "90%"... Code that reaches a public repository? Code that stays in a repository without being refactored every week? Code that actually goes into production? Code written on the machine, which means the humans can't compete with a looping agent? I guess I can just speak from first-hand experience: I reached that 90%, I've seen various teams and companies reach it, and the pockets of specialized software engineering the agents weren't capable of touching are thinning.
+
+
 ## And what is the future now?
 
 ### No stopping in sight
 
 The models still improve. What's positive is that the bottleneck has just shifted.
 
-### Wirth's Law is now the problem
+### Wirth's Law actually stops
 
 In my feedback loop as a developer, I'm now wasting more time waiting for tests than waiting for the model.
 
@@ -205,18 +229,17 @@ Wirth's Law explains this. Most tech stacks are slow because companies don't car
 
 Agentic AI changes the equation. If your AI agent is bottlenecked by a 30-second test suite that could run in 3 seconds, that's wasted compute, wasted money, and worse results, as fewer iterations means less refinement.
 
-### Anthropic acquired Bun
+This is in part why I'm expecting AI labs to invest in tooling, for example [Anthropic acquiring Bun](https://bun.sh/blog/anthropic-acquires-bun) or [OpenAI acquiring Astral](https://openai.com/index/openai-to-acquire-astral/).
 
-This is in part why I'm expecting AI labs to invest in tooling, for example [Anthropic acquiring Bun](https://bun.sh/blog/anthropic-acquires-bun).
+Bun is a JavaScript/TypeScript runtime built from scratch in Zig, usually 3-10x faster than Node.js. It already powers Claude Code, and [was actually ported by Claude to Rust nearly automatically](https://bun.com/blog/bun-in-rust).
 
-Bun is a JavaScript/TypeScript runtime built from scratch in Zig, usually 3-10x faster than Node.js thanks to some smart trade-offs. It's a direct counter to Wirth's Law: instead of accepting that JS tooling is "just slow", some engineers rewrote nearly everything with performance as one of the top priorities.
+Astral is a company providing modern Python tooling: their package manager [uv](https://github.com/astral-sh/uv) and linter/formatter [ruff](https://github.com/astral-sh/ruff), both written in Rust, are typically 10-100x faster than the tools they replaced.
 
-It already powers Claude Code. And [Claude](https://github.com/claude) is already contributing to [Bun](https://github.com/oven-sh/bun)'s development (you can check the [top contributors](https://github.com/oven-sh/bun/graphs/contributors)).
+Both of these are part of the modern ecosystem, with an emphasis on speed. It can be seen as a long-term investment for the control of the ecosystem, but the choice of tools that made speed a top selling point is quite telling.
 
-Now, companies like Anthropic care about fast runtimes. Raw compute isn't enough if the software stack wastes it. The testing feedback loop gets faster, the agent iterates more, the results get better.
+The testing feedback loop gets faster, the agent iterates more, the results get better.
 
-
-### Why were the good tools underused?
+### People will finally pay for the right models
 
 The best tools were underused because they're behind a paywall. Companies fight this by giving temporary access to the best models, sometimes through invite codes, but they also provide free models, which are way behind the frontier.
 
@@ -224,7 +247,9 @@ The regular models are *way* worse than the frontier ones. I hear a lot of compl
 
 State of the art for me is Claude Code with Fable 5, personal choice. You don't want to form an opinion on anything that is not at least to this level, for now that only means GPT 5.6 Sol, and you probably want to try SOTA at least every 6 months to feel the progression.
 
-### Why each session makes the next model better
+I expect more and more people that were disappointed by their first experiences with models to change their mind through exposure to the good stuff, and to realize how much this is worth paying for.
+
+### Each session makes the next model better
 
 Code definitely has a structural advantage over other AI domains: as previously written, there is usually quite a short feedback loop for correctness.
 We had years pre-genAI to experiment with methodologies to get the previous stochastic parrots (us, the humans) to make better code.
@@ -251,27 +276,6 @@ The transformer architecture may be the real inflection point. It doesn't matter
 
 Inventors tried to imitate birds when trying to fly, but airplanes are quite different.
 The silicon stack is different than the biological one, and even if we can't make an AI that learns like a human does, we may get the [ASI](https://en.wikipedia.org/wiki/Superintelligence#Artificial_superintelligence) unlock through transformers + auto research at the top labs.
-
-### A prediction from Amodei I consider mostly fulfilled
-
-> "I think we'll be there in three to six months—where AI is writing 90 percent of the code. And then in twelve months, we may be in a world where AI is writing essentially all of the code."
-- Dario Amodei, Anthropic's CEO, [March 2025](https://www.cfr.org/event/ceo-speaker-series-dario-amodei-anthropic)
-
-He was quite precise, and people took that prediction as meaning developers are dead, which he obviously didn't mean. Also made for engaging headlines. I really recommend reading the whole transcript.
-
-Personally, I now write nearly all of my code with Claude Code. Whether the industry-wide number is exactly where he predicted, the direction is undeniable. He may be late by months but for specific reasons.
-
-He is clearly more of a scientist than an engineer, and the barriers that appeared are not the ones he's used to. We're talking about adoption friction in big companies where things have to move slowly, and processes have to be validated by the management, not actual technical limitations.
-
-Once again, in my experience, anyone that tried agentic coding seriously doesn't want to go back.
-
-The argument that AI hype doesn't deliver since it comes from the AI labs isn't valid. We shouldn't consider them as authority figures, because they have their interest there, but it's just as wrong to infer the opposite.
-
-The developers aren't dead yet, but the role is evolving fast. You still need a lot of knowledge outside "how to use an AI", but the need for "someone who just writes code" dropped sharply.
-
-The value of the "developer" title now lies in everything else, i.e. engineering excellence, product understanding/communication, adaptability to complex environments, the final human verification before putting something in production...
-
-Anyway, I wouldn't even know which metric to pick to validate that "90%"... Code that reaches a public repository? Code that stays in a repository without being refactored every week? Code that actually goes into production? Code written on the machine, which means the humans can't compete with a looping agent? I guess I can just speak from first-hand experience: I reached that 90%, I've seen various teams and companies reach it, and the pockets of specialized software engineering the agents weren't capable of touching are thinning.
 
 ### Another prediction from Amodei we're still waiting for
 
