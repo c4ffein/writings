@@ -212,7 +212,7 @@ The developers aren't dead yet, but the role is evolving fast. You still need a 
 
 The value of the "developer" title now lies in everything else, i.e. engineering excellence, product understanding/communication, adaptability to complex environments, the final human verification before putting something in production...
 
-Anyway, I wouldn't even know which metric to pick to validate that "90%"... Code that reaches a public repository? Code that stays in a repository without being refactored every week? Code that actually goes into production? Code written on the machine, which means the humans can't compete with a looping agent? I guess I can just speak from first-hand experience: I reached that 90%, I've seen various teams and companies reach it, and the pockets of specialized software engineering the agents weren't capable of touching are thinning.
+Anyway, I wouldn't even know which metric to pick to validate that "90%"... Code that reaches a public repository? Code that stays in a repository without being refactored every week? Code that actually goes into production? Code written on the machine, which means the humans can't compete with a looping agent? I guess I can just speak from first-hand experience: I reached that 90% on all of these, I've seen various teams and companies reach it, and the pockets of specialized software engineering the agents weren't capable of touching are thinning.
 
 
 ## And what is the future now?
