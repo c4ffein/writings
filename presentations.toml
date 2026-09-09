@@ -2,6 +2,10 @@
 # The theme is extracted from zola/templates/base.html (single source of truth)
 
 [[presentations]]
+href = "slides/claude-on-scotch.html"
+title = "Claude on Scotch"
+
+[[presentations]]
 href = "slides/dev-with-ai-in-late-2025.html"
 title = "Coding with Claude Code - fin 2025"
 
