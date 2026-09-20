@@ -34,7 +34,7 @@
     uncurtain(); return; // belt-and-suspenders: loader already skips
   }
 
-  var SEL = "nav a, #theme-toggle, h1, h2, h3, article hr, article blockquote, .fc-date, .fc-slab, .fc-ring, li .post-meta, .fc-bullet";
+  var SEL = "nav a, #theme-toggle, h1, h2, h3, article hr, article blockquote, .fc-date, .fc-slab, .fc-ring, li .post-meta, li .presentation-desc, .fc-bullet";
 
   function prep() {
     // Code chips inside headings lose their opaque background: the GPU stencil cuts by

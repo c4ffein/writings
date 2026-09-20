@@ -17,7 +17,12 @@
 <h1>Presentations</h1>
 <ul>
     {% for p in page.extra.presentations %}
-    <li><a href="{{ p.href }}">{{ p.title }}</a></li>
+    <li>
+        <a href="{{ p.href }}">{{ p.title }}</a>
+        {% if p.description %}
+        <p class="presentation-desc">{{ p.description }}</p>
+        {% endif %}
+    </li>
     {% endfor %}
 </ul>
 {% endblock %}

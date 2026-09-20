@@ -39,10 +39,13 @@ def main():
     presentations = config.get("presentations", [])
     if not presentations:
         raise SystemExit("presentations.toml: no [[presentations]] entries")
-    items = ",\n".join(
-        f'    {{ href = "{naive(p["href"], "href")}", title = "{naive(p["title"], "title")}" }}'
-        for p in presentations
-    )
+    def item(p):
+        fields = [f'href = "{naive(p["href"], "href")}"', f'title = "{naive(p["title"], "title")}"']
+        if p.get("description"):
+            fields.append(f'description = "{naive(p["description"], "description")}"')
+        return "    { " + ", ".join(fields) + " }"
+
+    items = ",\n".join(item(p) for p in presentations)
     OUTPUT.write_text(f"""+++
 title = "Presentations"
 path = "presentations-index"

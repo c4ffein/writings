@@ -179,6 +179,11 @@
         #content:focus { outline: none; } /* spa-nav focuses it after a swap (a11y), no ring */
         article { margin-bottom: 3rem; }
         .post-meta { color: var(--chrome); font-size: 0.9rem; }
+        /* Presentations index: the description is chrome (it takes the field like the
+           date line), indented 5% under its title, tight to the title, roomier before
+           the next one. Narrow screens: a fixed indent, 5% of a phone is too little. */
+        .presentation-desc { color: var(--chrome); font-size: 0.9rem; margin: 0.15rem 0 1.25rem 5%; }
+        @media (max-width: 600px) { .presentation-desc { margin-left: 1rem; } }
         .tags { margin-top: 0.5rem; }
         .tag { background: var(--chrome); color: var(--bg); padding: 0.2rem 0.5rem; border-radius: 3px; font-size: 0.8rem; }
         details { margin: 1rem 0; }
