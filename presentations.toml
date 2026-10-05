@@ -1,33 +1,47 @@
 # Presentations list - used by generate_presentations.py to build presentations/index.html
 # The theme is extracted from zola/templates/base.html (single source of truth)
-# description is optional; naive strings only (no double quote, backslash or newline)
+# description and audience are optional; naive strings only (no double quote, backslash or newline).
+# Languages, audio and the includes / part-of relations are not written here: they come from
+# presentations.json, built by the presentations repo (PRESENTATIONS_META, see the generator).
 
 [[presentations]]
 href = "slides/claude-on-scotch.html"
+audience = "Inria researchers, no agentic-coding experience"
 title = "Claude on Scotch"
 description = "For researchers at Inria, some at the top of their field with zero agentic coding experience. Three parts: my mental model of LLMs, a ten-month journey finding real bugs in Scotch (a 30-year-old C/MPI graph partitioner) with Claude, and general lessons from Scotch and other projects. FR."
 
 [[presentations]]
+href = "slides/mental-model-of-llms.html"
+audience = "Anyone meeting LLMs for the first time, researchers included"
+title = "My mental model of LLMs in the context of coding agents"
+description = "The first part of Claude on Scotch on its own: how I think about LLMs, from GPT-2 to agents, context windows, reasoning, harness versus model. FR."
+
+[[presentations]]
 href = "slides/dev-with-ai-in-late-2025.html"
+audience = "Developers curious about day-to-day work with Claude Code"
 title = "Coding with Claude Code - fin 2025"
 description = "How I actually coded with Claude Code in late 2025: a short LLM primer, real sessions, and where it still needs a nudge. FR/EN."
 
 [[presentations]]
 href = "slides/django-ninja.html"
+audience = "Django developers weighing a DRF alternative"
 title = "Django Ninja"
 description = "A Django REST Framework alternative inspired by FastAPI, with a first performance assessment. FR."
 
 [[presentations]]
 href = "slides/hypothesis.html"
+audience = "Python developers who have never used property-based testing"
 title = "Hypothesis"
 description = "Property-based testing in Python: let the machine find your edge cases. FR."
 
 [[presentations]]
 href = "slides/learning-python-as-a-programmer.html"
+audience = "Experienced programmers new to Python"
 title = "Learning Python as a Programmer"
 description = "A dense syntax tour for programmers who never tried Python, built to support a live discussion rather than a lecture. Unlike most Python tutorials, it expects intermediate to advanced knowledge of other languages. EN."
 
 [[presentations]]
 href = "slides/vibe-coding-vs-vibe-engineering.html"
+audience = "Developers and tech leads, ten minutes"
 title = "Vibe coding vs vibe engineering"
 description = "Ten minutes: Karpathy's vibe coding, Willison's and Ogilvie's vibe engineering, and what it looks like in practice. Your new job is tech lead + QA. FR."

@@ -22,6 +22,14 @@
         {% if p.description %}
         <p class="presentation-desc">{{ p.description }}</p>
         {% endif %}
+        {% if p.audience or p.langs or p.part_of or p.includes %}
+        <ul class="presentation-meta">
+            {% if p.audience %}<li>Intended audience: {{ p.audience }}</li>{% endif %}
+            {% if p.langs %}<li>Languages: {% for l in p.langs %}{{ l.code }}{% set_global flags = [] %}{% if l.slides %}{% set_global flags = flags | concat(with="slides") %}{% endif %}{% if l.audio is defined and l.audio == "full" %}{% set_global flags = flags | concat(with="audio") %}{% elif l.audio is defined and l.audio == "partial" %}{% set_global flags = flags | concat(with="audio, partial") %}{% elif l.audio is defined and l.audio == "unknown" %}{% set_global flags = flags | concat(with="audio?") %}{% endif %}{% if flags %} ({{ flags | join(sep=", ") }}){% endif %}{% if not loop.last %}, {% endif %}{% endfor %}</li>{% endif %}
+            {% if p.part_of %}<li>Also part of: {% for o in p.part_of %}<a href="{{ o.href }}">{{ o.title }}</a>{% if not loop.last %}, {% endif %}{% endfor %}</li>{% endif %}
+            {% if p.includes %}<li>Includes {% if p.includes | length == 1 %}this sub-presentation{% else %}these sub-presentations{% endif %}: {% for o in p.includes %}<a href="{{ o.href }}">{{ o.title }}</a>{% if not loop.last %}, {% endif %}{% endfor %}</li>{% endif %}
+        </ul>
+        {% endif %}
     </li>
     {% endfor %}
 </ul>

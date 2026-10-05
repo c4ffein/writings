@@ -184,6 +184,11 @@
            the next one. Narrow screens: a fixed indent, 5% of a phone is too little. */
         .presentation-desc { color: var(--chrome); font-size: 0.9rem; margin: 0.15rem 0 1.25rem 5%; }
         @media (max-width: 600px) { .presentation-desc { margin-left: 1rem; } }
+        /* the lines under a talk's description: audience, languages, what it includes — no bullets */
+        .presentation-meta { color: var(--chrome); font-size: 0.8rem; margin: -1rem 0 1.25rem 5%; padding: 0; }
+        .presentation-meta li { margin: 0.1rem 0; }
+        .presentation-meta li::before, .presentation-meta li .fc-bullet { content: none; display: none; }
+        @media (max-width: 600px) { .presentation-meta { margin-left: 1rem; } }
         .tags { margin-top: 0.5rem; }
         .tag { background: var(--chrome); color: var(--bg); padding: 0.2rem 0.5rem; border-radius: 3px; font-size: 0.8rem; }
         details { margin: 1rem 0; }
