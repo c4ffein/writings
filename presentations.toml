@@ -11,7 +11,7 @@ title = "Claude on Scotch"
 description = "For researchers at Inria, some at the top of their field with zero agentic coding experience. Three parts: my mental model of LLMs, a ten-month journey finding real bugs in Scotch (a 30-year-old C/MPI graph partitioner) with Claude, and general lessons from Scotch and other projects. FR."
 
 [[presentations]]
-href = "slides/mental-model-of-llms.html"
+href = "slides/mental-model-of-llms-in-the-context-of-coding-agents.html"
 audience = "Anyone meeting LLMs for the first time, researchers included"
 title = "My mental model of LLMs in the context of coding agents"
 description = "The first part of Claude on Scotch on its own: how I think about LLMs, from GPT-2 to agents, context windows, reasoning, harness versus model. FR."
